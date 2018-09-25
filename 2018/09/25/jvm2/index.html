@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JVM(2)：虚拟机对象探秘 | Xiao&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对象的创建对象的创建一般有四种方式：new关键字、反射、clone、序列化。对象创建主要分三步：     检查类是否加载　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。   分配内存　　主要有指针碰撞和空闲列表两种方式。指针碰撞是把内存指针向空闲空间移">
+<meta name="keywords" content="JVM虚拟机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM(2)：虚拟机对象探秘">
+<meta property="og:url" content="http://yoursite.com/2018/09/25/jvm2/index.html">
+<meta property="og:site_name" content="Xiao&#39;s Blog">
+<meta property="og:description" content="对象的创建对象的创建一般有四种方式：new关键字、反射、clone、序列化。对象创建主要分三步：     检查类是否加载　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。   分配内存　　主要有指针碰撞和空闲列表两种方式。指针碰撞是把内存指针向空闲空间移">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-25T07:40:00.370Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM(2)：虚拟机对象探秘">
+<meta name="twitter:description" content="对象的创建对象的创建一般有四种方式：new关键字、反射、clone、序列化。对象创建主要分三步：     检查类是否加载　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。   分配内存　　主要有指针碰撞和空闲列表两种方式。指针碰撞是把内存指针向空闲空间移">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiao&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiao&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">个人博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jvm2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/25/jvm2/" class="article-date">
+  <time datetime="2018-09-25T06:00:36.000Z" itemprop="datePublished">2018-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JVM(2)：虚拟机对象探秘
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+  	
+  	  <h4 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h4><p>对象的创建一般有四种方式：new关键字、反射、clone、序列化。<br>对象创建主要分三步：   </p>
+<ol>
+<li><strong>检查类是否加载</strong><br>　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。  </li>
+<li><strong>分配内存</strong><br>　　主要有指针碰撞和空闲列表两种方式。指针碰撞是把内存指针向空闲空间移动与对象大小相等的距离来分配内存，这种主要适用于带有整理的垃圾收集器。空闲列表是维护一个列表记录哪些内存区域可以使用，在分配的时候从列表中找出一块分配，这种适用于不带整理功能的垃圾收集器。<br>　　分配过程中还要考虑多个线程同时分配内存出现并发的问题。这个一般有两种方案：一是使用CAS机制保证更新操作的原子性；二是使用本地线程分配缓冲（TLAB）。  </li>
+<li><strong>对象设置</strong><br>　　分配完内存之后需要进行对象设置，主要是把这个对象是哪个类的实例、对象的哈希码、对象的GC分代年龄、对象的锁信息等存放在对象的对象头里。</li>
+</ol>
+<h4 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h4><p>　　对象在内存中存储的布局可以分为3块区域：对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）。<br>　　对象头分成两部分：第一部分用于存储对象自身的运行时数据，如对象的哈希码、GC分代年龄、锁状态标志等，官方称之为‘MarkWord’。另外一部分是类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。<br>　　实例数据部分是对象真正存储的有效信息，也是在程序代码中所定义的各种类型的字段内容。无论是从父类继承下来的，还是在子类中定义的，都需要记录起来。<br>　　第三部分对象填充不是必须的，仅仅是占位的作用，用来保证对象的大小是８字节的整数倍。
+　　</p>
+<h4 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h4><p>对象的访问主要两种方式：  </p>
+<ol>
+<li><strong>句柄访问</strong><br>　　Java堆中会划出一块内存作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据和类型数据各自的具体地址信息。好处是对象移动时只用改动句柄中的实例数据地址，不用改变reference。  </li>
+<li><strong>直接指针访问</strong><br>　　reference中存储的就是对象的地址。好处就是访问快，节省了一次指针定位的开销。hotspot使用直接指针访问。</li>
+</ol>
+
+  	
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/25/jvm2/" data-id="cjmhexl5y0005b1cgrgavrvre" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2018/09/25/jvm2/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM虚拟机/">JVM虚拟机</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/25/jvm1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JVM（1）：内存结构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM虚拟机/">JVM虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM虚拟机/" style="font-size: 20px;">JVM虚拟机</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/25/jvm2/">JVM(2)：虚拟机对象探秘</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/25/jvm1/">JVM（1）：内存结构</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/22/code-optimization/">Java代码优化</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/17/about/">关于</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/17/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 xiaodaoyuan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'true';
+  
+  var disqus_url = 'http://yoursite.com/2018/09/25/jvm2/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

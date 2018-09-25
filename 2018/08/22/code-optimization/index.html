@@ -5,19 +5,20 @@
   
 
   
-  <title>Hello World | Xiao&#39;s Blog</title>
+  <title>Java代码优化 | Xiao&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="代码优化目标：减少代码体积，提高代码的运行效率 代码优化具体细节 尽量指定类、方法的final修饰符：如果一个类是final的，则它的所有方法也是final的，java编译器会寻找机会内内联的所有final方法，可以提高50%的性能。 尽量重用对象：特别是String对象。Java虚拟机创建对象需要花费时间和空间，后期还要进行垃圾回收。 尽可能使用局部变量：局部变量存储于栈中，速度较快，而且随着方">
+<meta name="keywords" content="java基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/05/17/hello-world/index.html">
+<meta property="og:title" content="Java代码优化">
+<meta property="og:url" content="http://yoursite.com/2018/08/22/code-optimization/index.html">
 <meta property="og:site_name" content="Xiao&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="代码优化目标：减少代码体积，提高代码的运行效率 代码优化具体细节 尽量指定类、方法的final修饰符：如果一个类是final的，则它的所有方法也是final的，java编译器会寻找机会内内联的所有final方法，可以提高50%的性能。 尽量重用对象：特别是String对象。Java虚拟机创建对象需要花费时间和空间，后期还要进行垃圾回收。 尽可能使用局部变量：局部变量存储于栈中，速度较快，而且随着方">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-17T03:43:31.000Z">
+<meta property="og:updated_time" content="2018-08-23T12:07:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Java代码优化">
+<meta name="twitter:description" content="代码优化目标：减少代码体积，提高代码的运行效率 代码优化具体细节 尽量指定类、方法的final修饰符：如果一个类是final的，则它的所有方法也是final的，java编译器会寻找机会内内联的所有final方法，可以提高50%的性能。 尽量重用对象：特别是String对象。Java虚拟机创建对象需要花费时间和空间，后期还要进行垃圾回收。 尽可能使用局部变量：局部变量存储于栈中，速度较快，而且随着方">
   
     <link rel="alternate" href="/atom.xml" title="Xiao&#39;s Blog" type="application/atom+xml">
   
@@ -68,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-code-optimization" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/17/hello-world/" class="article-date">
-  <time datetime="2018-05-17T03:43:31.000Z" itemprop="datePublished">2018-05-17</time>
+    <a href="/2018/08/22/code-optimization/" class="article-date">
+  <time datetime="2018-08-22T09:17:31.000Z" itemprop="datePublished">2018-08-22</time>
 </a>
     
   </div>
@@ -82,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Java代码优化
     </h1>
   
 
@@ -92,40 +93,50 @@
       
 
   	
-  	  <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+  	  <p><strong><code>代码优化目标：减少代码体积，提高代码的运行效率</code></strong></p>
+<h2 id="代码优化具体细节"><a href="#代码优化具体细节" class="headerlink" title="代码优化具体细节"></a>代码优化具体细节</h2><ol>
+<li><strong>尽量指定类、方法的final修饰符：</strong>如果一个类是final的，则它的所有方法也是final的，java编译器会寻找机会内内联的所有final方法，可以提高50%的性能。</li>
+<li><strong>尽量重用对象：</strong>特别是String对象。Java虚拟机创建对象需要花费时间和空间，后期还要进行垃圾回收。</li>
+<li><strong>尽可能使用局部变量：</strong>局部变量存储于栈中，速度较快，而且随着方法的结束会消失。</li>
+<li><strong>及时关闭流和连接等：</strong>对于IO流以及数据库连接、线程池连接，在finally 中一定要将其关闭。</li>
+<li><strong>尽量使用懒加载策略：</strong>在使用时创建（单例模式最好使用懒汉模式）。</li>
+<li><strong>不要在循环中使用try…catch…：</strong>在循环外使用。</li>
+<li><strong>乘法和除法使用移位操作：</strong>&gt;&gt;1表示除以2，&lt;&lt;1表示乘以2。</li>
+<li><strong>当有大量数据复制时，使用System.arrayCopy()命令</strong>。</li>
+<li><strong>循环内不要不断的创建对象</strong>。</li>
+</ol>
 
   	
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/17/hello-world/" data-id="cjmhexl5u0003b1cgfeb5km2t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/22/code-optimization/" data-id="cjmhexl5k0000b1cg1jdtgec0" class="article-share-link">Share</a>
       
-        <a href="http://yoursite.com/2018/05/17/hello-world/#disqus_thread" class="article-comment-link">留言</a>
+        <a href="http://yoursite.com/2018/08/22/code-optimization/#disqus_thread" class="article-comment-link">留言</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2018/05/17/about/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/09/25/jvm1/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          关于
+          JVM（1）：内存结构
         
       </div>
     </a>
   
+  
+    <a href="/2018/05/17/about/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于</div>
+    </a>
   
 </nav>
 
@@ -230,7 +241,7 @@
 <script>
   var disqus_shortname = 'true';
   
-  var disqus_url = 'http://yoursite.com/2018/05/17/hello-world/';
+  var disqus_url = 'http://yoursite.com/2018/08/22/code-optimization/';
   
   (function(){
     var dsq = document.createElement('script');
