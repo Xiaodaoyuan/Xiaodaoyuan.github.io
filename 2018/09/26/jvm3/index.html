@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JVM（3）：垃圾收集GC | Xiao&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。 判断对象是否可以回收 引用计数法　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。 可达性分析法　　通过一系列称为“GC ROOTS”的节点作为起点">
+<meta name="keywords" content="JVM虚拟机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM（3）：垃圾收集GC">
+<meta property="og:url" content="http://yoursite.com/2018/09/26/jvm3/index.html">
+<meta property="og:site_name" content="Xiao&#39;s Blog">
+<meta property="og:description" content="Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。 判断对象是否可以回收 引用计数法　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。 可达性分析法　　通过一系列称为“GC ROOTS”的节点作为起点">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://c1.staticflickr.com/5/4613/40093687372_3b03521a7c.jpg">
+<meta property="og:updated_time" content="2018-09-26T05:51:58.309Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM（3）：垃圾收集GC">
+<meta name="twitter:description" content="Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。 判断对象是否可以回收 引用计数法　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。 可达性分析法　　通过一系列称为“GC ROOTS”的节点作为起点">
+<meta name="twitter:image" content="https://c1.staticflickr.com/5/4613/40093687372_3b03521a7c.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiao&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiao&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">个人博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jvm3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/26/jvm3/" class="article-date">
+  <time datetime="2018-09-26T06:09:37.000Z" itemprop="datePublished">2018-09-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JVM（3）：垃圾收集GC
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+  	
+  	  <p> <strong>Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。</strong></p>
+<h3 id="判断对象是否可以回收"><a href="#判断对象是否可以回收" class="headerlink" title="判断对象是否可以回收"></a>判断对象是否可以回收</h3><ul>
+<li><strong>引用计数法</strong><br>　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。</li>
+<li><strong>可达性分析法</strong><br>　　通过一系列称为“GC ROOTS”的节点作为起点，开始向下搜索，搜素所走的路径称为引用链，当一个对象到GC ROOTS没有任何引用链相连的话，就说明该对象不可用，可以被回收。<br>　　可以作为GC ROOTS的对象包含以下几种：虚拟机栈（栈帧中的本地变量表）中引用的对象、方法区中类静态属性引用的对象、方法区中常量引用的对象、本地方法中JNI引用的对象。</li>
+</ul>
+<p>四种引用类型：</p>
+<ul>
+<li><strong>强引用</strong>：指在程序代码之中普遍存在的，类似“Object obj=new Object（）”这类的引用，只要强引用还存在，垃圾收集器永远不会回收掉被引用的对象。</li>
+<li><strong>软引用</strong>：用来描述一些还有用但是非必需的对象。在系统内存不足时进行垃圾收集会对软引用进行回收。（SoftReference）</li>
+<li><strong>弱引用</strong>：也是用来描述非必需的对象，但是它的强度比软引用更弱。发生GC时，不管内存是否足够都会对其进行回收。（WeakReference）</li>
+<li><strong>虚引用</strong>：也称为幽灵引用或者幻影引用，它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。（PhantomReference）</li>
+</ul>
+<hr>
+<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><ul>
+<li>标记清除算法</li>
+<li>复制算法</li>
+<li>标记整理算法</li>
+<li>分代收集算法</li>
+</ul>
+<p>算法实现</p>
+<ul>
+<li><strong>枚举根结点</strong><br>　　在可达性分析过程中为了防止对象的引用关系发生变化，所以在执行GC时需要停顿所有java执行线程（Stop The World）。<br>　　由于目前的主流Java虚拟机使用的都是准确式GC，所以当执行系统停顿下来后，并不需要一个不漏地检查完所有执行上下文和全局的引用位置，虚拟机应当是有办法直接得知哪些地方存放着对象引用。在HotSpot的实现中，是使用一组称为OopMap的数据结构来达到这个目的的，在类加载完成的时候，HotSpot就把对象内什么偏移量上是什么类型的数据计算出来，在JIT编译过程中，也会在特定的位置记录下栈和寄存器中哪些位置是引用。这样，GC在扫描时就可以直接得知这些信息了。</li>
+<li><strong>安全点</strong><br>　　HotSpot并没有为每条指令都生成OopMap，只有在特定的位置记录这个信息，这些位置称为安全点（SaftPoint）。安全点的选定基本上是以程序“是否具有让程序长时间执行的特征”为标准进行选定的。长时间执行的最明显特征就是指令序列复用，例如方法调用、循环跳转、异常跳转等。<br>　　GC停顿有两种方案：抢先式中断（基本不用）和主动式中断。主动式中断是当需要中断线程时，设置一个中断标志，各个线程去轮询这个标志，当为真的就中断挂起。</li>
+<li><strong>安全区域</strong><br>　　程序不执行的时候，也就是没有分配CPU的时候，典型的就是线程sleep或者blocked状态时，这个时候不能响应中断请求。JVM不太可能等到线程重新分配CPU然后走到安全点。这样就需要安全区域解决这个问题。<br>　　安全区域是指在一段区域内引用关系不会发生变化，在这中间任何一个地方GC都是安全的。我们可以把Safe Region看成是扩展的safe point。</li>
+</ul>
+<hr>
+<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p><img src="https://c1.staticflickr.com/5/4613/40093687372_3b03521a7c.jpg" alt="image"></p>
+<ul>
+<li><strong>Serial收集器</strong>：单线程收集器，client模式下默认的新生代收集器。</li>
+<li><strong>ParNew收集器</strong>：Serial收集器的多线程版本。server模式首选的新生代收集器。</li>
+<li><strong>Parallel Scavenge收集器</strong>：并行的多线程垃圾收集器，目标是达到一个可控制的吞吐量。提供了两个参数用于精确控制吞吐量，分别是控制最大垃圾收集停顿时间的-XX：MaxGCPauseMillis参数以及直接设置吞吐量大小的-XX：GCTimeRatio参数。无法与CMS配合。</li>
+<li><strong>Serial Old收集器</strong>  ：Serial收集器的老年代版本，client模式下默认的老年代收集器。</li>
+<li><strong>Parallel Old收集器</strong>：Parallel Scavenge收集器的老年代版本。</li>
+<li><strong>CMS收集器</strong>：基于标记清除算法。目标是降低GC停顿时间，一共有四个步骤：初始标记、并发标记、重新标记、并发清除。这之中最耗时的并发标记和并发清除可以和用户线程一起运行，所以可以看成是并行的垃圾收集器。三个缺点：对CPU资源敏感、无法处理浮动垃圾、标记清除算法会产生内存碎片。</li>
+<li><strong>G1收集器</strong>：特点：并行与并发、分代收集、可预测的停顿。使用G1收集器时，Java堆的内存布局就与其他收集器有很大差别，它将整个Java堆划分为多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔离的了，它们都是一部分Region（不需要连续）的集合。G1跟踪各个Region里面的垃圾堆积的价值大小，在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。四个步骤：初始标记、并发标记、最终标记、筛选回收。</li>
+</ul>
+<hr>
+
+  	
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/26/jvm3/" data-id="cjmiqarl00006vdcglevrzt1i" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2018/09/26/jvm3/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM虚拟机/">JVM虚拟机</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/25/jvm2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JVM（2）：虚拟机对象探秘</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM虚拟机/">JVM虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM虚拟机/" style="font-size: 20px;">JVM虚拟机</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/26/jvm3/">JVM（3）：垃圾收集GC</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/25/jvm2/">JVM（2）：虚拟机对象探秘</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/25/jvm1/">JVM（1）：内存结构</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/22/code-optimization/">Java代码优化</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/17/about/">关于</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 xiaodaoyuan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'true';
+  
+  var disqus_url = 'http://yoursite.com/2018/09/26/jvm3/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
