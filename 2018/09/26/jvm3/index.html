@@ -16,7 +16,7 @@
 <meta property="og:description" content="Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。 判断对象是否可以回收 引用计数法　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。 可达性分析法　　通过一系列称为“GC ROOTS”的节点作为起点">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://c1.staticflickr.com/5/4613/40093687372_3b03521a7c.jpg">
-<meta property="og:updated_time" content="2018-09-26T05:51:58.309Z">
+<meta property="og:updated_time" content="2018-09-26T07:08:38.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM（3）：垃圾收集GC">
 <meta name="twitter:description" content="Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。 判断对象是否可以回收 引用计数法　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。 可达性分析法　　通过一系列称为“GC ROOTS”的节点作为起点">
@@ -132,12 +132,19 @@
 <li><strong>G1收集器</strong>：特点：并行与并发、分代收集、可预测的停顿。使用G1收集器时，Java堆的内存布局就与其他收集器有很大差别，它将整个Java堆划分为多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔离的了，它们都是一部分Region（不需要连续）的集合。G1跟踪各个Region里面的垃圾堆积的价值大小，在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。四个步骤：初始标记、并发标记、最终标记、筛选回收。</li>
 </ul>
 <hr>
+<h3 id="内存分配回收策略"><a href="#内存分配回收策略" class="headerlink" title="内存分配回收策略"></a>内存分配回收策略</h3><ul>
+<li>对象优先在Eden区分配</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活对象进入老年代</li>
+<li>动态对象年龄判定</li>
+<li>空间分配担保</li>
+</ul>
 
   	
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/26/jvm3/" data-id="cjmiqarl00006vdcglevrzt1i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/26/jvm3/" data-id="cjmkc4x98000640cge0wnr2nq" class="article-share-link">Share</a>
       
         <a href="http://yoursite.com/2018/09/26/jvm3/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -149,6 +156,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/09/26/jvm4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JVM（4）：虚拟机性能监控
+        
+      </div>
+    </a>
   
   
     <a href="/2018/09/25/jvm2/" id="article-nav-older" class="article-nav-link-wrap">
@@ -179,7 +195,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM虚拟机/">JVM虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM虚拟机/">JVM虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
     </div>
   </div>
 
@@ -189,7 +205,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JVM虚拟机/" style="font-size: 20px;">JVM虚拟机</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a>
+      <a href="/tags/JVM虚拟机/" style="font-size: 20px;">JVM虚拟机</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a>
     </div>
   </div>
 
@@ -211,6 +227,14 @@
       <ul>
         
           <li>
+            <a href="/2018/09/27/springboot1/">springboot线程池优雅关闭</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/26/jvm4/">JVM（4）：虚拟机性能监控</a>
+          </li>
+        
+          <li>
             <a href="/2018/09/26/jvm3/">JVM（3）：垃圾收集GC</a>
           </li>
         
@@ -220,14 +244,6 @@
         
           <li>
             <a href="/2018/09/25/jvm1/">JVM（1）：内存结构</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/22/code-optimization/">Java代码优化</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/17/about/">关于</a>
           </li>
         
       </ul>
