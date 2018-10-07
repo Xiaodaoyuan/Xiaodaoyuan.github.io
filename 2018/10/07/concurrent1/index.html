@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Java内存模型 | Xiao&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、Java内存模型的抽象结构　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。Java内">
+<meta name="keywords" content="并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java内存模型">
+<meta property="og:url" content="http://yoursite.com/2018/10/07/concurrent1/index.html">
+<meta property="og:site_name" content="Xiao&#39;s Blog">
+<meta property="og:description" content="1、Java内存模型的抽象结构　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。Java内">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/10/07/concurrent1/images/thread-jmm.png">
+<meta property="og:updated_time" content="2018-10-07T13:26:38.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java内存模型">
+<meta name="twitter:description" content="1、Java内存模型的抽象结构　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。Java内">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/07/concurrent1/images/thread-jmm.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiao&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiao&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">个人博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-concurrent1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/07/concurrent1/" class="article-date">
+  <time datetime="2018-10-07T07:58:29.000Z" itemprop="datePublished">2018-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java内存模型
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+  	
+  	  <h3 id="1、Java内存模型的抽象结构"><a href="#1、Java内存模型的抽象结构" class="headerlink" title="1、Java内存模型的抽象结构"></a>1、Java内存模型的抽象结构</h3><p>　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。<br><img src="/2018/10/07/concurrent1/images/thread-jmm.png" alt="图1-Java内存结构"><br>Java内存模型是一种共享内存模型：</p>
+<ul>
+<li>线程只能操作工作内存，不能直接操作主存。</li>
+<li>每个线程只能访问自己的工作内存，不能访问其他线程的工作内存。</li>
+<li>线程之间的数据通信必须通过主存中完成。</li>
+</ul>
+<hr>
+<h3 id="2、并发三问题"><a href="#2、并发三问题" class="headerlink" title="2、并发三问题"></a>2、并发三问题</h3><ul>
+<li><strong>重排序</strong><br>为了提高性能，编译器和处理器会对指令进行重排序，重排序主要有三种类型：<ol>
+<li>编译器重排序：编译器在不改变单线程程序语义的前提下，可以重新安排字节码的执行顺序；也就是编译生成的机器码顺序和源代码顺序不一样。</li>
+<li>处理器重排序：现代处理器采用指令级并行技术将多条指令重叠执行，如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序；也就是CPU在执行字节码时，执行顺序可能和机器码顺序不一样。</li>
+<li>内存重排序：由于处理器使用缓存和读/写缓冲区，这使得加载和存储操作看上去可能是在乱序执行。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class ReorderExample &#123;</span><br><span class="line">  int a = 0;</span><br><span class="line">  boolean flag = false;</span><br><span class="line"></span><br><span class="line">  public void writer() &#123;</span><br><span class="line">    a = 1;                   // A1</span><br><span class="line">    flag = true;             // A2</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void reader() &#123;</span><br><span class="line">    if (flag) &#123;              // B1</span><br><span class="line">      int i =  a * a;        // B2</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　线程1执行writer()方法，线程2执行reader()方法，结果怎样？<br>　　由于writer()方法中的A1和A2操作没有依赖关系，所以可能被重排序，先执行A2，再执行A1，这种情况下由于a=0，所以i=0；reader方法中的B1、B2虽然有依赖关系，但是仍然可以重排序，B2先执行a*a=0放在缓存，当flag为true时将i赋值为0。</p>
+<ul>
+<li><strong>内存可见性</strong><br>内存可见性问题是由于多核缓存引起的。现在的多核cpu都有自己的一级缓存和二级缓存。Java作为高级语言，屏蔽了底层这些细节，构建了JMM规范。JMM抽象了主存和工作内存的概念。由于线程可能不能及时将工作内存中变量刷到主存，造成其他线程读取到的变量可能是错误的，这就是内存可见性问题。</li>
+<li><strong>原子性</strong><br>原子性即一个操作不可拆分。JMM只保证像read/load/store/write这样很少的操作是原子性的，甚至在32位平台下，对64位数据的读取和赋值都不能保证其原子性（long变量赋值是需要通过两个操作来完成的）。简单说，int i=10; 是原子的；i = i + 1 不是原子的；甚至long v = 100L 也可能不是原子的。</li>
+</ul>
+<hr>
+<h3 id="3、volatile关键字"><a href="#3、volatile关键字" class="headerlink" title="3、volatile关键字"></a>3、volatile关键字</h3><p>volatile关键字有两个作用：一是保证内存可见性；二是防止指令重排序。</p>
+<ul>
+<li>可见性：被volatile修饰的变量，如果一个线程修改了其的值，另一个线程能够立即读取到最新的值。</li>
+<li>禁止指令重排序：被volatile修饰的变量，保证在它前面的代码先执行，在它后面的代码后执行。</li>
+</ul>
+<p><strong>volatile小结</strong></p>
+<ol>
+<li>volatile 修饰符适用于以下场景：某个属性被多个线程共享，其中有一个线程修改了此属性，其他线程可以立即得到修改后的值。在并发包的源码中，它使用得非常多。</li>
+<li>volatile 属性的读写操作都是无锁的，它不能替代 synchronized，因为它没有提供原子性和互斥性。因为无锁，不需要花费时间在获取锁和释放锁上，所以说它是低成本的。</li>
+<li>volatile 只能作用于属性，我们用 volatile 修饰属性，这样 compilers 就不会对这个属性做指令重排序。</li>
+<li>volatile 提供了可见性，任何一个线程对其的修改将立马对其他线程可见。volatile 属性不会被线程缓存，始终从主存中读取。</li>
+</ol>
+<hr>
+<h3 id="4、happens-before规则"><a href="#4、happens-before规则" class="headerlink" title="4、happens-before规则"></a>4、happens-before规则</h3><p>　　happens-before用来指定两个操作之间的顺序，这两个操作可以在一个线程内，也可以在不同线程之间。因此，JMM可以通过happens-before关系向程序员提供跨线程的内存可见性。<br>　　JSR-133定义了如下happens-before规则：</p>
+<ul>
+<li>程序顺序规则：一个线程中的每个操作，happens-before于该线程的任意后续操作。</li>
+<li>监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。</li>
+<li>volatile变量规则：对一个volatile变量的写，happens-before于随后对这个volatile变量的读。</li>
+<li>传递性：如果A happens-before于B，B happens-before于C，可以得出A happens-before于C。</li>
+<li>start()规则：如果线程A执行操作ThreadB.start()（启动线程B），那么A线程的ThreadB.start()操作happens-before于线程B中的任意操作。</li>
+<li>join()规则：如果线程A执行操作ThreadB.join()并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回。</li>
+</ul>
+<hr>
+<h3 id="5、synchronized关键字"><a href="#5、synchronized关键字" class="headerlink" title="5、synchronized关键字"></a>5、synchronized关键字</h3><p>synchronized关键字可以实现volatile的保证内存可见性以及禁止重排序，同时它还可以保证原子性操作。但是synchronized需要进行加锁操作，效率更低。</p>
+<hr>
+<h3 id="6、final关键字"><a href="#6、final关键字" class="headerlink" title="6、final关键字"></a>6、final关键字</h3><p>final关键字可以用来修饰类、方法、变量。用来修饰变量时可以在对象初始化完成前，不要将此对象的引用写入到其他线程可以访问到的地方（不要让引用在构造函数中逸出）。如果这个条件满足，当其他线程看到这个对象的时候，那个线程始终可以看到正确初始化后的对象的 final 属性。</p>
+
+  	
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/07/concurrent1/" data-id="cjmyw66t00002iocgmrdvsao9" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2018/10/07/concurrent1/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/06/nginx/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">nginx详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM虚拟机/">JVM虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM虚拟机/" style="font-size: 20px;">JVM虚拟机</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/07/concurrent1/">Java内存模型</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/06/nginx/">nginx详解</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/30/springboot2/">springboot使用mybatis加载typealias的package问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/jvm5/">JVM（5）：类加载机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/27/springboot1/">springboot线程池优雅关闭</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 xiaodaoyuan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'true';
+  
+  var disqus_url = 'http://yoursite.com/2018/10/07/concurrent1/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
