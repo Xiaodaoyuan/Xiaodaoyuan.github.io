@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="Xiao&#39;s Blog">
 <meta property="og:description" content="1、Java内存模型的抽象结构　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。Java内">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/10/07/concurrent1/images/thread-jmm.png">
+<meta property="og:image" content="http://yoursite.com/images/thread-jmm.png">
 <meta property="og:updated_time" content="2018-10-07T13:26:38.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存模型">
 <meta name="twitter:description" content="1、Java内存模型的抽象结构　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。Java内">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/07/concurrent1/images/thread-jmm.png">
+<meta name="twitter:image" content="http://yoursite.com/images/thread-jmm.png">
   
     <link rel="alternate" href="/atom.xml" title="Xiao&#39;s Blog" type="application/atom+xml">
   
@@ -95,7 +95,7 @@
       
 
   	
-  	  <h3 id="1、Java内存模型的抽象结构"><a href="#1、Java内存模型的抽象结构" class="headerlink" title="1、Java内存模型的抽象结构"></a>1、Java内存模型的抽象结构</h3><p>　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。<br><img src="/2018/10/07/concurrent1/images/thread-jmm.png" alt="图1-Java内存结构"><br>Java内存模型是一种共享内存模型：</p>
+  	  <h3 id="1、Java内存模型的抽象结构"><a href="#1、Java内存模型的抽象结构" class="headerlink" title="1、Java内存模型的抽象结构"></a>1、Java内存模型的抽象结构</h3><p>　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。<br><img src="/images/thread-jmm.png" alt="图1-Java内存结构"><br>Java内存模型是一种共享内存模型：</p>
 <ul>
 <li>线程只能操作工作内存，不能直接操作主存。</li>
 <li>每个线程只能访问自己的工作内存，不能访问其他线程的工作内存。</li>
@@ -148,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/07/concurrent1/" data-id="cjmyw66t00002iocgmrdvsao9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/07/concurrent1/" data-id="cjmywvosa0002rwcgm15idufy" class="article-share-link">Share</a>
       
         <a href="http://yoursite.com/2018/10/07/concurrent1/#disqus_thread" class="article-comment-link">留言</a>
       
