@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="Xiao&#39;s Blog">
 <meta property="og:description" content="Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。 判断对象是否可以回收 引用计数法　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。 可达性分析法　　通过一系列称为“GC ROOTS”的节点作为起点">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://c1.staticflickr.com/5/4613/40093687372_3b03521a7c.jpg">
-<meta property="og:updated_time" content="2018-09-26T07:08:38.287Z">
+<meta property="og:image" content="http://yoursite.com/images/gc.jpg">
+<meta property="og:updated_time" content="2018-10-07T14:36:37.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM（3）：垃圾收集GC">
 <meta name="twitter:description" content="Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。 判断对象是否可以回收 引用计数法　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。 可达性分析法　　通过一系列称为“GC ROOTS”的节点作为起点">
-<meta name="twitter:image" content="https://c1.staticflickr.com/5/4613/40093687372_3b03521a7c.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/gc.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Xiao&#39;s Blog" type="application/atom+xml">
   
@@ -121,7 +121,7 @@
 <li><strong>安全区域</strong><br>　　程序不执行的时候，也就是没有分配CPU的时候，典型的就是线程sleep或者blocked状态时，这个时候不能响应中断请求。JVM不太可能等到线程重新分配CPU然后走到安全点。这样就需要安全区域解决这个问题。<br>　　安全区域是指在一段区域内引用关系不会发生变化，在这中间任何一个地方GC都是安全的。我们可以把Safe Region看成是扩展的safe point。</li>
 </ul>
 <hr>
-<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p><img src="https://c1.staticflickr.com/5/4613/40093687372_3b03521a7c.jpg" alt="image"></p>
+<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p><img src="/images/gc.jpg" alt="垃圾收集器"></p>
 <ul>
 <li><strong>Serial收集器</strong>：单线程收集器，client模式下默认的新生代收集器。</li>
 <li><strong>ParNew收集器</strong>：Serial收集器的多线程版本。server模式首选的新生代收集器。</li>
@@ -144,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/26/jvm3/" data-id="cjmyx840n0006xecg7vekld6n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/26/jvm3/" data-id="cjmzm49lv0009srcgel2fyscv" class="article-share-link">Share</a>
       
         <a href="http://yoursite.com/2018/09/26/jvm3/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -205,7 +205,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JVM虚拟机/" style="font-size: 20px;">JVM虚拟机</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a>
+      <a href="/tags/JVM虚拟机/" style="font-size: 20px;">JVM虚拟机</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a>
     </div>
   </div>
 
@@ -227,6 +227,10 @@
       <ul>
         
           <li>
+            <a href="/2018/10/07/concurrent2/">Java原子操作类</a>
+          </li>
+        
+          <li>
             <a href="/2018/10/07/concurrent1/">Java内存模型</a>
           </li>
         
@@ -240,10 +244,6 @@
         
           <li>
             <a href="/2018/09/27/jvm5/">JVM（5）：类加载机制</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/27/springboot1/">springboot线程池优雅关闭</a>
           </li>
         
       </ul>
