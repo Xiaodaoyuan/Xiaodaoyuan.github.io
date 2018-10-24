@@ -1,1 +1,2467 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="个人博客"><title>Xiao's Blog | 个人博客</title><link rel="stylesheet" type="text/css" href="//fonts.neworld.org/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Xiao's Blog</h1><a id="logo" href="/.">Xiao's Blog</a><p class="description">个人博客</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h2 class="post-title"><a href="/2018/10/23/bst/">二叉搜索树Java实现</a></h2><div class="post-meta"><p><span class="date">2018-10-23</span></p></div><div class="post-content"><p>二叉搜索树特性：</p></div><p class="readmore"><a href="/2018/10/23/bst/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/10/15/regular/">正则表达式</a></h2><div class="post-meta"><p><span class="date">2018-10-15</span></p></div><div class="post-content"><h4 id="常用正则表达式"><a href="#常用正则表达式" class="headerlink" title="常用正则表达式"></a>常用正则表达式</h4><table></table></div><p class="readmore"><a href="/2018/10/15/regular/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/10/07/concurrent2/">Java原子操作类</a></h2><div class="post-meta"><p><span class="date">2018-10-07</span></p></div><p class="readmore"><a href="/2018/10/07/concurrent2/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/10/07/concurrent1/">Java内存模型</a></h2><div class="post-meta"><p><span class="date">2018-10-07</span></p></div><div class="post-content"><h3 id="1、Java内存模型的抽象结构"><a href="#1、Java内存模型的抽象结构" class="headerlink" title="1、Java内存模型的抽象结构"></a>1、Java内存模型的抽象结构</h3><p>　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。<br><img src="/images/thread-jmm.png" alt="图1-Java内存结构"><br>Java内存模型是一种共享内存模型：</p></div><p class="readmore"><a href="/2018/10/07/concurrent1/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/10/06/nginx/">nginx详解</a></h2><div class="post-meta"><p><span class="date">2018-10-06</span></p></div><div class="post-content"><h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><p>　　nginx是一个跨平台的高性能web服务器。目前我们主要使用nginx用来做反向代理服务器。<br>　　为什么选择nginx：1、更快；2、高扩展性；3、高可靠性；4、低内存消耗；5、单机支持10w以上并发连接；6、热部署。</p></div><p class="readmore"><a href="/2018/10/06/nginx/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/09/30/springboot2/">springboot使用mybatis加载typealias的package问题</a></h2><div class="post-meta"><p><span class="date">2018-09-30</span></p></div><div class="post-content"><p> <strong>springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。</strong></p></div><p class="readmore"><a href="/2018/09/30/springboot2/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/09/27/jvm5/">JVM（5）：类加载机制</a></h2><div class="post-meta"><p><span class="date">2018-09-27</span></p></div><div class="post-content"><p>JVM把class文件加载的内存，并对数据进行校验、转换解析和初始化，最终形成JVM可以直接使用的Java类型的过程就是加载机制。</p></div><p class="readmore"><a href="/2018/09/27/jvm5/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/09/27/springboot1/">springboot线程池优雅关闭</a></h2><div class="post-meta"><p><span class="date">2018-09-27</span></p></div><div class="post-content"><p>在我们停止springboot项目时，我们希望线程池中的任务能够继续执行完再完全停掉服务。一般有两种做法：</p></div><p class="readmore"><a href="/2018/09/27/springboot1/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/09/26/jvm4/">JVM（4）：虚拟机性能监控</a></h2><div class="post-meta"><p><span class="date">2018-09-26</span></p></div><div class="post-content"><p>要进行虚拟机性能监控光有理论还不够，还需要实践。JDK为我们提供了一些命令行工具以及图形化洁面工具进行虚拟机性能监控实践。</p></div><p class="readmore"><a href="/2018/09/26/jvm4/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/2018/09/26/jvm3/">JVM（3）：垃圾收集GC</a></h2><div class="post-meta"><p><span class="date">2018-09-26</span></p></div><div class="post-content"><p> <strong>Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。</strong></p></div><p class="readmore"><a href="/2018/09/26/jvm3/">阅读更多</a></p></div><nav class="page-navigator"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a></nav></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/23/bst/">二叉搜索树Java实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/15/regular/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/07/concurrent2/">Java原子操作类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/07/concurrent1/">Java内存模型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/06/nginx/">nginx详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/30/springboot2/">springboot使用mybatis加载typealias的package问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/27/jvm5/">JVM（5）：类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/27/springboot1/">springboot线程池优雅关闭</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/jvm4/">JVM（4）：虚拟机性能监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/26/jvm3/">JVM（3）：垃圾收集GC</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/java基础/" style="font-size: 15px;">java基础</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/JVM虚拟机/" style="font-size: 15px;">JVM虚拟机</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="https://github.com/Xiaodaoyuan" title="GitHub" target="_blank">GitHub</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">xiaodaoyuan.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/totop.js?v=2.0.1" async></script></body></html>
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Xiao&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Xiao&#39;s Blog">
+<meta property="og:description" content="个人博客">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xiao&#39;s Blog">
+<meta name="twitter:description" content="个人博客">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/">
+
+
+
+
+
+  <title>Xiao's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiao's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/23/bst/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/23/bst/" itemprop="url">二叉搜索树Java实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-23T20:16:13+08:00">
+                2018-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>二叉搜索树特性：</p>
+<ul>
+<li>具有二叉树的所有特性。</li>
+<li>左节点的值永远小于根结点。</li>
+<li>有节点的值永远大于根结点。</li>
+<li>具有较高的查找效率。</li>
+<li>插入效率也高，比链表要高。</li>
+</ul>
+<hr>
+<p>二叉搜索树的Java代码实现：</p>
+<ul>
+<li>insert方法：插入一个节点</li>
+<li>getMin方法：获取最小节点</li>
+<li>getMax方法：获取最大节点</li>
+<li>search方法：查找一个节点</li>
+<li>delete方法：删除一个节点</li>
+<li>deleteMax方法：删除最小节点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br></pre></td><td class="code"><pre><span class="line">public class BinarySearchTree&lt;E extends Comparable&lt;E&gt;&gt; &#123;</span><br><span class="line">    private Node&lt;E&gt; root;</span><br><span class="line"></span><br><span class="line">    static class Node&lt;E&gt; &#123;</span><br><span class="line">        E item;</span><br><span class="line">        Node&lt;E&gt; leftChild;</span><br><span class="line">        Node&lt;E&gt; rightChild;</span><br><span class="line"></span><br><span class="line">        public Node(E item) &#123;</span><br><span class="line">            this.item = item;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 插入</span><br><span class="line">     *</span><br><span class="line">     * @param e</span><br><span class="line">     */</span><br><span class="line">    public void insert(E e) &#123;</span><br><span class="line">        root = insertNode(root, e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 插入节点</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     * @param e</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    private Node&lt;E&gt; insertNode(Node&lt;E&gt; node, E e) &#123;</span><br><span class="line">        if (node == null) &#123;</span><br><span class="line">            return new Node&lt;&gt;(e);</span><br><span class="line">        &#125;</span><br><span class="line">        int cmp = e.compareTo(node.item);</span><br><span class="line">        if (cmp &lt; 0) &#123;</span><br><span class="line">            //要插入的节点值比当前节点值小，则向当前节点的左节点递归插入，插入后的值赋给当前节点的左节点</span><br><span class="line">            node.leftChild = insertNode(node.leftChild, e);</span><br><span class="line">        &#125; else if (cmp &gt; 0) &#123;</span><br><span class="line">            //要插入的节点值比当前节点值大，则向当前节点的右节点递归插入，插入后的值赋给当前节点的右节点</span><br><span class="line">            node.rightChild = insertNode(node.rightChild, e);</span><br><span class="line">        &#125;</span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取整个二叉树的最小节点</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public Node&lt;E&gt; getMin() &#123;</span><br><span class="line">        return getMin(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取以指定节点为根结点的子树中的最小节点</span><br><span class="line">     * 由二叉搜索树的特性可知道最小节点一定是最左的一个节点，</span><br><span class="line">     * 所以一直找最左的节点</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public Node&lt;E&gt; getMin(Node&lt;E&gt; node) &#123;</span><br><span class="line">        //递归实现</span><br><span class="line">        if (node.leftChild == null) &#123;</span><br><span class="line">            return node;</span><br><span class="line">        &#125;</span><br><span class="line">        return getMin(node.leftChild);</span><br><span class="line">        //遍历实现</span><br><span class="line">        /*Node&lt;E&gt; min = node;</span><br><span class="line">        while (min.leftChild != null) &#123;</span><br><span class="line">            min = min.leftChild;</span><br><span class="line">        &#125;</span><br><span class="line">        return min;*/</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取整个二叉树的最大节点</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public Node&lt;E&gt; getMax() &#123;</span><br><span class="line">        return getMax(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取以指定节点为根结点的子树中的最大节点</span><br><span class="line">     * 由二叉搜索树的特性可知道最小节点一定是最右的一个节点，</span><br><span class="line">     * 所以一直找最右的节点</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public Node&lt;E&gt; getMax(Node&lt;E&gt; node) &#123;</span><br><span class="line">        //递归实现</span><br><span class="line">        if (node.rightChild == null) &#123;</span><br><span class="line">            return node;</span><br><span class="line">        &#125;</span><br><span class="line">        return getMax(node.rightChild);</span><br><span class="line">        //遍历实现</span><br><span class="line">        /*Node&lt;E&gt; max = node;</span><br><span class="line">        while (max.rightChild != null) &#123;</span><br><span class="line">            max = max.rightChild;</span><br><span class="line">        &#125;</span><br><span class="line">        return max;*/</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Node&lt;E&gt; search(E e) &#123;</span><br><span class="line">        return search(root, e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 查找某个节点</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     * @param e</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public Node&lt;E&gt; search(Node&lt;E&gt; node, E e) &#123;</span><br><span class="line">        //遍历实现</span><br><span class="line">        int count = 0;</span><br><span class="line">        Node&lt;E&gt; current = node;</span><br><span class="line">        while (current != null) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            int cmp = current.item.compareTo(e);</span><br><span class="line">            if (cmp &gt; 0) &#123;</span><br><span class="line">                current = current.leftChild;</span><br><span class="line">            &#125; else if (cmp &lt; 0) &#123;</span><br><span class="line">                current = current.rightChild;</span><br><span class="line">            &#125; else if (cmp == 0) &#123;</span><br><span class="line">                System.out.println(&quot;查找次数为：&quot; + count);</span><br><span class="line">                return current;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">        //递归实现</span><br><span class="line">        /*if (node == null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        int cmp = node.item.compareTo(e);</span><br><span class="line">        if (cmp &gt; 0) &#123;</span><br><span class="line">            return search(node.leftChild, e);</span><br><span class="line">        &#125; else if (cmp &lt; 0) &#123;</span><br><span class="line">            return search(node.rightChild, e);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return node;</span><br><span class="line">        &#125;*/</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 删除值为e的节点</span><br><span class="line">     *</span><br><span class="line">     * @param key</span><br><span class="line">     */</span><br><span class="line">    public void delete(E key) &#123;</span><br><span class="line">        root = delete(root, key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 删除节点</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public Node&lt;E&gt; delete(Node&lt;E&gt; node, E key) &#123;</span><br><span class="line">        if (node == null) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int cmp = key.compareTo(node.item);</span><br><span class="line">            if (cmp &gt; 0) &#123;</span><br><span class="line">                //判断删除节点的值比当前节点大，则向当前节点的右节点递归删除</span><br><span class="line">                node.rightChild = delete(node.rightChild, key);</span><br><span class="line">            &#125; else if (cmp &lt; 0) &#123;</span><br><span class="line">                node.leftChild = delete(node.leftChild, key);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (node.rightChild == null) &#123;</span><br><span class="line">                    return node.leftChild;</span><br><span class="line">                &#125;</span><br><span class="line">                if (node.leftChild == null) &#123;</span><br><span class="line">                    return node.rightChild;</span><br><span class="line">                &#125;</span><br><span class="line">                Node&lt;E&gt; t = node;</span><br><span class="line">                node = getMin(t.rightChild);</span><br><span class="line">                node.rightChild = deleteMin(t.rightChild);</span><br><span class="line">                node.leftChild = t.leftChild;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 删除树中最小节点</span><br><span class="line">     */</span><br><span class="line">    public void deleteMin() &#123;</span><br><span class="line">        root = deleteMin(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 删除最小节点</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public Node&lt;E&gt; deleteMin(Node&lt;E&gt; node) &#123;</span><br><span class="line">        //如果当前节点左节点为空，则当前节点为最小节点，将当前节点的右节点返回赋值给上一节点的左节点，则表示删除了改节点。</span><br><span class="line">        if (node.leftChild == null) &#123;</span><br><span class="line">            return node.rightChild;</span><br><span class="line">        &#125;</span><br><span class="line">        //递归删除当前节点的左节点，并将返回值赋给左节点</span><br><span class="line">        node.leftChild = deleteMin(node.leftChild);</span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 打印节点值</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     */</span><br><span class="line">    private void printNode(Node&lt;E&gt; node) &#123;</span><br><span class="line">        System.out.println(node.item);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 先序遍历</span><br><span class="line">     */</span><br><span class="line">    public void firstOrderTraversal() &#123;</span><br><span class="line">        firstOrderTraversal(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 先序遍历</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     */</span><br><span class="line">    public void firstOrderTraversal(Node&lt;E&gt; node) &#123;</span><br><span class="line">        if (node != null) &#123;</span><br><span class="line">            printNode(node);</span><br><span class="line">            if (node.leftChild != null) &#123;</span><br><span class="line">                firstOrderTraversal(node.leftChild);</span><br><span class="line">            &#125;</span><br><span class="line">            if (node.rightChild != null) &#123;</span><br><span class="line">                firstOrderTraversal(node.rightChild);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 中序遍历</span><br><span class="line">     */</span><br><span class="line">    public void inOrderTraversal() &#123;</span><br><span class="line">        inOrderTraversal(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 中序遍历</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     */</span><br><span class="line">    public void inOrderTraversal(Node&lt;E&gt; node) &#123;</span><br><span class="line">        if (node != null) &#123;</span><br><span class="line">            if (node.leftChild != null) &#123;</span><br><span class="line">                inOrderTraversal(node.leftChild);</span><br><span class="line">            &#125;</span><br><span class="line">            printNode(node);</span><br><span class="line">            if (node.rightChild != null) &#123;</span><br><span class="line">                inOrderTraversal(node.rightChild);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 后续遍历</span><br><span class="line">     */</span><br><span class="line">    public void postOrderTraversal() &#123;</span><br><span class="line">        postOrderTraversal(root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 后续遍历</span><br><span class="line">     *</span><br><span class="line">     * @param node</span><br><span class="line">     */</span><br><span class="line">    public void postOrderTraversal(Node&lt;E&gt; node) &#123;</span><br><span class="line">        if (node != null) &#123;</span><br><span class="line">            if (node.leftChild != null) &#123;</span><br><span class="line">                postOrderTraversal(node.leftChild);</span><br><span class="line">            &#125;</span><br><span class="line">            if (node.rightChild != null) &#123;</span><br><span class="line">                postOrderTraversal(node.rightChild);</span><br><span class="line">            &#125;</span><br><span class="line">            printNode(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/regular/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/15/regular/" itemprop="url">正则表达式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T18:17:26+08:00">
+                2018-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="常用正则表达式"><a href="#常用正则表达式" class="headerlink" title="常用正则表达式"></a>常用正则表达式</h4><table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>匹配出换行符外任意字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符，可以将一些有特殊含义的字符转化为本身含义，如\.代表点本身的含义。</td>
+</tr>
+<tr>
+<td>[ ]</td>
+<td>匹配中括号中字符的一个，如[abc]表示匹配a、b、c中的一个字符。</td>
+</tr>
+<tr>
+<td>&#124;</td>
+<td>匹配两个字符中的一个，如a&#124;b表示匹配a或者b。</td>
+</tr>
+<tr>
+<td>[0-9A-Za-z]</td>
+<td>字符区间，[0-9]表示0-9中的一个数。</td>
+</tr>
+<tr>
+<td>^</td>
+<td>取非匹配，[^0-9]表示不是0-9中的一个字符。</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配非数字</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非字母</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配一个或多个字符，如\d+表示匹配一个或多个数字。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配0个或多个字符。</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配0个或一个字符。</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配多次，如\w{3}表示匹配3个字母。</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>匹配次数是一个区间，如\d{2,4}表示匹配2-4个数字。</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>匹配至少次数的字符。</td>
+</tr>
+<tr>
+<td>()</td>
+<td>标记一个子表达式开始和结束</td>
+</tr>
+<tr>
+<td>^</td>
+<td>放在外面表示匹配字符串开始位置，如果是在方括号内表示取非</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串结束位置</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>匹配一个换页符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符，等价于[ ^\f\n\r\t\v]</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配一个单词边界，即字与空格间位置</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配一个非单词边界</td>
+</tr>
+<tr>
+<td>?=</td>
+<td>向前匹配，如?=:表示匹配:然后向前匹配，最后结果不包含:</td>
+</tr>
+<tr>
+<td>?&lt;=</td>
+<td>向前匹配，如(?&lt;=\$)[0-9.]+表示匹配$然后向后匹配，最后结果不包含$</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="防止过度匹配"><a href="#防止过度匹配" class="headerlink" title="防止过度匹配"></a>防止过度匹配</h4><p>　　* 和+ 都是所谓的“贪婪型”元字符，它们在进行匹配时的行为模式是多多益善而不是适可而止的。它们会尽可能地从一段文本的开头一直匹配到这段文本的末尾，而不是从这段文本的开头匹配到碰到第一个匹配时为止。<br>　　为了防止这种贪婪型匹配，我们需要使用对应字符的惰性版本，<em> 使用 </em>？，+ 使用 +？，{n,}使用{n,}?</p>
+<h4 id="回溯引用"><a href="#回溯引用" class="headerlink" title="回溯引用"></a>回溯引用</h4><p>　　回溯引用指的是模式的后半部分引用在前半部分中定义的子表达式。如 &lt;<a href="[1-6]">hH</a>&gt;.*?&lt;/[hH]\1&gt;，这其中最后的\1表示前面第一个子表达式匹配的结果，即([1-6])，依此类推，\2表示第二个子表达式，\n表示第n个子表达式。<br>　　回溯引用在替换操作中也很有用，如(\d{3})(-)(\d{3})(-)(\d{4})这个正则表达式，使用替换的表达式($1) $3-$5，可以将匹配到的字符替换成别的格式。其中$1,$3,$5分别表示第1，第3，第5个子表达式。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/07/concurrent2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/concurrent2/" itemprop="url">Java原子操作类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-07T22:38:14+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/07/concurrent1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/07/concurrent1/" itemprop="url">Java内存模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-07T15:58:29+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、Java内存模型的抽象结构"><a href="#1、Java内存模型的抽象结构" class="headerlink" title="1、Java内存模型的抽象结构"></a>1、Java内存模型的抽象结构</h3><p>　　Java内存模型就是Java Memory Model（以下简称JMM），是Java虚拟机规范的一部分。JMM规定：变量存储在主存中，每个线程有自己的工作内存，线程工作内存中保存了变量在主存的副本拷贝。主存是线程共享的，工作内存变量是各个线程独享的。线程工作时，从主存中复制变量到线程的工作内存，然后在工作内存中操作变量副本，最后再把变量副本写回到主内存。<br><img src="/images/thread-jmm.png" alt="图1-Java内存结构"><br>Java内存模型是一种共享内存模型：</p>
+<ul>
+<li>线程只能操作工作内存，不能直接操作主存。</li>
+<li>每个线程只能访问自己的工作内存，不能访问其他线程的工作内存。</li>
+<li>线程之间的数据通信必须通过主存中完成。</li>
+</ul>
+<hr>
+<h3 id="2、并发三问题"><a href="#2、并发三问题" class="headerlink" title="2、并发三问题"></a>2、并发三问题</h3><ul>
+<li><strong>重排序</strong><br>为了提高性能，编译器和处理器会对指令进行重排序，重排序主要有三种类型：<ol>
+<li>编译器重排序：编译器在不改变单线程程序语义的前提下，可以重新安排字节码的执行顺序；也就是编译生成的机器码顺序和源代码顺序不一样。</li>
+<li>处理器重排序：现代处理器采用指令级并行技术将多条指令重叠执行，如果不存在数据依赖性，处理器可以改变语句对应机器指令的执行顺序；也就是CPU在执行字节码时，执行顺序可能和机器码顺序不一样。</li>
+<li>内存重排序：由于处理器使用缓存和读/写缓冲区，这使得加载和存储操作看上去可能是在乱序执行。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class ReorderExample &#123;</span><br><span class="line">  int a = 0;</span><br><span class="line">  boolean flag = false;</span><br><span class="line"></span><br><span class="line">  public void writer() &#123;</span><br><span class="line">    a = 1;                   // A1</span><br><span class="line">    flag = true;             // A2</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void reader() &#123;</span><br><span class="line">    if (flag) &#123;              // B1</span><br><span class="line">      int i =  a * a;        // B2</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　线程1执行writer()方法，线程2执行reader()方法，结果怎样？<br>　　由于writer()方法中的A1和A2操作没有依赖关系，所以可能被重排序，先执行A2，再执行A1，这种情况下由于a=0，所以i=0；reader方法中的B1、B2虽然有依赖关系，但是仍然可以重排序，B2先执行a*a=0放在缓存，当flag为true时将i赋值为0。</p>
+<ul>
+<li><strong>内存可见性</strong><br>内存可见性问题是由于多核缓存引起的。现在的多核cpu都有自己的一级缓存和二级缓存。Java作为高级语言，屏蔽了底层这些细节，构建了JMM规范。JMM抽象了主存和工作内存的概念。由于线程可能不能及时将工作内存中变量刷到主存，造成其他线程读取到的变量可能是错误的，这就是内存可见性问题。</li>
+<li><strong>原子性</strong><br>原子性即一个操作不可拆分。JMM只保证像read/load/store/write这样很少的操作是原子性的，甚至在32位平台下，对64位数据的读取和赋值都不能保证其原子性（long变量赋值是需要通过两个操作来完成的）。简单说，int i=10; 是原子的；i = i + 1 不是原子的；甚至long v = 100L 也可能不是原子的。</li>
+</ul>
+<hr>
+<h3 id="3、volatile关键字"><a href="#3、volatile关键字" class="headerlink" title="3、volatile关键字"></a>3、volatile关键字</h3><p>volatile关键字有两个作用：一是保证内存可见性；二是防止指令重排序。</p>
+<ul>
+<li>可见性：被volatile修饰的变量，如果一个线程修改了其的值，另一个线程能够立即读取到最新的值。</li>
+<li>禁止指令重排序：被volatile修饰的变量，保证在它前面的代码先执行，在它后面的代码后执行。</li>
+</ul>
+<p><strong>volatile小结</strong></p>
+<ol>
+<li>volatile 修饰符适用于以下场景：某个属性被多个线程共享，其中有一个线程修改了此属性，其他线程可以立即得到修改后的值。在并发包的源码中，它使用得非常多。</li>
+<li>volatile 属性的读写操作都是无锁的，它不能替代 synchronized，因为它没有提供原子性和互斥性。因为无锁，不需要花费时间在获取锁和释放锁上，所以说它是低成本的。</li>
+<li>volatile 只能作用于属性，我们用 volatile 修饰属性，这样 compilers 就不会对这个属性做指令重排序。</li>
+<li>volatile 提供了可见性，任何一个线程对其的修改将立马对其他线程可见。volatile 属性不会被线程缓存，始终从主存中读取。</li>
+</ol>
+<hr>
+<h3 id="4、happens-before规则"><a href="#4、happens-before规则" class="headerlink" title="4、happens-before规则"></a>4、happens-before规则</h3><p>　　happens-before用来指定两个操作之间的顺序，这两个操作可以在一个线程内，也可以在不同线程之间。因此，JMM可以通过happens-before关系向程序员提供跨线程的内存可见性。<br>　　JSR-133定义了如下happens-before规则：</p>
+<ul>
+<li>程序顺序规则：一个线程中的每个操作，happens-before于该线程的任意后续操作。</li>
+<li>监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。</li>
+<li>volatile变量规则：对一个volatile变量的写，happens-before于随后对这个volatile变量的读。</li>
+<li>传递性：如果A happens-before于B，B happens-before于C，可以得出A happens-before于C。</li>
+<li>start()规则：如果线程A执行操作ThreadB.start()（启动线程B），那么A线程的ThreadB.start()操作happens-before于线程B中的任意操作。</li>
+<li>join()规则：如果线程A执行操作ThreadB.join()并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回。</li>
+</ul>
+<hr>
+<h3 id="5、synchronized关键字"><a href="#5、synchronized关键字" class="headerlink" title="5、synchronized关键字"></a>5、synchronized关键字</h3><p>synchronized关键字可以实现volatile的保证内存可见性以及禁止重排序，同时它还可以保证原子性操作。但是synchronized需要进行加锁操作，效率更低。</p>
+<hr>
+<h3 id="6、final关键字"><a href="#6、final关键字" class="headerlink" title="6、final关键字"></a>6、final关键字</h3><p>final关键字可以用来修饰类、方法、变量。用来修饰变量时可以在对象初始化完成前，不要将此对象的引用写入到其他线程可以访问到的地方（不要让引用在构造函数中逸出）。如果这个条件满足，当其他线程看到这个对象的时候，那个线程始终可以看到正确初始化后的对象的 final 属性。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/06/nginx/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/06/nginx/" itemprop="url">nginx详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-06T19:00:44+08:00">
+                2018-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><p>　　nginx是一个跨平台的高性能web服务器。目前我们主要使用nginx用来做反向代理服务器。<br>　　为什么选择nginx：1、更快；2、高扩展性；3、高可靠性；4、低内存消耗；5、单机支持10w以上并发连接；6、热部署。</p>
+<hr>
+<h3 id="2、安装和启动"><a href="#2、安装和启动" class="headerlink" title="2、安装和启动"></a>2、安装和启动</h3><p><strong>2.1、编译安装</strong><br>　　从nginx官网获取nginx的源码，然后将源码解压到准备好的目录。然后进入安装目录执行三行代码：./configure、make、make install。<br>　　configure命令做了大量的“幕后”工作，包括检测操作系统内核和已经安装的软件，参数的解析，中间目录的生成以及根据各种参数生成一些C源码文件、Makefile文件等。<br>　　make命令根据configure命令生成的Makefile文件编译Nginx工程，并生成目标文件、最终的二进制文件。<br>　　make install命令根据configure执行时的参数将Nginx部署到指定的安装目录，包括相关目录的建立和二进制文件、配置文件的复制。<br><strong>2.2、命令行控制</strong></p>
+<ul>
+<li><strong>默认方式启动：</strong>./nginx 会使用默认路径下的conf文件。</li>
+<li><strong>另指定配置文件启动：</strong>./nginx -c /tmp/nginx.conf 使用-c参数可以指定配置文件。</li>
+<li><strong>另指定安装目录启动：</strong>./nginx -p /usr/local/nginx 使用-p参数指定nginx的安装目录。</li>
+<li><strong>测试配置信息的正确性：</strong>./nginx -t 使用-t参数测试配置文件是否正确。</li>
+<li><strong>在测试阶段不输出非错误信息：</strong>./nginx -t -q 测试配置选项时，使用-q参数可以不把error级别以下的信息输出到屏幕。</li>
+<li><strong>显示版本信息：</strong>./nginx -v 使用-v参数显示Nginx的版本信息。</li>
+<li><strong>快速停止服务：</strong>./nginx -s stop       可以强制停止服务。nginx程序通过nginx.pid文件得到master进程的进程ID，再向master进程发送TERM信号快速的关闭服务。</li>
+<li><strong>优雅停止服务：</strong>./nginx -s quit  这个会先关闭端口，停止接受新的连接，然后将当前的任务全部处理完再关闭服务。</li>
+<li><strong>运行中重读配置文件并生效：</strong>./nginx -s reload  可以使运行中的nginx重新加载配置文件。</li>
+</ul>
+<hr>
+<h3 id="3、服务架构"><a href="#3、服务架构" class="headerlink" title="3、服务架构"></a>3、服务架构</h3><p><strong>3.1、模块化架构</strong><br>　　nginx其实就是由很多模块组成，每个模块实现特定的功能。主要分为核心模块、标准http模块、可选http模块、邮件模块以及第三方模块等五大类。<br><strong>3.2、web请求处理机制</strong><br>　　实现并行处理请求工作主要有三种方式：多进程方式、多线程方式、异步方式。nginx主要采用的是多进程机制和异步机制，异步机制使用的是异步非阻塞。<br><strong>3.3、事件驱动模型</strong><br>　　异步IO的实现机制主要有两种：一是工作进程不停的查询IO是否完成；二是IO调用完成后主动通知工作进程。nginx使用的是第二种，也就是事件驱动模型。  事件收集器–&gt;事件发送器–&gt;事件处理器<br>　　常用的事件驱动模型库有：select库、poll库、epoll库。</p>
+<ul>
+<li>select库：首先创建读、写、异常三类事件描述符集合，其次调用底层select函数，等待事件发生，然后轮询三个集合中的每一个事件描述符，如果有事件发生就进行处理。</li>
+<li>poll库：poll库和select库的基本工作方式是相同的，主要区别在于select库创建了三个集合，而poll库只需要创建一个集合，是select库的优化实现。</li>
+<li>epoll库：epoll的实现方式是把描述符列表的管理交给内核负责，一旦有某种事件发生，内核就把事件发生的描述符列表通知给进程，这样避免了轮询整个描述符列表，所以它比select库和poll库更高效。</li>
+</ul>
+<p><strong>3.4、设计架构概览</strong><br>　　nginx的主要架构是由一个主进程(master process)，多个工作进程(worker process)组成。主进程主要进行nginx配置文件解析、数据结构初始化、模块配置和注册、信号处理、网络监听生成、工作进程生成和管理等工作，工作进程主要进行进程初始化、模块调用和请求处理等工作，是nginx服务器提供服务的主体。  </p>
+<hr>
+<h3 id="4-配置"><a href="#4-配置" class="headerlink" title="4.配置"></a>4.配置</h3><p>下面是<a href="http://nginx.org/en/docs/" target="_blank" rel="noopener">nginx官网</a>基本配置的一个完整例子，更多的配置可以去官网查询相关文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line">#用户（组）</span><br><span class="line">user  www www;</span><br><span class="line">#工作进程数</span><br><span class="line">worker_processes  2;</span><br><span class="line">#进程PID存放路径</span><br><span class="line">pid /var/run/nginx.pid;</span><br><span class="line">#错误日志存放路径</span><br><span class="line"># [ debug | info | notice | warn | error | crit ]</span><br><span class="line">error_log  /var/log/nginx.error_log  info;</span><br><span class="line"></span><br><span class="line">#events块</span><br><span class="line">events &#123;</span><br><span class="line">    #配置最大连接数</span><br><span class="line">    worker_connections   2000;</span><br><span class="line">    #事件驱动模型选择</span><br><span class="line">    # use [kqueue|epoll|/dev/poll|select|poll];</span><br><span class="line">    use kqueue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#http块</span><br><span class="line">http &#123;</span><br><span class="line">    #定义MIME-Type</span><br><span class="line">    include       conf/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    #日志格式</span><br><span class="line">    log_format main      &apos;$remote_addr - $remote_user [$time_local] &apos;</span><br><span class="line">                         &apos;&quot;$request&quot; $status $bytes_sent &apos;</span><br><span class="line">                         &apos;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &apos;</span><br><span class="line">                         &apos;&quot;$gzip_ratio&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    log_format download  &apos;$remote_addr - $remote_user [$time_local] &apos;</span><br><span class="line">                         &apos;&quot;$request&quot; $status $bytes_sent &apos;</span><br><span class="line">                         &apos;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &apos;</span><br><span class="line">                         &apos;&quot;$http_range&quot; &quot;$sent_http_content_range&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    client_header_timeout  3m;</span><br><span class="line">    client_body_timeout    3m;</span><br><span class="line">    send_timeout           3m;</span><br><span class="line"></span><br><span class="line">    client_header_buffer_size    1k;</span><br><span class="line">    large_client_header_buffers  4 4k;</span><br><span class="line"></span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_min_length  1100;</span><br><span class="line">    gzip_buffers     4 8k;</span><br><span class="line">    gzip_types       text/plain;</span><br><span class="line"></span><br><span class="line">    output_buffers   1 32k;</span><br><span class="line">    postpone_output  1460;</span><br><span class="line"></span><br><span class="line">    sendfile         on;</span><br><span class="line">    tcp_nopush       on;</span><br><span class="line">    tcp_nodelay      on;</span><br><span class="line">    send_lowat       12000;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  75 20;</span><br><span class="line"></span><br><span class="line">    #lingering_time     30;</span><br><span class="line">    #lingering_timeout  10;</span><br><span class="line">    #reset_timedout_connection  on;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen        one.example.com;</span><br><span class="line">        server_name   one.example.com  www.one.example.com;</span><br><span class="line"></span><br><span class="line">        access_log   /var/log/nginx.access_log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass         http://127.0.0.1/;</span><br><span class="line">            proxy_redirect     off;</span><br><span class="line"></span><br><span class="line">            proxy_set_header   Host             $host;</span><br><span class="line">            proxy_set_header   X-Real-IP        $remote_addr;</span><br><span class="line">            #proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">            client_max_body_size       10m;</span><br><span class="line">            client_body_buffer_size    128k;</span><br><span class="line"></span><br><span class="line">            client_body_temp_path      /var/nginx/client_body_temp;</span><br><span class="line"></span><br><span class="line">            proxy_connect_timeout      70;</span><br><span class="line">            proxy_send_timeout         90;</span><br><span class="line">            proxy_read_timeout         90;</span><br><span class="line">            proxy_send_lowat           12000;</span><br><span class="line"></span><br><span class="line">            proxy_buffer_size          4k;</span><br><span class="line">            proxy_buffers              4 32k;</span><br><span class="line">            proxy_busy_buffers_size    64k;</span><br><span class="line">            proxy_temp_file_write_size 64k;</span><br><span class="line"></span><br><span class="line">            proxy_temp_path            /var/nginx/proxy_temp;</span><br><span class="line"></span><br><span class="line">            charset  koi8-r;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page  404  /404.html;</span><br><span class="line"></span><br><span class="line">        location = /404.html &#123;</span><br><span class="line">            root  /spool/www;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location /old_stuff/ &#123;</span><br><span class="line">            rewrite   ^/old_stuff/(.*)$  /new_stuff/$1  permanent;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location /download/ &#123;</span><br><span class="line"></span><br><span class="line">            valid_referers  none  blocked  server_names  *.example.com;</span><br><span class="line"></span><br><span class="line">            if ($invalid_referer) &#123;</span><br><span class="line">                #rewrite   ^/   http://www.example.com/;</span><br><span class="line">                return   403;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            #rewrite_log  on;</span><br><span class="line"></span><br><span class="line">            # rewrite /download/*/mp3/*.any_ext to /download/*/mp3/*.mp3</span><br><span class="line">            rewrite ^/(download/.*)/mp3/(.*)\..*$</span><br><span class="line">                    /$1/mp3/$2.mp3                   break;</span><br><span class="line"></span><br><span class="line">            root         /spool/www;</span><br><span class="line">            #autoindex    on;</span><br><span class="line">            access_log   /var/log/nginx-download.access_log  download;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~* \.(jpg|jpeg|gif)$ &#123;</span><br><span class="line">            root         /spool/www;</span><br><span class="line">            access_log   off;</span><br><span class="line">            expires      30d;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="5-反向代理与负载均衡"><a href="#5-反向代理与负载均衡" class="headerlink" title="5.反向代理与负载均衡"></a>5.反向代理与负载均衡</h3><p><strong>正向代理和反向代理：</strong> 简单说，正向代理用来让局域网客户机接入外网以访问外网资源，反向代理用来让外网的客户端接入局域网中的站点以访问站点中的资源。  </p>
+<ul>
+<li><p>正向代理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;  </span><br><span class="line">   resolver 192.168.1.1; #指定DNS服务器IP地址  </span><br><span class="line">   listen 8080;  </span><br><span class="line">   location / &#123;  </span><br><span class="line">       proxy_pass http://$http_host$request_uri; #设定代理服务器的协议和地址  </span><br><span class="line">   &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>反向代理</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">   listen       80;</span><br><span class="line">   location /demo &#123;</span><br><span class="line">       proxy_pass http://127.0.0.1:8081;</span><br><span class="line">   &#125;</span><br><span class="line">   location /demo1 &#123;</span><br><span class="line">       proxy_pass http://127.0.0.1:8082;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>负载均衡</strong><br>　　nginx是一个非常高效的HTTP负载均衡器，将流量分配给多个应用服务器，并通过nginx提高web应用程序的性能、可伸缩性和可靠性。<br>　　nginx负载均衡使用的指令主要有upstream和proxy_pass，upstream块定义一个后端集群，proxy_pass用于location块中，表示对于所有符合要求的request交给某个集群处理。<br>　　常见的由以下几种实现负载均衡的方式。</p>
+<ul>
+<li>轮询（round-robin）：默认方式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">   upstream backend &#123;</span><br><span class="line">       server srv1.example.com;</span><br><span class="line">       server srv2.example.com;</span><br><span class="line">       server srv3.example.com;</span><br><span class="line">   &#125;</span><br><span class="line">   server &#123;</span><br><span class="line">       listen 80;</span><br><span class="line">       location / &#123;</span><br><span class="line">           proxy_pass http://backend;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>加权轮询（weight-round-robin）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">   server srv1.example.com weight=3;</span><br><span class="line">   server srv2.example.com weight=2;</span><br><span class="line">   server srv3.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最少连接（least-connected）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">   least_conn;</span><br><span class="line">   server srv1.example.com;</span><br><span class="line">   server srv2.example.com;</span><br><span class="line">   server srv3.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ip-hash：每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">   ip_hash;</span><br><span class="line">   server srv1.example.com;</span><br><span class="line">   server srv2.example.com;</span><br><span class="line">   server srv3.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>fair（第三方）: 按后端服务器的响应时间来分配请求，响应时间短的优先分配</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">   fair;</span><br><span class="line">   server srv1.example.com;</span><br><span class="line">   server srv2.example.com;</span><br><span class="line">   server srv3.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/30/springboot2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/30/springboot2/" itemprop="url">springboot使用mybatis加载typealias的package问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-30T18:02:32+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> <strong>springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。</strong></p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">    public SqlSessionFactory db1SqlSessionFactory(DataSource dataSource) throws Exception &#123;</span><br><span class="line">        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();</span><br><span class="line">        sqlSessionFactoryBean.setDataSource(dataSource);</span><br><span class="line">        //mybatis使用默认DefaultVFS扫描包会有问题，使用SpringBootVFS</span><br><span class="line">        sqlSessionFactoryBean.setVfs(SpringBootVFS.class); </span><br><span class="line">        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();</span><br><span class="line">        sqlSessionFactoryBean.setMapperLocations(resolver.getResources(&quot;classpath*:/mybatis/mapper/**.xml&quot;));</span><br><span class="line">        sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(&quot;mybatis/mybatis-config.xml&quot;));</span><br><span class="line">        return sqlSessionFactoryBean.getObject();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果使用 mybatis autoconfigure生成的 SessionFactory可能就没有这个问题了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/jvm5/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/27/jvm5/" itemprop="url">JVM（5）：类加载机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T17:41:42+08:00">
+                2018-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>JVM把class文件加载的内存，并对数据进行校验、转换解析和初始化，最终形成JVM可以直接使用的Java类型的过程就是加载机制。</p>
+<h4 id="类加载生命周期"><a href="#类加载生命周期" class="headerlink" title="类加载生命周期"></a>类加载生命周期</h4><ul>
+<li>加载（Loading）</li>
+<li>验证（Verifycation）</li>
+<li>准备（Preparation）</li>
+<li>解析（Resolution）</li>
+<li>初始化（Initialization）</li>
+<li>使用（Using）</li>
+<li>卸载（Unloading）  </li>
+</ul>
+<p>其中验证、准备、解析这三个阶段统称为连接。加载、验证、准备、初始化、卸载这五个阶段顺序是确定的。</p>
+<hr>
+<ul>
+<li><strong>加载</strong><br>在加载阶段，虚拟机需要完成三件事情：<ol>
+<li>通过一个类的全限定名来获取定义此类的二进制字节流。</li>
+<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</li>
+<li>在内存中生成一个代表这个类的java.lang.class的对象，作为方法区这个类的各种数据的访问入口。</li>
+</ol>
+</li>
+<li><strong>验证</strong><br>验证是连接阶段的第一步，这一阶段的目的是为了确保Class文件字节流中包含的信息符合当前虚拟机的要求，并且不回危害虚拟机的安全。验证阶段一共包含四步：文件格式验证、愿数据验证、字节码验证、符号引用验证。</li>
+<li><strong>准备</strong><br>准备阶段是为类变量分配内存并设置初始值的阶段，这些变量所使用的内存都在方法区中。<br>public static int value=123；这个变量在准备阶段会初始化为0而不是123，因为这个时候尚未执行任何java方法，将value赋值为123是在putstatic指令被程序编译之后。<br>public static final int value=123；而这个会在准备阶段之后value就被初始化为123。</li>
+<li><strong>解析</strong><br>解析阶段是将常量池中的符号引用替换成直接引用的过程。</li>
+<li><strong>初始化</strong><br>初始化阶段是真正开始执行类中定义的java代码。在准备阶段，类变量已经赋值了一次系统要求的初始值，而在初始化阶段，则根据具体实际的值去初始化。</li>
+</ul>
+<hr>
+<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><ul>
+<li><strong>Bootstrap ClassLoader</strong></li>
+<li><strong>Extension ClassLoader</strong></li>
+<li><strong>Application ClassLoader</strong></li>
+<li><strong>Custom ClassLoader</strong> </li>
+</ul>
+<p> <strong>双亲委派模型</strong><br>　　双亲委派模型要求除了顶层的启动类加载器外，其余的类加载器都应该有自己的父类加载器。这些父子类加载器之间的关系不会以继承来实现，而是使用组合来实现。<br>　　双亲委派模型的工作过程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到顶层的启动类加载器中，只有当父加载器反馈自己无法完成这个加载请求（它的搜索范围中没有找到所需的类）时，子加载器才会尝试自己去加载。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/springboot1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/27/springboot1/" itemprop="url">springboot线程池优雅关闭</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T16:46:18+08:00">
+                2018-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在我们停止springboot项目时，我们希望线程池中的任务能够继续执行完再完全停掉服务。一般有两种做法：</p>
+<h4 id="线程池配置参数"><a href="#线程池配置参数" class="headerlink" title="线程池配置参数"></a>线程池配置参数</h4><p>在spring应用中，如果需要<br>停止服务，而线程池没有优雅的关闭，就会造成线程池中的任务被强行停止，导致部分任务执行失败。我们只需要在配置线程池时增加两个参数即可：</p>
+<ul>
+<li>waitForTasksToCompleteOnShutdown</li>
+<li>awaitTerminationSeconds<br>具体代码如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public ThreadPoolTaskExecutor treadPool() &#123;</span><br><span class="line">    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();</span><br><span class="line">    executor.setCorePoolSize(10);</span><br><span class="line">    executor.setMaxPoolSize(20);</span><br><span class="line">    executor.setQueueCapacity(10);</span><br><span class="line">    executor.setKeepAliveSeconds(60);</span><br><span class="line">    executor.setWaitForTasksToCompleteOnShutdown(true);</span><br><span class="line">    executor.setAwaitTerminationSeconds(30);</span><br><span class="line">    executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line">    executor.initialize();</span><br><span class="line">    return executor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="使用ApplicationListener监听关闭事件"><a href="#使用ApplicationListener监听关闭事件" class="headerlink" title="使用ApplicationListener监听关闭事件"></a>使用ApplicationListener<contextclosedevent>监听关闭事件</contextclosedevent></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyContextClosedHandler implements ApplicationListener&lt;ContextClosedEvent&gt;&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private ThreadPoolTaskExecutor executor;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onApplicationEvent(ContextClosedEvent event) &#123;</span><br><span class="line">        shutdownAndAwaitTermination(executor.getThreadPoolExecutor());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void shutdownAndAwaitTermination(ExecutorService pool) &#123;</span><br><span class="line">        pool.shutdown(); // Disable new tasks from being submitted</span><br><span class="line">        try &#123;</span><br><span class="line">            // Wait a while for existing tasks to terminate</span><br><span class="line">            if (!pool.awaitTermination(30, TimeUnit.SECONDS)) &#123;</span><br><span class="line">                pool.shutdownNow(); // Cancel currently executing tasks</span><br><span class="line">                // Wait a while for tasks to respond to being cancelled</span><br><span class="line">                if (!pool.awaitTermination(30, TimeUnit.SECONDS))</span><br><span class="line">                    System.err.println(&quot;Pool did not terminate&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (InterruptedException ie) &#123;</span><br><span class="line">            // (Re-)Cancel if current thread also interrupted</span><br><span class="line">            pool.shutdownNow();</span><br><span class="line">            // Preserve interrupt status</span><br><span class="line">            Thread.currentThread().interrupt();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/jvm4/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/26/jvm4/" itemprop="url">JVM（4）：虚拟机性能监控</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T15:12:08+08:00">
+                2018-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>要进行虚拟机性能监控光有理论还不够，还需要实践。JDK为我们提供了一些命令行工具以及图形化洁面工具进行虚拟机性能监控实践。</p>
+<h3 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h3><ul>
+<li><strong>jps：虚拟机进程状况工具</strong><br>用于列出正在执行的虚拟机进程。<br>命令格式：jps ［options］［hostid］<br>主要选项：-q   只输出LVMID，省略主类的名称<br>  　　　　　-l 输出主类的全名，如果执行的是jar包，输出jar的包路径<br>　　　　　 -m   输出虚拟机进程启动时传给主类main函数的参数<br>　　　　　 -v     输出虚拟机进程启动时的JVM参数<br>jps可以通过RMI协议查询开启了RMI服务的远程虚拟机进程状态，hostid为RMI注册表中注册的主机名。</li>
+</ul>
+<ul>
+<li><strong>jstat：虚拟机统计信息监视工具</strong><br>用于监视虚拟机各种运行状态信息。<br>命令格式： jstat -<option> [-t] [-h<lines>] <vmid> [<interval> [<count>]]<br>   　　　　　jstat -gc   2764   250  20     每250ms查看一次进程ID2764的gc情况，一共查看20次<br>主要选项：-class       监视类装载、卸载、总空间以及所耗费时间<br>  　　　　　-gc           监视java堆gc状况，包括Eden区、两个Survivor区、、老年代、永久带等的容量、已用空间、<pre><code>GC时间合计等信息 
+</code></pre></count></interval></vmid></lines></option></li>
+</ul>
+<ul>
+<li><strong>jinfo：Java配置信息工具</strong><br>实时查看和调整虚拟机各项参数。<br>命令格式：jinfo [ option ] vmid</li>
+</ul>
+<ul>
+<li><strong>jmap：Java 内存映像工具</strong><br>用于生成堆转储快照，一般是headdump文件或者dump文件。<br>命令格式：jmap [ option ] vmid<br>主要选项：-dump 生成Java堆转储快照<br>　　　　　-heap 显示Java堆详细信息。</li>
+</ul>
+<ul>
+<li><p><strong>jhat：虚拟机堆转储快照分析工具</strong><br>jhat与jmap搭配使用，来分析jmap生成的堆转储快照。</p>
+</li>
+<li><p><strong>jstack：Java堆栈跟踪工具</strong><br>用于生成虚拟机当前的线程快照，一般是threaddump文件或者javacore文件。<br>命令格式：jstack [ option ] vmid</p>
+</li>
+</ul>
+<hr>
+<h3 id="图形化工具"><a href="#图形化工具" class="headerlink" title="图形化工具"></a>图形化工具</h3><ul>
+<li><strong>JConsole：Java监视与管理控制台</strong></li>
+<li><strong>VisualVM：多合一故障处理工具</strong></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/jvm3/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/26/jvm3/" itemprop="url">JVM（3）：垃圾收集GC</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T14:09:37+08:00">
+                2018-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> <strong>Java内存结构中程序计数器、虚拟机栈、本地方法栈都是线程私有的，随着方法的结束或者线程的结束，内存会被回收。所以垃圾收集主要针对Java堆和方法区。</strong></p>
+<h3 id="判断对象是否可以回收"><a href="#判断对象是否可以回收" class="headerlink" title="判断对象是否可以回收"></a>判断对象是否可以回收</h3><ul>
+<li><strong>引用计数法</strong><br>　　每个对象有一个引用计数器，每当有一个地方引用，计数器就加1，当引用失效，计数器就减1，计数器为0的对象会被回收。引用计数不能解决循环引用的问题。</li>
+<li><strong>可达性分析法</strong><br>　　通过一系列称为“GC ROOTS”的节点作为起点，开始向下搜索，搜素所走的路径称为引用链，当一个对象到GC ROOTS没有任何引用链相连的话，就说明该对象不可用，可以被回收。<br>　　可以作为GC ROOTS的对象包含以下几种：虚拟机栈（栈帧中的本地变量表）中引用的对象、方法区中类静态属性引用的对象、方法区中常量引用的对象、本地方法中JNI引用的对象。</li>
+</ul>
+<p>四种引用类型：</p>
+<ul>
+<li><strong>强引用</strong>：指在程序代码之中普遍存在的，类似“Object obj=new Object（）”这类的引用，只要强引用还存在，垃圾收集器永远不会回收掉被引用的对象。</li>
+<li><strong>软引用</strong>：用来描述一些还有用但是非必需的对象。在系统内存不足时进行垃圾收集会对软引用进行回收。（SoftReference）</li>
+<li><strong>弱引用</strong>：也是用来描述非必需的对象，但是它的强度比软引用更弱。发生GC时，不管内存是否足够都会对其进行回收。（WeakReference）</li>
+<li><strong>虚引用</strong>：也称为幽灵引用或者幻影引用，它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。（PhantomReference）</li>
+</ul>
+<hr>
+<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><ul>
+<li>标记清除算法</li>
+<li>复制算法</li>
+<li>标记整理算法</li>
+<li>分代收集算法</li>
+</ul>
+<p>算法实现</p>
+<ul>
+<li><strong>枚举根结点</strong><br>　　在可达性分析过程中为了防止对象的引用关系发生变化，所以在执行GC时需要停顿所有java执行线程（Stop The World）。<br>　　由于目前的主流Java虚拟机使用的都是准确式GC，所以当执行系统停顿下来后，并不需要一个不漏地检查完所有执行上下文和全局的引用位置，虚拟机应当是有办法直接得知哪些地方存放着对象引用。在HotSpot的实现中，是使用一组称为OopMap的数据结构来达到这个目的的，在类加载完成的时候，HotSpot就把对象内什么偏移量上是什么类型的数据计算出来，在JIT编译过程中，也会在特定的位置记录下栈和寄存器中哪些位置是引用。这样，GC在扫描时就可以直接得知这些信息了。</li>
+<li><strong>安全点</strong><br>　　HotSpot并没有为每条指令都生成OopMap，只有在特定的位置记录这个信息，这些位置称为安全点（SaftPoint）。安全点的选定基本上是以程序“是否具有让程序长时间执行的特征”为标准进行选定的。长时间执行的最明显特征就是指令序列复用，例如方法调用、循环跳转、异常跳转等。<br>　　GC停顿有两种方案：抢先式中断（基本不用）和主动式中断。主动式中断是当需要中断线程时，设置一个中断标志，各个线程去轮询这个标志，当为真的就中断挂起。</li>
+<li><strong>安全区域</strong><br>　　程序不执行的时候，也就是没有分配CPU的时候，典型的就是线程sleep或者blocked状态时，这个时候不能响应中断请求。JVM不太可能等到线程重新分配CPU然后走到安全点。这样就需要安全区域解决这个问题。<br>　　安全区域是指在一段区域内引用关系不会发生变化，在这中间任何一个地方GC都是安全的。我们可以把Safe Region看成是扩展的safe point。</li>
+</ul>
+<hr>
+<h3 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h3><p><img src="/images/gc.jpg" alt="垃圾收集器"></p>
+<ul>
+<li><strong>Serial收集器</strong>：单线程收集器，client模式下默认的新生代收集器。</li>
+<li><strong>ParNew收集器</strong>：Serial收集器的多线程版本。server模式首选的新生代收集器。</li>
+<li><strong>Parallel Scavenge收集器</strong>：并行的多线程垃圾收集器，目标是达到一个可控制的吞吐量。提供了两个参数用于精确控制吞吐量，分别是控制最大垃圾收集停顿时间的-XX：MaxGCPauseMillis参数以及直接设置吞吐量大小的-XX：GCTimeRatio参数。无法与CMS配合。</li>
+<li><strong>Serial Old收集器</strong>  ：Serial收集器的老年代版本，client模式下默认的老年代收集器。</li>
+<li><strong>Parallel Old收集器</strong>：Parallel Scavenge收集器的老年代版本。</li>
+<li><strong>CMS收集器</strong>：基于标记清除算法。目标是降低GC停顿时间，一共有四个步骤：初始标记、并发标记、重新标记、并发清除。这之中最耗时的并发标记和并发清除可以和用户线程一起运行，所以可以看成是并行的垃圾收集器。三个缺点：对CPU资源敏感、无法处理浮动垃圾、标记清除算法会产生内存碎片。</li>
+<li><strong>G1收集器</strong>：特点：并行与并发、分代收集、可预测的停顿。使用G1收集器时，Java堆的内存布局就与其他收集器有很大差别，它将整个Java堆划分为多个大小相等的独立区域（Region），虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔离的了，它们都是一部分Region（不需要连续）的集合。G1跟踪各个Region里面的垃圾堆积的价值大小，在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的Region。四个步骤：初始标记、并发标记、最终标记、筛选回收。</li>
+</ul>
+<hr>
+<h3 id="内存分配回收策略"><a href="#内存分配回收策略" class="headerlink" title="内存分配回收策略"></a>内存分配回收策略</h3><ul>
+<li>对象优先在Eden区分配</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活对象进入老年代</li>
+<li>动态对象年龄判定</li>
+<li>空间分配担保</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/a.jpg" alt="xiaodaoyuan">
+            
+              <p class="site-author-name" itemprop="name">xiaodaoyuan</p>
+              <p class="site-description motion-element" itemprop="description">个人博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiaodaoyuan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaodaoyuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
