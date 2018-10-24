@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="springboot,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiao&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/Java/index.html">
+<meta name="description" content="springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot使用mybatis加载typealias的package问题">
+<meta property="og:url" content="http://yoursite.com/web/springboot2/index.html">
 <meta property="og:site_name" content="Xiao&#39;s Blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-24T08:17:32.929Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiao&#39;s Blog">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="springboot使用mybatis加载typealias的package问题">
+<meta name="twitter:description" content="springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Java/">
+  <link rel="canonical" href="http://yoursite.com/web/springboot2/">
 
 
 
 
 
-  <title>Category: Java | Xiao's Blog</title>
+  <title>springboot使用mybatis加载typealias的package问题 | Xiao's Blog</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -279,235 +281,190 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Java<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/web/springboot2/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/Java/concurrent2/" itemprop="url">
-              
-                <span itemprop="name">Java原子操作类</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">springboot使用mybatis加载typealias的package问题</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-07T22:38:14+08:00" content="2018-10-07">
-          10-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-30T18:02:32+08:00">
+                2018-09-30
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-10-24T16:17:32+08:00">
+                2018-10-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/concurrent1/" itemprop="url">
-              
-                <span itemprop="name">Java内存模型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-07T15:58:29+08:00" content="2018-10-07">
-          10-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm5/" itemprop="url">
-              
-                <span itemprop="name">JVM（5）：类加载机制</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-27T17:41:42+08:00" content="2018-09-27">
-          09-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm4/" itemprop="url">
-              
-                <span itemprop="name">JVM（4）：虚拟机性能监控</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-26T15:12:08+08:00" content="2018-09-26">
-          09-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm3/" itemprop="url">
-              
-                <span itemprop="name">JVM（3）：垃圾收集GC</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-26T14:09:37+08:00" content="2018-09-26">
-          09-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm2/" itemprop="url">
-              
-                <span itemprop="name">JVM（2）：虚拟机对象探秘</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-25T14:00:36+08:00" content="2018-09-25">
-          09-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm1/" itemprop="url">
-              
-                <span itemprop="name">JVM（1）：内存结构</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-25T11:38:43+08:00" content="2018-09-25">
-          09-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/code-optimization/" itemprop="url">
-              
-                <span itemprop="name">Java代码优化</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-22T17:17:31+08:00" content="2018-08-22">
-          08-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p> <strong>springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。</strong></p>
+<hr>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">    public SqlSessionFactory db1SqlSessionFactory(DataSource dataSource) throws Exception &#123;</span><br><span class="line">        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();</span><br><span class="line">        sqlSessionFactoryBean.setDataSource(dataSource);</span><br><span class="line">        //mybatis使用默认DefaultVFS扫描包会有问题，使用SpringBootVFS</span><br><span class="line">        sqlSessionFactoryBean.setVfs(SpringBootVFS.class); </span><br><span class="line">        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();</span><br><span class="line">        sqlSessionFactoryBean.setMapperLocations(resolver.getResources(&quot;classpath*:/mybatis/mapper/**.xml&quot;));</span><br><span class="line">        sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(&quot;mybatis/mybatis-config.xml&quot;));</span><br><span class="line">        return sqlSessionFactoryBean.getObject();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果使用 mybatis autoconfigure生成的 SessionFactory可能就没有这个问题了。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/springboot/" rel="tag"><i class="fa fa-tag"></i> springboot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Java/jvm5/" rel="next" title="JVM（5）：类加载机制">
+                <i class="fa fa-chevron-left"></i> JVM（5）：类加载机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/其他/nginx/" rel="prev" title="nginx详解">
+                nginx详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -515,6 +472,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -750,6 +711,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="JVM虚拟机,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Xiao&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/Java/index.html">
+<meta name="description" content="对象的创建对象的创建一般有四种方式：new关键字、反射、clone、序列化。对象创建主要分三步：     检查类是否加载　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。">
+<meta name="keywords" content="JVM虚拟机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM（2）：虚拟机对象探秘">
+<meta property="og:url" content="http://yoursite.com/Java/jvm2/index.html">
 <meta property="og:site_name" content="Xiao&#39;s Blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="对象的创建对象的创建一般有四种方式：new关键字、反射、clone、序列化。对象创建主要分三步：     检查类是否加载　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-24T08:16:09.627Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xiao&#39;s Blog">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="JVM（2）：虚拟机对象探秘">
+<meta name="twitter:description" content="对象的创建对象的创建一般有四种方式：new关键字、反射、clone、序列化。对象创建主要分三步：     检查类是否加载　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Java/">
+  <link rel="canonical" href="http://yoursite.com/Java/jvm2/">
 
 
 
 
 
-  <title>Category: Java | Xiao's Blog</title>
+  <title>JVM（2）：虚拟机对象探秘 | Xiao's Blog</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -279,235 +281,197 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Java<small>Category</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/jvm2/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/Java/concurrent2/" itemprop="url">
-              
-                <span itemprop="name">Java原子操作类</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">JVM（2）：虚拟机对象探秘</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-07T22:38:14+08:00" content="2018-10-07">
-          10-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T14:00:36+08:00">
+                2018-09-25
+              </time>
+            
 
-    </header>
-  </article>
+            
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-10-24T16:16:09+08:00">
+                2018-10-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/concurrent1/" itemprop="url">
-              
-                <span itemprop="name">Java内存模型</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-10-07T15:58:29+08:00" content="2018-10-07">
-          10-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm5/" itemprop="url">
-              
-                <span itemprop="name">JVM（5）：类加载机制</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-27T17:41:42+08:00" content="2018-09-27">
-          09-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm4/" itemprop="url">
-              
-                <span itemprop="name">JVM（4）：虚拟机性能监控</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-26T15:12:08+08:00" content="2018-09-26">
-          09-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm3/" itemprop="url">
-              
-                <span itemprop="name">JVM（3）：垃圾收集GC</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-26T14:09:37+08:00" content="2018-09-26">
-          09-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm2/" itemprop="url">
-              
-                <span itemprop="name">JVM（2）：虚拟机对象探秘</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-25T14:00:36+08:00" content="2018-09-25">
-          09-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/jvm1/" itemprop="url">
-              
-                <span itemprop="name">JVM（1）：内存结构</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-09-25T11:38:43+08:00" content="2018-09-25">
-          09-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/code-optimization/" itemprop="url">
-              
-                <span itemprop="name">Java代码优化</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-08-22T17:17:31+08:00" content="2018-08-22">
-          08-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h4 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h4><p>对象的创建一般有四种方式：new关键字、反射、clone、序列化。<br>对象创建主要分三步：   </p>
+<ol>
+<li><strong>检查类是否加载</strong><br>　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。  <a id="more"></a></li>
+<li><strong>分配内存</strong><br>　　主要有指针碰撞和空闲列表两种方式。指针碰撞是把内存指针向空闲空间移动与对象大小相等的距离来分配内存，这种主要适用于带有整理的垃圾收集器。空闲列表是维护一个列表记录哪些内存区域可以使用，在分配的时候从列表中找出一块分配，这种适用于不带整理功能的垃圾收集器。<br>　　分配过程中还要考虑多个线程同时分配内存出现并发的问题。这个一般有两种方案：一是使用CAS机制保证更新操作的原子性；二是使用本地线程分配缓冲（TLAB）。  </li>
+<li><strong>对象设置</strong><br>　　分配完内存之后需要进行对象设置，主要是把这个对象是哪个类的实例、对象的哈希码、对象的GC分代年龄、对象的锁信息等存放在对象的对象头里。</li>
+</ol>
+<h4 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h4><p>　　对象在内存中存储的布局可以分为3块区域：对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）。<br>　　对象头分成两部分：第一部分用于存储对象自身的运行时数据，如对象的哈希码、GC分代年龄、锁状态标志等，官方称之为‘MarkWord’。另外一部分是类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。<br>　　实例数据部分是对象真正存储的有效信息，也是在程序代码中所定义的各种类型的字段内容。无论是从父类继承下来的，还是在子类中定义的，都需要记录起来。<br>　　第三部分对象填充不是必须的，仅仅是占位的作用，用来保证对象的大小是８字节的整数倍。
+　　</p>
+<h4 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h4><p>对象的访问主要两种方式：  </p>
+<ol>
+<li><strong>句柄访问</strong><br>　　Java堆中会划出一块内存作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据和类型数据各自的具体地址信息。好处是对象移动时只用改动句柄中的实例数据地址，不用改变reference。  </li>
+<li><strong>直接指针访问</strong><br>　　reference中存储的就是对象的地址。好处就是访问快，节省了一次指针定位的开销。hotspot使用直接指针访问。</li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM虚拟机/" rel="tag"><i class="fa fa-tag"></i> JVM虚拟机</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Java/jvm1/" rel="next" title="JVM（1）：内存结构">
+                <i class="fa fa-chevron-left"></i> JVM（1）：内存结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Java/jvm3/" rel="prev" title="JVM（3）：垃圾收集GC">
+                JVM（3）：垃圾收集GC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -515,6 +479,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -535,8 +503,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -608,6 +585,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的创建"><span class="nav-number">1.</span> <span class="nav-text">对象的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的内存布局"><span class="nav-number">2.</span> <span class="nav-text">对象的内存布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的访问定位"><span class="nav-number">3.</span> <span class="nav-text">对象的访问定位</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -750,6 +743,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

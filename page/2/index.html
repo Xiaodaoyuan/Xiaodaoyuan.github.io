@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/jvm2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/jvm2/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaodaoyuan">
@@ -313,7 +313,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/25/jvm2/" itemprop="url">JVM（2）：虚拟机对象探秘</a></h1>
+                <a class="post-title-link" href="/Java/jvm2/" itemprop="url">JVM（2）：虚拟机对象探秘</a></h1>
         
 
         <div class="post-meta">
@@ -331,139 +331,19 @@
             
 
             
-
+              <span class="post-meta-divider">|</span>
             
-          </span>
 
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h4><p>对象的创建一般有四种方式：new关键字、反射、clone、序列化。<br>对象创建主要分三步：   </p>
-<ol>
-<li><strong>检查类是否加载</strong><br>　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。  </li>
-<li><strong>分配内存</strong><br>　　主要有指针碰撞和空闲列表两种方式。指针碰撞是把内存指针向空闲空间移动与对象大小相等的距离来分配内存，这种主要适用于带有整理的垃圾收集器。空闲列表是维护一个列表记录哪些内存区域可以使用，在分配的时候从列表中找出一块分配，这种适用于不带整理功能的垃圾收集器。<br>　　分配过程中还要考虑多个线程同时分配内存出现并发的问题。这个一般有两种方案：一是使用CAS机制保证更新操作的原子性；二是使用本地线程分配缓冲（TLAB）。  </li>
-<li><strong>对象设置</strong><br>　　分配完内存之后需要进行对象设置，主要是把这个对象是哪个类的实例、对象的哈希码、对象的GC分代年龄、对象的锁信息等存放在对象的对象头里。</li>
-</ol>
-<h4 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h4><p>　　对象在内存中存储的布局可以分为3块区域：对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）。<br>　　对象头分成两部分：第一部分用于存储对象自身的运行时数据，如对象的哈希码、GC分代年龄、锁状态标志等，官方称之为‘MarkWord’。另外一部分是类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。<br>　　实例数据部分是对象真正存储的有效信息，也是在程序代码中所定义的各种类型的字段内容。无论是从父类继承下来的，还是在子类中定义的，都需要记录起来。<br>　　第三部分对象填充不是必须的，仅仅是占位的作用，用来保证对象的大小是８字节的整数倍。
-　　</p>
-<h4 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h4><p>对象的访问主要两种方式：  </p>
-<ol>
-<li><strong>句柄访问</strong><br>　　Java堆中会划出一块内存作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据和类型数据各自的具体地址信息。好处是对象移动时只用改动句柄中的实例数据地址，不用改变reference。  </li>
-<li><strong>直接指针访问</strong><br>　　reference中存储的就是对象的地址。好处就是访问快，节省了一次指针定位的开销。hotspot使用直接指针访问。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/jvm1/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xiaodaoyuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/a.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xiao's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/25/jvm1/" itemprop="url">JVM（1）：内存结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
             
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T11:38:43+08:00">
-                2018-09-25
+              <time title="Post modified" itemprop="dateModified" datetime="2018-10-24T16:16:09+08:00">
+                2018-10-24
               </time>
-            
-
-            
-
             
           </span>
 
@@ -518,18 +398,19 @@
 
       
         
-          
-            <h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><p>　　程序计数器是内存结构中很小的一块，属于线程私有的。字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的指令，分支、循环、跳转、异常处理、线程恢复都要依赖这个计数器来实现。程序计数器是内存结构中唯一一个没有定义OOM的区域。</p>
-<h4 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h4><p>　　虚拟机栈也是线程私有的，主要用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法的调用对应着一个栈帧在虚拟机中的入栈出栈过程。<br>　　虚拟机栈中定义了StackOverflowError和OutOfMemeryError。当线程请求的栈深度大于虚拟机允许的最大深度，就会抛出SOF异常。如果虚拟机栈可以动态扩展，扩展时无法申请足够的内存，就会抛出OOM异常。</p>
-<h4 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h4><p>　　本地方法栈和虚拟机栈一样，只不过本地方法栈是为native方法服务的。hotspot虚拟机把本地方法栈和虚拟机栈合二为一了。</p>
-<h4 id="JAVA堆"><a href="#JAVA堆" class="headerlink" title="JAVA堆"></a>JAVA堆</h4><p>　　Java堆时内存结构中最大的一块区域，它是线程共享的，主要用于存储对象的实例。Java堆可以细分为年轻代和老年代，年轻代又可以分成Eden区，From Survivor区和To Survivor区。Java堆是垃圾收集器管理的主要区域，现在的收集器基本都采用分代收集的策略。当内存不足时，Java堆中也会出现OOM异常。</p>
-<h4 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h4><p>　　方法区也是线程共享的，主要用于存储被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。方法区中也会出现OOM异常。</p>
-<h4 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h4><p>　　直接内存并不是虚拟机内存结构中的一块，但是这部分内存也被频繁使用，也会导致ＯＯＭ异常。JDK1.4中引入的NIO就使用了直接内存。</p>
-
-          
+          <h4 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h4><p>对象的创建一般有四种方式：new关键字、反射、clone、序列化。<br>对象创建主要分三步：   </p>
+<ol>
+<li><strong>检查类是否加载</strong><br>　　虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池中定位到一个类的符号引用，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Java/jvm2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </li></ol></div>
     
     
     
@@ -573,7 +454,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/22/code-optimization/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/jvm1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaodaoyuan">
@@ -592,7 +473,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/22/code-optimization/" itemprop="url">Java代码优化</a></h1>
+                <a class="post-title-link" href="/Java/jvm1/" itemprop="url">JVM（1）：内存结构</a></h1>
         
 
         <div class="post-meta">
@@ -604,16 +485,50 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-22T17:17:31+08:00">
-                2018-08-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T11:38:43+08:00">
+                2018-09-25
               </time>
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-10-24T16:15:03+08:00">
+                2018-10-24
+              </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -643,24 +558,17 @@
 
       
         
-          
-            <p><strong><code>代码优化目标：减少代码体积，提高代码的运行效率</code></strong></p>
-<h2 id="代码优化具体细节"><a href="#代码优化具体细节" class="headerlink" title="代码优化具体细节"></a>代码优化具体细节</h2><ol>
-<li><strong>尽量指定类、方法的final修饰符：</strong>如果一个类是final的，则它的所有方法也是final的，java编译器会寻找机会内内联的所有final方法，可以提高50%的性能。</li>
-<li><strong>尽量重用对象：</strong>特别是String对象。Java虚拟机创建对象需要花费时间和空间，后期还要进行垃圾回收。</li>
-<li><strong>尽可能使用局部变量：</strong>局部变量存储于栈中，速度较快，而且随着方法的结束会消失。</li>
-<li><strong>及时关闭流和连接等：</strong>对于IO流以及数据库连接、线程池连接，在finally 中一定要将其关闭。</li>
-<li><strong>尽量使用懒加载策略：</strong>在使用时创建（单例模式最好使用懒汉模式）。</li>
-<li><strong>不要在循环中使用try…catch…：</strong>在循环外使用。</li>
-<li><strong>乘法和除法使用移位操作：</strong>&gt;&gt;1表示除以2，&lt;&lt;1表示乘以2。</li>
-<li><strong>当有大量数据复制时，使用System.arrayCopy()命令</strong>。</li>
-<li><strong>循环内不要不断的创建对象</strong>。</li>
-</ol>
-
-          
+          <h4 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h4><p>　　程序计数器是内存结构中很小的一块，属于线程私有的。字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的指令，分支、循环、跳转、异常处理、线程恢复都要依赖这个计数器来实现。程序计数器是内存结构中唯一一个没有定义OOM的区域。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Java/jvm1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -704,7 +612,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/about/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/code-optimization/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xiaodaoyuan">
@@ -723,7 +631,165 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/17/about/" itemprop="url">关于</a></h1>
+                <a class="post-title-link" href="/Java/code-optimization/" itemprop="url">Java代码优化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-22T17:17:31+08:00">
+                2018-08-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-10-24T16:18:30+08:00">
+                2018-10-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong><code>代码优化目标：减少代码体积，提高代码的运行效率</code></strong><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Java/code-optimization/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/uncategorized/about/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/uncategorized/about/" itemprop="url">关于</a></h1>
         
 
         <div class="post-meta">
@@ -741,7 +807,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-05-17T17:05:37+08:00">
+                2018-05-17
+              </time>
             
           </span>
 
@@ -874,7 +952,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nginx,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、概述　　nginx是一个跨平台的高性能web服务器。目前我们主要使用nginx用来做反向代理服务器。　　为什么选择nginx：1、更快；2、高扩展性；3、高可靠性；4、低内存消耗；5、单机支持10w以上并发连接；6、热部署。">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx详解">
+<meta property="og:url" content="http://yoursite.com/其他/nginx/index.html">
+<meta property="og:site_name" content="Xiao&#39;s Blog">
+<meta property="og:description" content="1、概述　　nginx是一个跨平台的高性能web服务器。目前我们主要使用nginx用来做反向代理服务器。　　为什么选择nginx：1、更快；2、高扩展性；3、高可靠性；4、低内存消耗；5、单机支持10w以上并发连接；6、热部署。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-24T08:18:22.460Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx详解">
+<meta name="twitter:description" content="1、概述　　nginx是一个跨平台的高性能web服务器。目前我们主要使用nginx用来做反向代理服务器。　　为什么选择nginx：1、更快；2、高扩展性；3、高可靠性；4、低内存消耗；5、单机支持10w以上并发连接；6、热部署。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/其他/nginx/">
+
+
+
+
+
+  <title>nginx详解 | Xiao's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xiao's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/其他/nginx/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xiaodaoyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/a.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiao's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nginx详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-06T19:00:44+08:00">
+                2018-10-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2018-10-24T16:18:22+08:00">
+                2018-10-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><p>　　nginx是一个跨平台的高性能web服务器。目前我们主要使用nginx用来做反向代理服务器。<br>　　为什么选择nginx：1、更快；2、高扩展性；3、高可靠性；4、低内存消耗；5、单机支持10w以上并发连接；6、热部署。</p>
+<a id="more"></a>
+<hr>
+<h3 id="2、安装和启动"><a href="#2、安装和启动" class="headerlink" title="2、安装和启动"></a>2、安装和启动</h3><p><strong>2.1、编译安装</strong><br>　　从nginx官网获取nginx的源码，然后将源码解压到准备好的目录。然后进入安装目录执行三行代码：./configure、make、make install。<br>　　configure命令做了大量的“幕后”工作，包括检测操作系统内核和已经安装的软件，参数的解析，中间目录的生成以及根据各种参数生成一些C源码文件、Makefile文件等。<br>　　make命令根据configure命令生成的Makefile文件编译Nginx工程，并生成目标文件、最终的二进制文件。<br>　　make install命令根据configure执行时的参数将Nginx部署到指定的安装目录，包括相关目录的建立和二进制文件、配置文件的复制。<br><strong>2.2、命令行控制</strong></p>
+<ul>
+<li><strong>默认方式启动：</strong>./nginx 会使用默认路径下的conf文件。</li>
+<li><strong>另指定配置文件启动：</strong>./nginx -c /tmp/nginx.conf 使用-c参数可以指定配置文件。</li>
+<li><strong>另指定安装目录启动：</strong>./nginx -p /usr/local/nginx 使用-p参数指定nginx的安装目录。</li>
+<li><strong>测试配置信息的正确性：</strong>./nginx -t 使用-t参数测试配置文件是否正确。</li>
+<li><strong>在测试阶段不输出非错误信息：</strong>./nginx -t -q 测试配置选项时，使用-q参数可以不把error级别以下的信息输出到屏幕。</li>
+<li><strong>显示版本信息：</strong>./nginx -v 使用-v参数显示Nginx的版本信息。</li>
+<li><strong>快速停止服务：</strong>./nginx -s stop       可以强制停止服务。nginx程序通过nginx.pid文件得到master进程的进程ID，再向master进程发送TERM信号快速的关闭服务。</li>
+<li><strong>优雅停止服务：</strong>./nginx -s quit  这个会先关闭端口，停止接受新的连接，然后将当前的任务全部处理完再关闭服务。</li>
+<li><strong>运行中重读配置文件并生效：</strong>./nginx -s reload  可以使运行中的nginx重新加载配置文件。</li>
+</ul>
+<hr>
+<h3 id="3、服务架构"><a href="#3、服务架构" class="headerlink" title="3、服务架构"></a>3、服务架构</h3><p><strong>3.1、模块化架构</strong><br>　　nginx其实就是由很多模块组成，每个模块实现特定的功能。主要分为核心模块、标准http模块、可选http模块、邮件模块以及第三方模块等五大类。<br><strong>3.2、web请求处理机制</strong><br>　　实现并行处理请求工作主要有三种方式：多进程方式、多线程方式、异步方式。nginx主要采用的是多进程机制和异步机制，异步机制使用的是异步非阻塞。<br><strong>3.3、事件驱动模型</strong><br>　　异步IO的实现机制主要有两种：一是工作进程不停的查询IO是否完成；二是IO调用完成后主动通知工作进程。nginx使用的是第二种，也就是事件驱动模型。  事件收集器–&gt;事件发送器–&gt;事件处理器<br>　　常用的事件驱动模型库有：select库、poll库、epoll库。</p>
+<ul>
+<li>select库：首先创建读、写、异常三类事件描述符集合，其次调用底层select函数，等待事件发生，然后轮询三个集合中的每一个事件描述符，如果有事件发生就进行处理。</li>
+<li>poll库：poll库和select库的基本工作方式是相同的，主要区别在于select库创建了三个集合，而poll库只需要创建一个集合，是select库的优化实现。</li>
+<li>epoll库：epoll的实现方式是把描述符列表的管理交给内核负责，一旦有某种事件发生，内核就把事件发生的描述符列表通知给进程，这样避免了轮询整个描述符列表，所以它比select库和poll库更高效。</li>
+</ul>
+<p><strong>3.4、设计架构概览</strong><br>　　nginx的主要架构是由一个主进程(master process)，多个工作进程(worker process)组成。主进程主要进行nginx配置文件解析、数据结构初始化、模块配置和注册、信号处理、网络监听生成、工作进程生成和管理等工作，工作进程主要进行进程初始化、模块调用和请求处理等工作，是nginx服务器提供服务的主体。  </p>
+<hr>
+<h3 id="4-配置"><a href="#4-配置" class="headerlink" title="4.配置"></a>4.配置</h3><p>下面是<a href="http://nginx.org/en/docs/" target="_blank" rel="noopener">nginx官网</a>基本配置的一个完整例子，更多的配置可以去官网查询相关文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line">#用户（组）</span><br><span class="line">user  www www;</span><br><span class="line">#工作进程数</span><br><span class="line">worker_processes  2;</span><br><span class="line">#进程PID存放路径</span><br><span class="line">pid /var/run/nginx.pid;</span><br><span class="line">#错误日志存放路径</span><br><span class="line"># [ debug | info | notice | warn | error | crit ]</span><br><span class="line">error_log  /var/log/nginx.error_log  info;</span><br><span class="line"></span><br><span class="line">#events块</span><br><span class="line">events &#123;</span><br><span class="line">    #配置最大连接数</span><br><span class="line">    worker_connections   2000;</span><br><span class="line">    #事件驱动模型选择</span><br><span class="line">    # use [kqueue|epoll|/dev/poll|select|poll];</span><br><span class="line">    use kqueue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#http块</span><br><span class="line">http &#123;</span><br><span class="line">    #定义MIME-Type</span><br><span class="line">    include       conf/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    #日志格式</span><br><span class="line">    log_format main      &apos;$remote_addr - $remote_user [$time_local] &apos;</span><br><span class="line">                         &apos;&quot;$request&quot; $status $bytes_sent &apos;</span><br><span class="line">                         &apos;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &apos;</span><br><span class="line">                         &apos;&quot;$gzip_ratio&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    log_format download  &apos;$remote_addr - $remote_user [$time_local] &apos;</span><br><span class="line">                         &apos;&quot;$request&quot; $status $bytes_sent &apos;</span><br><span class="line">                         &apos;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &apos;</span><br><span class="line">                         &apos;&quot;$http_range&quot; &quot;$sent_http_content_range&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    client_header_timeout  3m;</span><br><span class="line">    client_body_timeout    3m;</span><br><span class="line">    send_timeout           3m;</span><br><span class="line"></span><br><span class="line">    client_header_buffer_size    1k;</span><br><span class="line">    large_client_header_buffers  4 4k;</span><br><span class="line"></span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_min_length  1100;</span><br><span class="line">    gzip_buffers     4 8k;</span><br><span class="line">    gzip_types       text/plain;</span><br><span class="line"></span><br><span class="line">    output_buffers   1 32k;</span><br><span class="line">    postpone_output  1460;</span><br><span class="line"></span><br><span class="line">    sendfile         on;</span><br><span class="line">    tcp_nopush       on;</span><br><span class="line">    tcp_nodelay      on;</span><br><span class="line">    send_lowat       12000;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  75 20;</span><br><span class="line"></span><br><span class="line">    #lingering_time     30;</span><br><span class="line">    #lingering_timeout  10;</span><br><span class="line">    #reset_timedout_connection  on;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen        one.example.com;</span><br><span class="line">        server_name   one.example.com  www.one.example.com;</span><br><span class="line"></span><br><span class="line">        access_log   /var/log/nginx.access_log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass         http://127.0.0.1/;</span><br><span class="line">            proxy_redirect     off;</span><br><span class="line"></span><br><span class="line">            proxy_set_header   Host             $host;</span><br><span class="line">            proxy_set_header   X-Real-IP        $remote_addr;</span><br><span class="line">            #proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">            client_max_body_size       10m;</span><br><span class="line">            client_body_buffer_size    128k;</span><br><span class="line"></span><br><span class="line">            client_body_temp_path      /var/nginx/client_body_temp;</span><br><span class="line"></span><br><span class="line">            proxy_connect_timeout      70;</span><br><span class="line">            proxy_send_timeout         90;</span><br><span class="line">            proxy_read_timeout         90;</span><br><span class="line">            proxy_send_lowat           12000;</span><br><span class="line"></span><br><span class="line">            proxy_buffer_size          4k;</span><br><span class="line">            proxy_buffers              4 32k;</span><br><span class="line">            proxy_busy_buffers_size    64k;</span><br><span class="line">            proxy_temp_file_write_size 64k;</span><br><span class="line"></span><br><span class="line">            proxy_temp_path            /var/nginx/proxy_temp;</span><br><span class="line"></span><br><span class="line">            charset  koi8-r;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page  404  /404.html;</span><br><span class="line"></span><br><span class="line">        location = /404.html &#123;</span><br><span class="line">            root  /spool/www;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location /old_stuff/ &#123;</span><br><span class="line">            rewrite   ^/old_stuff/(.*)$  /new_stuff/$1  permanent;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location /download/ &#123;</span><br><span class="line"></span><br><span class="line">            valid_referers  none  blocked  server_names  *.example.com;</span><br><span class="line"></span><br><span class="line">            if ($invalid_referer) &#123;</span><br><span class="line">                #rewrite   ^/   http://www.example.com/;</span><br><span class="line">                return   403;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            #rewrite_log  on;</span><br><span class="line"></span><br><span class="line">            # rewrite /download/*/mp3/*.any_ext to /download/*/mp3/*.mp3</span><br><span class="line">            rewrite ^/(download/.*)/mp3/(.*)\..*$</span><br><span class="line">                    /$1/mp3/$2.mp3                   break;</span><br><span class="line"></span><br><span class="line">            root         /spool/www;</span><br><span class="line">            #autoindex    on;</span><br><span class="line">            access_log   /var/log/nginx-download.access_log  download;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~* \.(jpg|jpeg|gif)$ &#123;</span><br><span class="line">            root         /spool/www;</span><br><span class="line">            access_log   off;</span><br><span class="line">            expires      30d;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="5-反向代理与负载均衡"><a href="#5-反向代理与负载均衡" class="headerlink" title="5.反向代理与负载均衡"></a>5.反向代理与负载均衡</h3><p><strong>正向代理和反向代理：</strong> 简单说，正向代理用来让局域网客户机接入外网以访问外网资源，反向代理用来让外网的客户端接入局域网中的站点以访问站点中的资源。  </p>
+<ul>
+<li><p>正向代理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;  </span><br><span class="line">   resolver 192.168.1.1; #指定DNS服务器IP地址  </span><br><span class="line">   listen 8080;  </span><br><span class="line">   location / &#123;  </span><br><span class="line">       proxy_pass http://$http_host$request_uri; #设定代理服务器的协议和地址  </span><br><span class="line">   &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>反向代理</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">   listen       80;</span><br><span class="line">   location /demo &#123;</span><br><span class="line">       proxy_pass http://127.0.0.1:8081;</span><br><span class="line">   &#125;</span><br><span class="line">   location /demo1 &#123;</span><br><span class="line">       proxy_pass http://127.0.0.1:8082;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>负载均衡</strong><br>　　nginx是一个非常高效的HTTP负载均衡器，将流量分配给多个应用服务器，并通过nginx提高web应用程序的性能、可伸缩性和可靠性。<br>　　nginx负载均衡使用的指令主要有upstream和proxy_pass，upstream块定义一个后端集群，proxy_pass用于location块中，表示对于所有符合要求的request交给某个集群处理。<br>　　常见的由以下几种实现负载均衡的方式。</p>
+<ul>
+<li>轮询（round-robin）：默认方式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">   upstream backend &#123;</span><br><span class="line">       server srv1.example.com;</span><br><span class="line">       server srv2.example.com;</span><br><span class="line">       server srv3.example.com;</span><br><span class="line">   &#125;</span><br><span class="line">   server &#123;</span><br><span class="line">       listen 80;</span><br><span class="line">       location / &#123;</span><br><span class="line">           proxy_pass http://backend;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>加权轮询（weight-round-robin）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">   server srv1.example.com weight=3;</span><br><span class="line">   server srv2.example.com weight=2;</span><br><span class="line">   server srv3.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最少连接（least-connected）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">   least_conn;</span><br><span class="line">   server srv1.example.com;</span><br><span class="line">   server srv2.example.com;</span><br><span class="line">   server srv3.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ip-hash：每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">   ip_hash;</span><br><span class="line">   server srv1.example.com;</span><br><span class="line">   server srv2.example.com;</span><br><span class="line">   server srv3.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>fair（第三方）: 按后端服务器的响应时间来分配请求，响应时间短的优先分配</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">   fair;</span><br><span class="line">   server srv1.example.com;</span><br><span class="line">   server srv2.example.com;</span><br><span class="line">   server srv3.example.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag"><i class="fa fa-tag"></i> nginx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/web/springboot2/" rel="next" title="springboot使用mybatis加载typealias的package问题">
+                <i class="fa fa-chevron-left"></i> springboot使用mybatis加载typealias的package问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Java/concurrent1/" rel="prev" title="Java内存模型">
+                Java内存模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/a.jpg" alt="xiaodaoyuan">
+            
+              <p class="site-author-name" itemprop="name">xiaodaoyuan</p>
+              <p class="site-description motion-element" itemprop="description">个人博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiaodaoyuan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、概述"><span class="nav-number">1.</span> <span class="nav-text">1、概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、安装和启动"><span class="nav-number">2.</span> <span class="nav-text">2、安装和启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、服务架构"><span class="nav-number">3.</span> <span class="nav-text">3、服务架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置"><span class="nav-number">4.</span> <span class="nav-text">4.配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-反向代理与负载均衡"><span class="nav-number">5.</span> <span class="nav-text">5.反向代理与负载均衡</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaodaoyuan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
