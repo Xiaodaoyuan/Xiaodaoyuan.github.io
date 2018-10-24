@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>正则表达式 | Xiao&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常用正则表达式   表达式 描述     . 匹配出换行符外任意字符   \ 转义符，可以将一些有特殊含义的字符转化为本身含义，如\.代表点本身的含义。   [ ] 匹配中括号中字符的一个，如[abc]表示匹配a、b、c中的一个字符。   &amp;#124; 匹配两个字符中的一个，如a&amp;#124;b表示匹配a或者b。   [0-9A-Za-z] 字符区间，[0-9]表示0-9中的一个数。   ^ 取非匹">
+<meta name="keywords" content="正则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="http://yoursite.com/2018/10/15/regular/index.html">
+<meta property="og:site_name" content="Xiao&#39;s Blog">
+<meta property="og:description" content="常用正则表达式   表达式 描述     . 匹配出换行符外任意字符   \ 转义符，可以将一些有特殊含义的字符转化为本身含义，如\.代表点本身的含义。   [ ] 匹配中括号中字符的一个，如[abc]表示匹配a、b、c中的一个字符。   &amp;#124; 匹配两个字符中的一个，如a&amp;#124;b表示匹配a或者b。   [0-9A-Za-z] 字符区间，[0-9]表示0-9中的一个数。   ^ 取非匹">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-15T10:32:28.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式">
+<meta name="twitter:description" content="常用正则表达式   表达式 描述     . 匹配出换行符外任意字符   \ 转义符，可以将一些有特殊含义的字符转化为本身含义，如\.代表点本身的含义。   [ ] 匹配中括号中字符的一个，如[abc]表示匹配a、b、c中的一个字符。   &amp;#124; 匹配两个字符中的一个，如a&amp;#124;b表示匹配a或者b。   [0-9A-Za-z] 字符区间，[0-9]表示0-9中的一个数。   ^ 取非匹">
+  
+    <link rel="alternate" href="/atom.xml" title="Xiao&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Xiao&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">个人博客</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-regular" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/15/regular/" class="article-date">
+  <time datetime="2018-10-15T10:17:26.000Z" itemprop="datePublished">2018-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正则表达式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+  	
+  	  <h4 id="常用正则表达式"><a href="#常用正则表达式" class="headerlink" title="常用正则表达式"></a>常用正则表达式</h4><table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>匹配出换行符外任意字符</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义符，可以将一些有特殊含义的字符转化为本身含义，如\.代表点本身的含义。</td>
+</tr>
+<tr>
+<td>[ ]</td>
+<td>匹配中括号中字符的一个，如[abc]表示匹配a、b、c中的一个字符。</td>
+</tr>
+<tr>
+<td>&#124;</td>
+<td>匹配两个字符中的一个，如a&#124;b表示匹配a或者b。</td>
+</tr>
+<tr>
+<td>[0-9A-Za-z]</td>
+<td>字符区间，[0-9]表示0-9中的一个数。</td>
+</tr>
+<tr>
+<td>^</td>
+<td>取非匹配，[^0-9]表示不是0-9中的一个字符。</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配非数字</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非字母</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配一个或多个字符，如\d+表示匹配一个或多个数字。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配0个或多个字符。</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配0个或一个字符。</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配多次，如\w{3}表示匹配3个字母。</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>匹配次数是一个区间，如\d{2,4}表示匹配2-4个数字。</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>匹配至少次数的字符。</td>
+</tr>
+<tr>
+<td>()</td>
+<td>标记一个子表达式开始和结束</td>
+</tr>
+<tr>
+<td>^</td>
+<td>放在外面表示匹配字符串开始位置，如果是在方括号内表示取非</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串结束位置</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>匹配一个换页符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符，等价于[ ^\f\n\r\t\v]</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配一个单词边界，即字与空格间位置</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配一个非单词边界</td>
+</tr>
+<tr>
+<td>?=</td>
+<td>向前匹配，如?=:表示匹配:然后向前匹配，最后结果不包含:</td>
+</tr>
+<tr>
+<td>?&lt;=</td>
+<td>向前匹配，如(?&lt;=\$)[0-9.]+表示匹配$然后向后匹配，最后结果不包含$</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="防止过度匹配"><a href="#防止过度匹配" class="headerlink" title="防止过度匹配"></a>防止过度匹配</h4><p>　　* 和+ 都是所谓的“贪婪型”元字符，它们在进行匹配时的行为模式是多多益善而不是适可而止的。它们会尽可能地从一段文本的开头一直匹配到这段文本的末尾，而不是从这段文本的开头匹配到碰到第一个匹配时为止。<br>　　为了防止这种贪婪型匹配，我们需要使用对应字符的惰性版本，<em> 使用 </em>？，+ 使用 +？，{n,}使用{n,}?</p>
+<h4 id="回溯引用"><a href="#回溯引用" class="headerlink" title="回溯引用"></a>回溯引用</h4><p>　　回溯引用指的是模式的后半部分引用在前半部分中定义的子表达式。如 &lt;<a href="[1-6]">hH</a>&gt;.*?&lt;/[hH]\1&gt;，这其中最后的\1表示前面第一个子表达式匹配的结果，即([1-6])，依此类推，\2表示第二个子表达式，\n表示第n个子表达式。<br>　　回溯引用在替换操作中也很有用，如(\d{3})(-)(\d{3})(-)(\d{4})这个正则表达式，使用替换的表达式($1) $3-$5，可以将匹配到的字符替换成别的格式。其中$1,$3,$5分别表示第1，第3，第5个子表达式。</p>
+
+  	
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/15/regular/" data-id="cjnlp2y7p000mvycgyoxas74n" class="article-share-link">Share</a>
+      
+        <a href="http://yoursite.com/2018/10/15/regular/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/23/BST/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          二叉搜索树Java实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/07/concurrent2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java原子操作类</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM虚拟机/">JVM虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java基础/">java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springboot/">springboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JVM虚拟机/" style="font-size: 20px;">JVM虚拟机</a> <a href="/tags/java基础/" style="font-size: 10px;">java基础</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/springboot/" style="font-size: 15px;">springboot</a> <a href="/tags/并发/" style="font-size: 15px;">并发</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/23/BST/">二叉搜索树Java实现</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/15/regular/">正则表达式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/07/concurrent2/">Java原子操作类</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/07/concurrent1/">Java内存模型</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/06/nginx/">nginx详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 xiaodaoyuan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'true';
+  
+  var disqus_url = 'http://yoursite.com/2018/10/15/regular/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
