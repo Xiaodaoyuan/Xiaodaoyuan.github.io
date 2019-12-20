@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JVM虚拟机,">
+  <meta name="keywords" content="rocketmq,">
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="要进行虚拟机性能监控光有理论还不够，还需要实践。JDK为我们提供了一些命令行工具以及图形化洁面工具进行虚拟机性能监控实践。">
-<meta name="keywords" content="JVM虚拟机">
+<meta name="description" content="获取源码,打包编译 从github下载源码，git  clone  https://github.com/apache/rocketmq.git 编译源码，进入到主目录，然后执行命令： mvn -Prelease-all -DskipTests clean install -U 编译完之后我们只需要下图红框之内的目录进行部署。">
+<meta name="keywords" content="rocketmq">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM（4）：虚拟机性能监控">
-<meta property="og:url" content="http://yoursite.com/Java/jvm4/index.html">
+<meta property="og:title" content="Rocketmq安装部署">
+<meta property="og:url" content="http://yoursite.com/middleware/rocketmq-install/index.html">
 <meta property="og:site_name" content="Xiao&#39;s Blog">
-<meta property="og:description" content="要进行虚拟机性能监控光有理论还不够，还需要实践。JDK为我们提供了一些命令行工具以及图形化洁面工具进行虚拟机性能监控实践。">
+<meta property="og:description" content="获取源码,打包编译 从github下载源码，git  clone  https://github.com/apache/rocketmq.git 编译源码，进入到主目录，然后执行命令： mvn -Prelease-all -DskipTests clean install -U 编译完之后我们只需要下图红框之内的目录进行部署。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-08T09:42:23.032Z">
+<meta property="og:image" content="http://yoursite.com/images/rocketmq-install.png">
+<meta property="og:updated_time" content="2019-12-20T10:47:49.148Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM（4）：虚拟机性能监控">
-<meta name="twitter:description" content="要进行虚拟机性能监控光有理论还不够，还需要实践。JDK为我们提供了一些命令行工具以及图形化洁面工具进行虚拟机性能监控实践。">
+<meta name="twitter:title" content="Rocketmq安装部署">
+<meta name="twitter:description" content="获取源码,打包编译 从github下载源码，git  clone  https://github.com/apache/rocketmq.git 编译源码，进入到主目录，然后执行命令： mvn -Prelease-all -DskipTests clean install -U 编译完之后我们只需要下图红框之内的目录进行部署。">
+<meta name="twitter:image" content="http://yoursite.com/images/rocketmq-install.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/Java/jvm4/">
+  <link rel="canonical" href="http://yoursite.com/middleware/rocketmq-install/">
 
 
 
 
 
-  <title>JVM（4）：虚拟机性能监控 | Xiao's Blog</title>
+  <title>Rocketmq安装部署 | Xiao's Blog</title>
   
 
 
@@ -295,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/jvm4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/middleware/rocketmq-install/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="任重道远">
@@ -312,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JVM（4）：虚拟机性能监控</h1>
+          <h1 class="post-title" itemprop="name headline">Rocketmq安装部署</h1>
         
 
         <div class="post-meta">
@@ -324,8 +326,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T15:12:08+08:00">
-                2018-09-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-17T19:34:20+08:00">
+                2019-12-17
               </time>
             
 
@@ -347,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/middleware/" itemprop="url" rel="index">
+                    <span itemprop="name">middleware</span>
                   </a>
                 </span>
 
@@ -384,30 +386,31 @@
       
 
       
-        <p>要进行虚拟机性能监控光有理论还不够，还需要实践。JDK为我们提供了一些命令行工具以及图形化洁面工具进行虚拟机性能监控实践。<br><a id="more"></a></p>
-<h3 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h3><ul>
-<li><strong>jps：虚拟机进程状况工具</strong><br>用于列出正在执行的虚拟机进程。<br>命令格式：jps ［options］［hostid］<br>主要选项：-q   只输出LVMID，省略主类的名称<br>  　　　　　-l 输出主类的全名，如果执行的是jar包，输出jar的包路径<br>　　　　　 -m   输出虚拟机进程启动时传给主类main函数的参数<br>　　　　　 -v     输出虚拟机进程启动时的JVM参数<br>jps可以通过RMI协议查询开启了RMI服务的远程虚拟机进程状态，hostid为RMI注册表中注册的主机名。</li>
-</ul>
-<ul>
-<li><strong>jstat：虚拟机统计信息监视工具</strong><br>用于监视虚拟机各种运行状态信息。<br>命令格式： jstat -&lt;option> [-t] [-h &lt;lines>] &lt;vmid> [&lt;interval> [&lt;count>]]<br>   　　jstat -gc   2764   250  20     每250ms查看一次进程ID2764的gc情况，一共查看20次<br>主要选项：-class       监视类装载、卸载、总空间以及所耗费时间<br>  　　  -gc           监视java堆gc状况，包括Eden区、两个Survivor区、、老年代、永久带等的容量、已用空间、GC时间合计等信息 </li>
-</ul>
-<ul>
-<li><strong>jinfo：Java配置信息工具</strong><br>实时查看和调整虚拟机各项参数。<br>命令格式：jinfo [ option ] vmid</li>
-</ul>
-<ul>
-<li><strong>jmap：Java 内存映像工具</strong><br>用于生成堆转储快照，一般是headdump文件或者dump文件。<br>命令格式：jmap [ option ] vmid<br>主要选项：-dump 生成Java堆转储快照<br>　　　　　-heap 显示Java堆详细信息。</li>
-</ul>
-<ul>
-<li><p><strong>jhat：虚拟机堆转储快照分析工具</strong><br>jhat与jmap搭配使用，来分析jmap生成的堆转储快照。</p>
+        <h3 id="获取源码-打包编译"><a href="#获取源码-打包编译" class="headerlink" title="获取源码,打包编译"></a>获取源码,打包编译</h3><ol>
+<li>从github下载源码，git  clone  <a href="https://github.com/apache/rocketmq.git" target="_blank" rel="noopener">https://github.com/apache/rocketmq.git</a></li>
+<li>编译源码，进入到主目录，然后执行命令： mvn -Prelease-all -DskipTests clean install -U</li>
+<li>编译完之后我们只需要下图红框之内的目录进行部署。<a id="more"></a>
+<img src="/images/rocketmq-install.png" alt="iamge"></li>
+<li>上图中bin目录是存放部署启动的脚本，conf目录存放的是配置文件，lib目录是打包好之后的所有jar包。</li>
+</ol>
+<h3 id="启动Namesrv"><a href="#启动Namesrv" class="headerlink" title="启动Namesrv"></a>启动Namesrv</h3><p style="text-indent:2em">首先设置好系统JAVA_HOME变量（必须使用64位JDK），然后在主目录下执行nohup sh bin/mqnamesrv &amp;，启动成功之后可以查看到进程，端口默认是9876。(启动默认指定的堆内存是4G，我们自己测试时可以通过修改runserver.sh文件中参数适当改小)</p>
+
+<h3 id="启动broker"><a href="#启动broker" class="headerlink" title="启动broker"></a>启动broker</h3><p>&nbsp;&nbsp;&nbsp;broker集群主要有四种配置方式：单master，多master，多master多slave同步双写，多master多slave异步复制。（现在好像多了一种dledger的方式，暂时还没研究，不太明白）。<br>&nbsp;&nbsp;&nbsp;Master和Slave的配置文件参考conf目录下的配置文件。Master与Slave通过指定相同的brokerName参数来配对，Master的BrokerId必须是0，Slave的BrokerId必须是大于0的数。<br>&nbsp;&nbsp;&nbsp;启动命令：nohup sh bin/mqbroker -n localhost:9876  -c  conf/2m-2s-async/broker-a.properties  &amp;  </p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><strong>查看日志</strong><br>namesrv和broker的日志默认存在下面所示目录中：<br>tail -f ~/logs/rocketmqlogs/namesrv.log<br>tail -f ~/logs/rocketmqlogs/broker.log</li>
+<li><p><strong>关闭服务器</strong><br>分别关闭broker和namesrv:<br>sh bin/mqshutdown broker<br>sh bin/mqshutdown namesrv </p>
 </li>
-<li><p><strong>jstack：Java堆栈跟踪工具</strong><br>用于生成虚拟机当前的线程快照，一般是threaddump文件或者javacore文件。<br>命令格式：jstack [ option ] vmid</p>
+<li><p><strong>其他命令</strong><br>查看集群情况： ./bin/mqadmin clusterList -n localhost:9876<br>查看broker状态： ./bin/mqadmin brokerStatus -n localhost:9876 -b localhost:10911<br>查看topic列表： ./bin/mqadmin topicList -n localhost9876<br>查看topic状态： ./bin/mqadmin topicStatus -n localhost:9876 -t MyTopic (换成想查询的 topic)<br>查看topic路由： ./bin/mqadmin topicRoute -n localhost:9876 -t MyTopic  </p>
 </li>
 </ul>
-<hr>
-<h3 id="图形化工具"><a href="#图形化工具" class="headerlink" title="图形化工具"></a>图形化工具</h3><ul>
-<li><strong>JConsole：Java监视与管理控制台</strong></li>
-<li><strong>VisualVM：多合一故障处理工具</strong></li>
-</ul>
+<h3 id="Rocketmq-Console安装"><a href="#Rocketmq-Console安装" class="headerlink" title="Rocketmq-Console安装"></a>Rocketmq-Console安装</h3><ol>
+<li>使用git命令下载项目源码，由于我们仅需要rocketmq-console，故下载此项目对应分支即可。<code>git clone -b release-rocketmq-console-1.0.0 https://github.com/apache/rocketmq-externals.git</code></li>
+<li>进入项目文件夹并修改配置文件<br> <code>cd rocketmq-externals/rocketmq-console/
+ vi src/main/resources/application.properties</code>  (可以修改rocketmq.config.namesrvAddr，当然也可以后面启动时通过参数指定)</li>
+<li>执行maven命令打成jar包：<code>mvn clean package -Dmaven.test.skip=true</code></li>
+<li>启动： <code>java -jar -n localhost:9876  rocketmq-console-ng-1.0.0.jar  &amp;</code></li>
+<li>浏览器访问<a href="http://localhost:8080就可以查看管理界面。" target="_blank" rel="noopener">http://localhost:8080就可以查看管理界面。</a></li>
+</ol>
 
       
     </div>
@@ -425,7 +428,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JVM虚拟机/" rel="tag"><i class="fa fa-tag"></i> JVM虚拟机</a>
+            <a href="/tags/rocketmq/" rel="tag"><i class="fa fa-tag"></i> rocketmq</a>
           
         </div>
       
@@ -438,8 +441,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Java/jvm3/" rel="next" title="JVM（3）：垃圾收集GC">
-                <i class="fa fa-chevron-left"></i> JVM（3）：垃圾收集GC
+              <a href="/Java/nio/" rel="next" title="Java NIO详解">
+                <i class="fa fa-chevron-left"></i> Java NIO详解
               </a>
             
           </div>
@@ -448,8 +451,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/web/springboot1/" rel="prev" title="springboot线程池优雅关闭">
-                springboot线程池优雅关闭 <i class="fa fa-chevron-right"></i>
+              <a href="/middleware/rocketmq-structure/" rel="prev" title="Rocketmq源码解析-1.Rocketmq介绍">
+                Rocketmq源码解析-1.Rocketmq介绍 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行工具"><span class="nav-number">1.</span> <span class="nav-text">命令行工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图形化工具"><span class="nav-number">2.</span> <span class="nav-text">图形化工具</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取源码-打包编译"><span class="nav-number">1.</span> <span class="nav-text">获取源码,打包编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动Namesrv"><span class="nav-number">2.</span> <span class="nav-text">启动Namesrv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动broker"><span class="nav-number">3.</span> <span class="nav-text">启动broker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rocketmq-Console安装"><span class="nav-number">5.</span> <span class="nav-text">Rocketmq-Console安装</span></a></li></ol></div>
             
 
           </div>
