@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="rocketmq,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,21 +79,17 @@
 
 
 
-<meta name="description" content="Rocketmq优势： rocketmq原生就支持分布式，而activemq原生存在单点性。 rocketmq可以严格的保证消息的顺序，而activemq不能保证。 rocketmq可以提供亿级消息的堆积能力，不过这不是重点，重点是堆积了亿级消息还能保持低延迟写入。">
-<meta name="keywords" content="rocketmq">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Rocketmq源码解析-1.Rocketmq介绍">
-<meta property="og:url" content="http://yoursite.com/middleware/rocketmq-structure.html">
+<meta name="description" content="不善言辞的宅男码农一枚">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="Xiao&#39;s Blog">
-<meta property="og:description" content="Rocketmq优势： rocketmq原生就支持分布式，而activemq原生存在单点性。 rocketmq可以严格的保证消息的顺序，而activemq不能保证。 rocketmq可以提供亿级消息的堆积能力，不过这不是重点，重点是堆积了亿级消息还能保持低延迟写入。">
+<meta property="og:description" content="不善言辞的宅男码农一枚">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/rocketmq-project-structure.png">
-<meta property="og:image" content="http://yoursite.com/images/rocketmq-deploy.png">
-<meta property="og:updated_time" content="2019-12-19T09:19:57.412Z">
+<meta property="og:updated_time" content="2019-12-23T03:05:01.450Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rocketmq源码解析-1.Rocketmq介绍">
-<meta name="twitter:description" content="Rocketmq优势： rocketmq原生就支持分布式，而activemq原生存在单点性。 rocketmq可以严格的保证消息的顺序，而activemq不能保证。 rocketmq可以提供亿级消息的堆积能力，不过这不是重点，重点是堆积了亿级消息还能保持低延迟写入。">
-<meta name="twitter:image" content="http://yoursite.com/images/rocketmq-project-structure.png">
+<meta name="twitter:title" content="关于">
+<meta name="twitter:description" content="不善言辞的宅男码农一枚">
 
 
 
@@ -123,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/middleware/rocketmq-structure.html">
+  <link rel="canonical" href="http://yoursite.com/about/">
 
 
 
 
 
-  <title>Rocketmq源码解析-1.Rocketmq介绍 | Xiao's Blog</title>
+  <title>关于 | Xiao's Blog</title>
   
 
 
@@ -286,206 +282,34 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/middleware/rocketmq-structure.html">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="任重道远">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/a.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xiao's Blog">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Rocketmq源码解析-1.Rocketmq介绍</h1>
-        
+	<h1 class="post-title" itemprop="name headline">关于</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-18T20:16:13+08:00">
-                2019-12-18
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/middleware/" itemprop="url" rel="index">
-                    <span itemprop="name">middleware</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <h3 id="Rocketmq优势："><a href="#Rocketmq优势：" class="headerlink" title="Rocketmq优势："></a>Rocketmq优势：</h3><ol>
-<li>rocketmq原生就支持分布式，而activemq原生存在单点性。</li>
-<li>rocketmq可以严格的保证消息的顺序，而activemq不能保证。</li>
-<li>rocketmq可以提供亿级消息的堆积能力，不过这不是重点，重点是堆积了亿级消息还能保持低延迟写入。<a id="more"></a></li>
-<li>丰富的消息推拉模式（push和pull）：push好理解，在消费者端设置消息listener回调；pull需要应用主动的调用拉消息的方法从broker拉取消息，这里存在一个记录消费位置的问题，如果不记录会存在重复消费的问题。</li>
-<li>一般mq分布式协调使用zookeeper，rocketmq自己实现了一个nameserver，更加轻量级，性能更好。</li>
-<li>消息失败重试机制、高效的订阅者水平扩展能力、强大的api、事务机制等等。</li>
-<li>rocketmq有group的概念，通过group机制可以实现天然的消息负载均衡。</li>
-</ol>
-<h3 id="Rocketmq部署模式："><a href="#Rocketmq部署模式：" class="headerlink" title="Rocketmq部署模式："></a>Rocketmq部署模式：</h3><ol>
-<li>单master模式：无需多言，一旦单个broker重启或宕机，一切都结束了！显然，线上不可以使用。</li>
-<li>多master模式：全是master，没有slave。一个broker宕机了，应用没有影响，缺点在于宕机的master上未被消费的消息在master没有恢复之前不可以订阅。</li>
-<li>多master多slave模式（异步复制）：高可用，采用异步复制的方式，主备之间短暂延迟，ms级别。master宕机，消费者可以从slave上消费，但是master的宕机会导致丢失掉极少量的消息。</li>
-<li>多master多slave模式（同步双写）：和上面的区别在于采用的是同步方式，也就是master、slave都写成功才会向应用返回成功。可见不论是数据，还是服务都没有单点，都非常可靠！缺点在于同步的性能比异步稍低。</li>
-</ol>
-<h3 id="Rocketmq项目结构："><a href="#Rocketmq项目结构：" class="headerlink" title="Rocketmq项目结构："></a>Rocketmq项目结构：</h3><p><img src="/images/rocketmq-project-structure.png" alt="image"></p>
-<ul>
-<li>acl：访问权限控制模块</li>
-<li>broker：消息代理模块，串联 Producer/Consumer 和 Store </li>
-<li>client：客户端模块，包含producer和consumer，负责消息的发送和消费</li>
-<li>common：公共模块，供其他模块使用</li>
-<li>distribution：包含一些 sh 脚本和 配置，主要供部署时使用</li>
-<li>example：一些rocketmq使用的示例代码</li>
-<li>filter：过滤器模块</li>
-<li>logappender：接入日志需要的appender模块</li>
-<li>logging：日志模块</li>
-<li>namesrv：rocketmq的注册中心，broker，produce，consumer以及topic信息会在namesrv中注册</li>
-<li>openmessaging：忽略，没了解过</li>
-<li>remoting：远程调用模块，基于Netty实现，produer，consumer，broker之间通过这个模块通信。</li>
-<li>srvutil：解析命令行的工具类ServerUtil</li>
-<li>store：消息存储模块</li>
-<li>test：测试用例模块</li>
-<li>tools：一些工具类，基于它们可以写一些 sh 工具来管理、查看MQ系统的一些信息</li>
-</ul>
-<p>对于这些模块我们不需要都去研究源码，只需要挑几个重点去关注。这里面比较重要的是broker，client，common，namesrv，remoting，store这几个模块。</p>
-<h3 id="Rocketmq逻辑部署架构"><a href="#Rocketmq逻辑部署架构" class="headerlink" title="Rocketmq逻辑部署架构"></a>Rocketmq逻辑部署架构</h3><p><img src="/images/rocketmq-deploy.png" alt="image"></p>
-<p>这是 Rocketmq 的逻辑部署结构(参考《RocketMQ原理简介 v3.1.1》)，包括 producer/broker/namesrv/consumer 四大部分。namesrv 起到注册中心的作用，部署的时候会用到 rocketmq-namesrv/rocketmq-common/rocketmq-remoting 三个模块的代码；broker 部署的时候会用到 rocketmq-broker/rocketmq-store/rocketmq-common/rocketmq-remoting 四个模块的代码；producer 和 consumer 会用到 rocketmq-client/rocketmq-common/rocketmq-remoting 三个模块的代码，这里虽然将它们分开画了，但实际上一个应用往往既是producer又是consumer。</p>
+      <div class="post-body">
+        
+        
+          <p>不善言辞的宅男码农一枚</p>
 
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/rocketmq/" rel="tag"><i class="fa fa-tag"></i> rocketmq</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/middleware/rocketmq-install.html" rel="next" title="Rocketmq安装部署">
-                <i class="fa fa-chevron-left"></i> Rocketmq安装部署
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/middleware/rocketmq-namesrv.html" rel="prev" title="Rocketmq源码解析-2.Namesrv">
-                Rocketmq源码解析-2.Namesrv <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -518,17 +342,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -600,22 +415,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rocketmq优势："><span class="nav-number">1.</span> <span class="nav-text">Rocketmq优势：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rocketmq部署模式："><span class="nav-number">2.</span> <span class="nav-text">Rocketmq部署模式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rocketmq项目结构："><span class="nav-number">3.</span> <span class="nav-text">Rocketmq项目结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rocketmq逻辑部署架构"><span class="nav-number">4.</span> <span class="nav-text">Rocketmq逻辑部署架构</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
