@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="并发,">
+  <meta name="keywords" content="并发,lock,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;锁是用来控制多个线程访问共享资源的方式，一般来说，一个锁能够防止多个线程同时访问共享资源（但是有些锁可以允许多个线程并发的访问共享资源，比如读写锁）。在Lock接口出现之前，Java程序是靠synchronized关键字实现锁功能的，而Java SE 5之后，并发包中新增了Lock接口（以及相关实现类）用来实现锁功能，它提供了与synch">
-<meta name="keywords" content="并发">
+<meta name="keywords" content="并发,lock">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java锁介绍">
 <meta property="og:url" content="http://yoursite.com/Java/lock.html">
@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/mark-word.jpg">
 <meta property="og:image" content="http://yoursite.com/images/lock1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/lock2.jpg">
-<meta property="og:updated_time" content="2019-12-24T06:27:51.577Z">
+<meta property="og:updated_time" content="2020-01-15T03:25:09.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java锁介绍">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;锁是用来控制多个线程访问共享资源的方式，一般来说，一个锁能够防止多个线程同时访问共享资源（但是有些锁可以允许多个线程并发的访问共享资源，比如读写锁）。在Lock接口出现之前，Java程序是靠synchronized关键字实现锁功能的，而Java SE 5之后，并发包中新增了Lock接口（以及相关实现类）用来实现锁功能，它提供了与synch">
@@ -457,6 +457,8 @@
           
             <a href="/tags/concurrent/" rel="tag"><i class="fa fa-tag"></i> 并发</a>
           
+            <a href="/tags/lock/" rel="tag"><i class="fa fa-tag"></i> lock</a>
+          
         </div>
       
 
@@ -468,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/middleware/redis.html" rel="next" title="一文详解Redis">
-                <i class="fa fa-chevron-left"></i> 一文详解Redis
+              <a href="/distributed/distributedLock.html" rel="next" title="分布式锁介绍及其实现方式">
+                <i class="fa fa-chevron-left"></i> 分布式锁介绍及其实现方式
               </a>
             
           </div>
@@ -570,7 +572,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -581,7 +583,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
