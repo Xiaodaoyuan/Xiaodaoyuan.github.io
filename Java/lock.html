@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/mark-word.jpg">
 <meta property="og:image" content="http://yoursite.com/images/lock1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/lock2.jpg">
-<meta property="og:updated_time" content="2020-01-15T03:25:09.421Z">
+<meta property="og:updated_time" content="2020-01-16T09:05:52.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java锁介绍">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;锁是用来控制多个线程访问共享资源的方式，一般来说，一个锁能够防止多个线程同时访问共享资源（但是有些锁可以允许多个线程并发的访问共享资源，比如读写锁）。在Lock接口出现之前，Java程序是靠synchronized关键字实现锁功能的，而Java SE 5之后，并发包中新增了Lock接口（以及相关实现类）用来实现锁功能，它提供了与synch">
@@ -392,8 +392,10 @@
 <h3 id="synchronized锁"><a href="#synchronized锁" class="headerlink" title="synchronized锁"></a>synchronized锁</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JVM基于进入和退出Monitor对象来实现方法同步和代码块同步。代码块同步是使用monitorenter和monitorexit指令实现的，monitorenter指令是在编译后插入到同步代码块的开始位置，而monitorexit是插入到方法结束处和异常处。任何对象都有一个monitor与之关联，当且一个monitor被持有后，它将处于锁定状态。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据虚拟机规范的要求，在执行monitorenter指令时，首先要去尝试获取对象的锁，如果这个对象没被锁定，或者当前线程已经拥有了那个对象的锁，把锁的计数器加1；相应地，在执行monitorexit指令时会将锁计数器减1，当计数器被减到0时，锁就释放了。如果获取对象锁失败了，那当前线程就要阻塞等待，直到对象锁被另一个线程释放为止。  </p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized与java.util.concurrent包中的ReentrantLock相比，由于JDK1.6中加入了针对锁的优化措施（见后面），使得synchronized与ReentrantLock的性能基本持平。ReentrantLock只是提供了synchronized更丰富的功能，而不一定有更优的性能，所以在synchronized能实现需求的情况下，优先考虑使用synchronized来进行同步</p>
+<hr>
 <h3 id="Java对象头"><a href="#Java对象头" class="headerlink" title="Java对象头"></a>Java对象头</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized用的锁是存在Java对象头里的。如果对象是数组类型，则虚拟机用3个字宽（Word）存储对象头，如果对象是非数组类型，则用2字宽存储对象头。  </p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java对象头里的Mark Word里默认存储对象的HashCode、分代年龄和锁标记位。在运行期间，Mark Word里存储的数据会随着锁标志位的变化而变化。Mark Word可能变化为存储以下4种数据，如下所示<br><img src="/images/mark-word.jpg" alt="images"></p>
+<hr>
 <h3 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java SE 1.6为了减少获得锁和释放锁带来的性能消耗，引入了“偏向锁”和“轻量级锁”：锁一共有4种状态，级别从低到高依次是：无锁状态、偏向锁状态、轻量级锁状态和重量级锁状态。锁可以升级但不能降级。  </p>
 <ul>
 <li><strong>无锁</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无锁没有对资源进行锁定，所有的线程都能访问并修改同一个资源，但同时只有一个线程能修改成功。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无锁的特点就是修改操作在循环内进行，线程会不断的尝试修改共享资源。如果没有冲突就修改成功并退出，否则就会继续循环尝试。如果有多个线程修改同一个值，必定会有一个线程能修改成功，而其他修改失败的线程会不断重试直到修改成功。上面我们介绍的CAS原理及应用即是无锁的实现。无锁无法全面代替有锁，但无锁在某些场合下的性能是非常高的。</li>
@@ -402,6 +404,7 @@
 <li><strong>重量级锁</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;升级为重量级锁时，锁标志的状态值变为“10”，此时Mark Word中存储的是指向重量级锁的指针，此时等待锁的线程都会进入阻塞状态。</li>
 </ul>
 <p>综上，偏向锁通过对比Mark Word解决加锁问题，避免执行CAS操作。而轻量级锁是通过用CAS操作和自旋来解决加锁问题，避免线程阻塞和唤醒而影响性能。重量级锁是将除了拥有锁的线程以外的线程都阻塞。</p>
+<hr>
 <h3 id="其他锁优化（锁消除和锁粗化）"><a href="#其他锁优化（锁消除和锁粗化）" class="headerlink" title="其他锁优化（锁消除和锁粗化）"></a>其他锁优化（锁消除和锁粗化）</h3><ul>
 <li><strong>锁消除</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;锁消除即删除不必要的加锁操作。虚拟机即时编辑器在运行时，对一些“代码上要求同步，但是被检测到不可能存在共享数据竞争”的锁进行消除。根据代码逃逸技术，如果判断到一段代码中，堆上的数据不会逃逸出当前线程，那么可以认为这段代码是线程安全的，不必要加锁。  </li>
 </ul>
@@ -421,11 +424,14 @@
 <li><strong>自适应的自旋锁：</strong>JDK1.6引入自适应的自旋锁，自适应就意味着自旋的次数不再是固定的，它是由前一次在同一个锁上的自旋时间及锁的拥有者的状态来决定：如果在同一个锁的对象上，自旋等待刚刚成功获得过锁，并且持有锁的线程正在运行中，那么虚拟机就会认为这次自旋也很有可能再次成功，进而它将允许自旋等待持续相对更长的时间。如果对于某个锁，自旋很少成功获得过，那在以后要获取这个锁时将可能省略掉自旋过程，以避免浪费处理器资源。简单来说，就是线程如果自旋成功了，则下次自旋的次数会更多，如果自旋失败了，则自旋的次数就会减少。</li>
 <li><strong>自旋锁使用场景：</strong>从轻量级锁获取的流程中我们知道，当线程在获取轻量级锁的过程中执行CAS操作失败时，是要通过自旋来获取重量级锁的。</li>
 </ul>
+<hr>
 <h3 id="公平锁和非公平锁"><a href="#公平锁和非公平锁" class="headerlink" title="公平锁和非公平锁"></a>公平锁和非公平锁</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公平锁是指多个线程按照申请锁的顺序来获取锁，线程直接进入队列中排队，队列中的第一个线程才能获得锁。公平锁的优点是等待锁的线程不会饿死。缺点是整体吞吐效率相对非公平锁要低，等待队列中除第一个线程以外的所有线程都会阻塞，CPU唤醒阻塞线程的开销比非公平锁大。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;非公平锁是多个线程加锁时直接尝试获取锁，获取不到才会到等待队列的队尾等待。但如果此时锁刚好可用，那么这个线程可以无需阻塞直接获取到锁，所以非公平锁有可能出现后申请锁的线程先获取锁的场景。非公平锁的优点是可以减少唤起线程的开销，整体的吞吐效率高，因为线程有几率不阻塞直接获得锁，CPU不必唤醒所有线程。缺点是处于等待队列中的线程可能会饿死，或者等很久才会获得锁</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized锁实现是非公平锁，当我们需要使用公平锁的时候，我们可以使用ReentrantLock。根据代码可知，ReentrantLock里面有一个内部类Sync，Sync继承AQS，添加锁和释放锁的大部分操作实际上都是在Sync中实现的。它有公平锁FairSync和非公平锁NonfairSync两个子类。ReentrantLock默认使用非公平锁，也可以通过构造器来显示的指定使用公平锁。</p>
+<hr>
 <h3 id="可重入锁和非可重入锁"><a href="#可重入锁和非可重入锁" class="headerlink" title="可重入锁和非可重入锁"></a>可重入锁和非可重入锁</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可重入锁是是指当一个线程在外层方法中获取了一把锁，进入到内层方法再次遇到同样一把锁时可以直接获取该锁，而不需要阻塞。synchronized和ReentrantLock都是可重入锁。可重入锁的一个优点是可一定程度避免死锁。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ReentrantLock实现可重入锁是基于它定义的一个int型变量state，当一个线程来获取锁时，判断state是否为0，是0的话代表没有线程获取锁，线程就可以通过CAS将state自增+1。如果state不为0，表示已经有线程获取了锁，此时判断获取锁的线程是不是当前线程，是当前线程的话也可以获取锁（这个就实现了可重入锁），同样通过CAS将state自增+1。释放锁的过程刚好相反，每次通过CAS将state减1。加了多少次锁，就需要解多少次锁，不然很容易造成死锁。</p>
+<hr>
 <h3 id="独享锁和共享锁"><a href="#独享锁和共享锁" class="headerlink" title="独享锁和共享锁"></a>独享锁和共享锁</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;独享锁也叫排他锁，是指该锁一次只能被一个线程所持有。如果线程T对数据A加上排它锁后，则其他线程不能再对A加任何类型的锁。获得排它锁的线程即能读数据又能修改数据。JDK中的synchronized和JUC中ReentrantLock就是互斥锁。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共享锁是指该锁可被多个线程所持有。如果线程T对数据A加上共享锁后，则其他线程只能对A再加共享锁，不能加排它锁。获得共享锁的线程只能读数据，不能修改数据。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ReentrantReadWriteLock包含一个readLock和一个writeLock，readLock是共享锁，writeLock是独享锁。ReentrantLock的实现是通过AQS中的state变量(int类型，32位)，而ReentrantReadWriteLock包含读写两把锁，如果在state一个整型变量上维护多种状态，就一定需要“按位切割使用”这个变量，读写锁将变量切分成了两个部分，高16位表示读，低16位表示写，划分方式如下图所示<br><img src="/images/lock2.jpg" alt="images"></p>
@@ -470,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/distributed/distributedLock.html" rel="next" title="分布式锁介绍及其实现方式">
-                <i class="fa fa-chevron-left"></i> 分布式锁介绍及其实现方式
+              <a href="/Java/hashmap.html" rel="next" title="Java8中HashMap和ConcurrentHashMap解析">
+                <i class="fa fa-chevron-left"></i> Java8中HashMap和ConcurrentHashMap解析
               </a>
             
           </div>
@@ -561,7 +567,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -583,7 +589,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

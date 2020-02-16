@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xiao&#39;s Blog">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;提到锁，我们最先想到的是Java的synchronized关键字和JUC包中的ReentrantLock，这两个锁可以满足我们在多线程中对共享资源的安全访问，但是随着分布式的发展，本地锁已经没办法满足我们的需求了。为了在分布式环境也能对一个共享资源进行安全访问，我们需要引入分布式锁。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-15T10:39:54.525Z">
+<meta property="og:updated_time" content="2020-01-16T09:05:12.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式锁介绍及其实现方式">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;提到锁，我们最先想到的是Java的synchronized关键字和JUC包中的ReentrantLock，这两个锁可以满足我们在多线程中对共享资源的安全访问，但是随着分布式的发展，本地锁已经没办法满足我们的需求了。为了在分布式环境也能对一个共享资源进行安全访问，我们需要引入分布式锁。">
@@ -393,6 +393,7 @@
 <li><strong>支持阻塞和非阻塞(可选)：</strong>和ReentrantLock一样支持lock和trylock以及tryLock(long  timeOut)。</li>
 <li><strong>支持公平锁和非公平锁(可选)：</strong>公平锁的意思是按照请求加锁的顺序获得锁，非公平锁就相反是无序的。这个一般可以不用实现。</li>
 </ul>
+<hr>
 <h3 id="分布式锁实现方式"><a href="#分布式锁实现方式" class="headerlink" title="分布式锁实现方式"></a>分布式锁实现方式</h3><p>分布式锁的实现方式有很多种，一般主要有以下几种：</p>
 <ul>
 <li>基于数据库实现</li>
@@ -400,6 +401,7 @@
 <li>基于Zookeeper实现</li>
 <li>自研分布式锁(如谷歌的Chubby)</li>
 </ul>
+<hr>
 <h3 id="基于数据库实现"><a href="#基于数据库实现" class="headerlink" title="基于数据库实现"></a>基于数据库实现</h3><p>基于数据库实现分布式锁主要有两张方案，但是他们也都有一些缺陷。</p>
 <ul>
 <li>利用主键唯一规则：</li>
@@ -419,6 +421,7 @@
 <blockquote>
 <p>这种方式有两个比较大的问题：一是利用事务进行加锁的时候，query需要占用数据库连接，在行锁的时候连接不释放，这就会导致连接池爆满。二是mysql使用行锁时默认要走索引，但是有时mysql根据执行计划认为全表扫描效率更高的时候就会将行锁升级为表锁，解决这个问题的话需要我们查询的时候显式制定索引。</p>
 </blockquote>
+<hr>
 <h3 id="基于Redis实现"><a href="#基于Redis实现" class="headerlink" title="基于Redis实现"></a>基于Redis实现</h3><p>基于redis来实现分布式锁主要方案就是：</p>
 <ul>
 <li><strong>加锁：</strong></li>
@@ -440,7 +443,9 @@
 <p>解锁操作使用eval命令执行一段Lua脚本，首先获取锁对应的value值，检查是否与requestId相等，如果相等则删除锁（解锁）。使用Lua脚本可以保证原子性；</p>
 </blockquote>
 <p>基于redis实现分布式还有其他方式，比如基于Redlock和基于redisson来实现，这两种方式没做研究，这里不做过多介绍。</p>
+<hr>
 <h3 id="基于Zookeeper实现"><a href="#基于Zookeeper实现" class="headerlink" title="基于Zookeeper实现"></a>基于Zookeeper实现</h3><p>Zookeeper是一个分布式一致性协调框架，主要可以实现选主、配置管理和分布式锁等常用功能，因为Zookeeper的写入都是顺序的，在一个节点创建之后，其他请求再次创建便会失败，同时可以对这个节点进行Watch，如果节点删除会通知其他节点抢占锁。Zookeeper实现分布式锁虽然是比较重量级的，但实现的锁功能十分健全。</p>
+<hr>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>基于数据库实现的方式还是比较复杂，而且性能也不高，不推荐使用。</p>
 <p>基于redis实现的方式比较简单，性能也比较好，引入redis集群可以保证高可用，推荐大家使用redis的方式实现。</p>
 <p>基于Zookeeper实现的方式比较重，同时还需要维护Zookeeper集群，实现起来还是比较复杂的，实现不好的话还会引起“羊群效应”。如果不是原有系统就依赖Zookeeper，同时压力不大的情况下。一般不使用Zookeeper实现分布式锁。</p>
@@ -486,8 +491,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Java/lock.html" rel="prev" title="Java锁介绍">
-                Java锁介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/Java/hashmap.html" rel="prev" title="Java8中HashMap和ConcurrentHashMap解析">
+                Java8中HashMap和ConcurrentHashMap解析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,7 +572,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -589,7 +594,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

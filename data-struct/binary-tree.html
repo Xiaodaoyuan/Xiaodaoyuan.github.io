@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JVM虚拟机,">
+  <meta name="keywords" content="数据结构,">
 
 
 
@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="JVM把class文件加载的内存，并对数据进行校验、转换解析和初始化，最终形成JVM可以直接使用的Java类型的过程就是加载机制。 类加载生命周期 加载（Loading） 验证（Verifycation） 准备（Preparation） 解析（Resolution） 初始化（Initialization） 使用（Using） 卸载（Unloading）">
-<meta name="keywords" content="JVM虚拟机">
+<meta name="description" content="树是一种重要的数据结构，它的定义：  树(Tree)是n(n≥0)个结点的有限集。n=0时称为空树。在任意一颗非空树中：（1）有且仅有一个特定的称为 根（root） 的结点（2）当n&amp;gt;1时，其余结点可以分为m(m&amp;gt;0)个互不相交的有限集T1,T1,…,Tm，其中每一个本身又是一棵树，并且称为根的 子树（sub tree）">
+<meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM（5）：类加载机制">
-<meta property="og:url" content="http://yoursite.com/Java/jvm-classloader.html">
+<meta property="og:title" content="一文详解二叉树">
+<meta property="og:url" content="http://yoursite.com/data-struct/binary-tree.html">
 <meta property="og:site_name" content="Xiao&#39;s Blog">
-<meta property="og:description" content="JVM把class文件加载的内存，并对数据进行校验、转换解析和初始化，最终形成JVM可以直接使用的Java类型的过程就是加载机制。 类加载生命周期 加载（Loading） 验证（Verifycation） 准备（Preparation） 解析（Resolution） 初始化（Initialization） 使用（Using） 卸载（Unloading）">
+<meta property="og:description" content="树是一种重要的数据结构，它的定义：  树(Tree)是n(n≥0)个结点的有限集。n=0时称为空树。在任意一颗非空树中：（1）有且仅有一个特定的称为 根（root） 的结点（2）当n&amp;gt;1时，其余结点可以分为m(m&amp;gt;0)个互不相交的有限集T1,T1,…,Tm，其中每一个本身又是一棵树，并且称为根的 子树（sub tree）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-24T08:17:04.862Z">
+<meta property="og:image" content="http://yoursite.com/images/binary-tree-order.png">
+<meta property="og:image" content="http://yoursite.com/images/binary-tree-node.png">
+<meta property="og:image" content="http://yoursite.com/images/binary-tree-link.png">
+<meta property="og:updated_time" content="2020-01-17T07:58:37.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM（5）：类加载机制">
-<meta name="twitter:description" content="JVM把class文件加载的内存，并对数据进行校验、转换解析和初始化，最终形成JVM可以直接使用的Java类型的过程就是加载机制。 类加载生命周期 加载（Loading） 验证（Verifycation） 准备（Preparation） 解析（Resolution） 初始化（Initialization） 使用（Using） 卸载（Unloading）">
+<meta name="twitter:title" content="一文详解二叉树">
+<meta name="twitter:description" content="树是一种重要的数据结构，它的定义：  树(Tree)是n(n≥0)个结点的有限集。n=0时称为空树。在任意一颗非空树中：（1）有且仅有一个特定的称为 根（root） 的结点（2）当n&amp;gt;1时，其余结点可以分为m(m&amp;gt;0)个互不相交的有限集T1,T1,…,Tm，其中每一个本身又是一棵树，并且称为根的 子树（sub tree）">
+<meta name="twitter:image" content="http://yoursite.com/images/binary-tree-order.png">
 
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/Java/jvm-classloader.html">
+  <link rel="canonical" href="http://yoursite.com/data-struct/binary-tree.html">
 
 
 
 
 
-  <title>JVM（5）：类加载机制 | Xiao's Blog</title>
+  <title>一文详解二叉树 | Xiao's Blog</title>
   
 
 
@@ -295,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/jvm-classloader.html">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/data-struct/binary-tree.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="任重道远">
@@ -312,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JVM（5）：类加载机制</h1>
+          <h1 class="post-title" itemprop="name headline">一文详解二叉树</h1>
         
 
         <div class="post-meta">
@@ -324,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-27T17:41:42+08:00">
-                2018-09-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-16T11:50:05+08:00">
+                2020-01-16
               </time>
             
 
@@ -347,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/data-struct/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
                   </a>
                 </span>
 
@@ -384,38 +388,65 @@
       
 
       
-        <p>JVM把class文件加载的内存，并对数据进行校验、转换解析和初始化，最终形成JVM可以直接使用的Java类型的过程就是加载机制。</p>
-<h4 id="类加载生命周期"><a href="#类加载生命周期" class="headerlink" title="类加载生命周期"></a>类加载生命周期</h4><ul>
-<li>加载（Loading）</li>
-<li>验证（Verifycation）</li>
-<li>准备（Preparation）</li>
-<li>解析（Resolution）</li>
-<li>初始化（Initialization）</li>
-<li>使用（Using）</li>
-<li>卸载（Unloading）  <a id="more"></a>
-其中验证、准备、解析这三个阶段统称为连接。加载、验证、准备、初始化、卸载这五个阶段顺序是确定的。</li>
+        <p>树是一种重要的数据结构，它的定义：</p>
+<blockquote>
+<p>树(Tree)是n(n≥0)个结点的有限集。n=0时称为空树。在任意一颗非空树中：（1）有且仅有一个特定的称为 根（root） 的结点（2）当n&gt;1时，其余结点可以分为m(m&gt;0)个互不相交的有限集T1,T1,…,Tm，其中每一个本身又是一棵树，并且称为根的 子树（sub tree）</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="树的术语"><a href="#树的术语" class="headerlink" title="树的术语"></a>树的术语</h3><ul>
+<li><strong>结点的度：</strong>结点拥有的子树个数。</li>
+<li><strong>树的度：</strong>树内各结点的度的最大值。</li>
+<li><strong>叶结点或终端结点：</strong>度为0的结点。</li>
+<li><strong>子结点，父结点：</strong>结点的子树的根称为该结点的子结点，对应的，该结点是子结点的父结点。</li>
+<li><strong>根结点：</strong>没有父结点的是根结点。</li>
+<li><strong>结点的层次：</strong>根结点是第一层，根的子结点是第二层，依此类推。</li>
+<li><strong>树的深度或高度：</strong>树中结点最大的层次称为树的深度或高度。</li>
 </ul>
 <hr>
-<ul>
-<li><strong>加载</strong><br>在加载阶段，虚拟机需要完成三件事情：<ol>
-<li>通过一个类的全限定名来获取定义此类的二进制字节流。</li>
-<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</li>
-<li>在内存中生成一个代表这个类的java.lang.class的对象，作为方法区这个类的各种数据的访问入口。</li>
-</ol>
+<h3 id="二叉树定义"><a href="#二叉树定义" class="headerlink" title="二叉树定义"></a>二叉树定义</h3><blockquote>
+<p>二叉树（Binary Tree）是n（n≥0）个结点的有限集合，该集合或者为空集（空二叉树），或者由一个根结点和两棵互不相交的，分别称为根结点的左子树右子树的二叉树组成。</p>
+</blockquote>
+<p>简单点说，树中所有结点的度不超过2，这样的树就是二叉树。</p>
+<h4 id="二叉树特点"><a href="#二叉树特点" class="headerlink" title="二叉树特点"></a>二叉树特点</h4><ul>
+<li>每个结点最多有两棵树。</li>
+<li>左子树和右子树是有顺序的，不能颠倒。</li>
+<li>即使树中某结点只有一个子树，也要区分是左子树还是右子树。</li>
+</ul>
+<h4 id="特殊二叉树"><a href="#特殊二叉树" class="headerlink" title="特殊二叉树"></a>特殊二叉树</h4><ul>
+<li><p><strong>斜树：</strong>所有结点都只有左子树的二叉树叫做左斜树，所有结点都只有右子树的二叉树叫做右斜树，这两者统称为斜树。</p>
 </li>
-<li><strong>验证</strong><br>验证是连接阶段的第一步，这一阶段的目的是为了确保Class文件字节流中包含的信息符合当前虚拟机的要求，并且不回危害虚拟机的安全。验证阶段一共包含四步：文件格式验证、愿数据验证、字节码验证、符号引用验证。</li>
-<li><strong>准备</strong><br>准备阶段是为类变量分配内存并设置初始值的阶段，这些变量所使用的内存都在方法区中。<br>public static int value=123；这个变量在准备阶段会初始化为0而不是123，因为这个时候尚未执行任何java方法，将value赋值为123是在putstatic指令被程序编译之后。<br>public static final int value=123；而这个会在准备阶段之后value就被初始化为123。</li>
-<li><strong>解析</strong><br>解析阶段是将常量池中的符号引用替换成直接引用的过程。</li>
-<li><strong>初始化</strong><br>初始化阶段是真正开始执行类中定义的java代码。在准备阶段，类变量已经赋值了一次系统要求的初始值，而在初始化阶段，则根据具体实际的值去初始化。</li>
+<li><p><strong>满二叉树：</strong>所有分支结点都存在左子树和右子树，并且所有叶子结点都在最下面一层，这样的称为满二叉树。（满二叉树的结点个数为2^ｎ-1，ｎ为数的深度)。<br>）</p>
+</li>
+<li><p><strong>完全二叉树：</strong>若二叉树中最多只有最下面两层的结点的度数可以小于2，并且最下面一层的叶子结点都是依次排列在该层最左边的位置上，则称为完全二叉树。</p>
+</li>
 </ul>
 <hr>
-<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><ul>
-<li><strong>Bootstrap ClassLoader</strong></li>
-<li><strong>Extension ClassLoader</strong></li>
-<li><strong>Application ClassLoader</strong></li>
-<li><strong>Custom ClassLoader</strong> </li>
-</ul>
-<p> <strong>双亲委派模型</strong><br>　　双亲委派模型要求除了顶层的启动类加载器外，其余的类加载器都应该有自己的父类加载器。这些父子类加载器之间的关系不会以继承来实现，而是使用组合来实现。<br>　　双亲委派模型的工作过程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到顶层的启动类加载器中，只有当父加载器反馈自己无法完成这个加载请求（它的搜索范围中没有找到所需的类）时，子加载器才会尝试自己去加载。</p>
+<h3 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h3><h4 id="顺序存储"><a href="#顺序存储" class="headerlink" title="顺序存储"></a>顺序存储</h4><p>当二叉树是完全二叉树时，我们可以使用顺序存储来存储二叉树，如下图所示：<br><img src="/images/binary-tree-order.png" alt="images"><br>按层序遍历（下面会介绍）依次把结点存储在一个数组中。</p>
+<p>对于非完全二叉树，也可以按顺序存储，但是相比完全二叉树缺少的结点用 ^ 代替，这样空间利用率不高，一般非完全二叉树不建议用顺序存储。</p>
+<h4 id="链式存储"><a href="#链式存储" class="headerlink" title="链式存储"></a>链式存储</h4><p>二叉树每个结点最多只有两个孩子结点，所以为它设计一个数据域和两个指针域是比较好的做法，我们称这样的链表叫做二叉链表。结点的结构如下图所示：<br><img src="/images/binary-tree-node.png" alt="images"></p>
+<p>下面是我们二叉链表结构定义代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">        E item;</span><br><span class="line">        Node&lt;E&gt; leftChild;</span><br><span class="line">        Node&lt;E&gt; rightChild;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>利用指针域我们便可以完美的存储非完全二叉树，如下：<br><img src="/images/binary-tree-link.png" alt="images"></p>
+<p>如果有需要，我们还可以增加一个指向父结点的指针域，那样就称之为三叉链表。</p>
+<hr>
+<h3 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h3><h4 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h4><p>若二叉树为空，则直接返回，否则先访问根结点，然后前序遍历左子树，再前序遍历右子树。</p>
+<p>递归算法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">firstOrderTraversal</span><span class="params">(Node&lt;E&gt; node)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      printNode(node);</span><br><span class="line">      firstOrderTraversal(node.leftChild);</span><br><span class="line">      firstOrderTraversal(node.rightChild);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>非递归算法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">firstOrderTraversal2</span><span class="params">(Node&lt;E&gt; node)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      Stack&lt;Node&lt;E&gt;&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">      stack.push(node);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">          Node&lt;E&gt; pop = stack.pop();</span><br><span class="line">          <span class="keyword">if</span> (pop != <span class="keyword">null</span>) &#123;</span><br><span class="line">              printNode(pop);</span><br><span class="line">              stack.push(pop.rightChild);</span><br><span class="line">              stack.push(pop.leftChild);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p>若二叉树为空，则直接返回，否则先从根结点开始（注意不是先从根结点访问），中序遍历根结点的左子树，然后访问根结点，最后中序遍历根结点的右子树。</p>
+<p>算法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inOrderTraversal</span><span class="params">(Node&lt;E&gt; node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        inOrderTraversal(node.leftChild);</span><br><span class="line">        printNode(node);</span><br><span class="line">        inOrderTraversal(node.rightChild);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>非递归算法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inOrderTraversal2</span><span class="params">(Node&lt;E&gt; node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Stack&lt;Node&lt;E&gt;&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (node != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(node);</span><br><span class="line">            node = node.leftChild;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Node&lt;E&gt; pop = stack.pop();</span><br><span class="line">            printNode(pop);</span><br><span class="line">            node = pop.rightChild;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h4><p>若二叉树为空，则直接返回，否则先从根结点开始，后序遍历根结点的左子树，然后中序遍历根结点的右子树，最后访问根结点。</p>
+<p>算法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postOrderTraversal</span><span class="params">(Node&lt;E&gt; node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        postOrderTraversal(node.leftChild);</span><br><span class="line">        postOrderTraversal(node.rightChild);</span><br><span class="line">        printNode(node);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>非递归算法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 主要思想：首先遍历root根节点的所有左结点，并依次入栈。对出栈的元素，如果没有右子树或者虽然有右子树</span></span><br><span class="line"><span class="comment"> * 但右子树已完成遍历，即可完成出栈；否则，再次入栈，并把右子树入栈，遍历右子树的所有左子树。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> node</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postOrderTraversal2</span><span class="params">(Node&lt;E&gt; node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Stack&lt;Node&lt;E&gt;&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    Node&lt;E&gt; prePop = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> (node != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            stack.push(node);</span><br><span class="line">            node = node.leftChild;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Node&lt;E&gt; pop = stack.pop();</span><br><span class="line">            <span class="keyword">if</span> (pop.rightChild == <span class="keyword">null</span> || pop.rightChild == prePop) &#123;</span><br><span class="line">                printNode(pop);</span><br><span class="line">                prePop = pop;</span><br><span class="line">                node = <span class="keyword">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                stack.push(pop);</span><br><span class="line">                stack.push(pop.rightChild);</span><br><span class="line">                node = pop.rightChild.leftChild;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h4><p>若二叉树为空，则直接返回，否则先从树的第一层，也就是根结点开始，从上而下逐层遍历，同一层中，按从左至右依次访问各个结点。</p>
+<p>算法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">levelOrderTraversal</span><span class="params">(Node&lt;E&gt; node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        LinkedList&lt;Node&lt;E&gt;&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.push(node);</span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">            Node&lt;E&gt; pop = queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (pop != <span class="keyword">null</span>) &#123;</span><br><span class="line">                printNode(pop);</span><br><span class="line">                queue.add(pop.leftChild);</span><br><span class="line">                queue.add(pop.rightChild);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -433,7 +464,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jvm/" rel="tag"><i class="fa fa-tag"></i> JVM虚拟机</a>
+            <a href="/tags/数据结构/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
           
         </div>
       
@@ -446,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/web/springboot1.html" rel="next" title="springboot线程池优雅关闭">
-                <i class="fa fa-chevron-left"></i> springboot线程池优雅关闭
+              <a href="/Mysql/explain.html" rel="next" title="Mysql explain 详解">
+                <i class="fa fa-chevron-left"></i> Mysql explain 详解
               </a>
             
           </div>
@@ -455,10 +486,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/web/springboot2.html" rel="prev" title="springboot使用mybatis加载typealias的package问题">
-                springboot使用mybatis加载typealias的package问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -602,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类加载生命周期"><span class="nav-number">1.</span> <span class="nav-text">类加载生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类加载器"><span class="nav-number">2.</span> <span class="nav-text">类加载器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的术语"><span class="nav-number">1.</span> <span class="nav-text">树的术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树定义"><span class="nav-number">2.</span> <span class="nav-text">二叉树定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树特点"><span class="nav-number">2.1.</span> <span class="nav-text">二叉树特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊二叉树"><span class="nav-number">2.2.</span> <span class="nav-text">特殊二叉树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的存储结构"><span class="nav-number">3.</span> <span class="nav-text">二叉树的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#顺序存储"><span class="nav-number">3.1.</span> <span class="nav-text">顺序存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链式存储"><span class="nav-number">3.2.</span> <span class="nav-text">链式存储</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树遍历"><span class="nav-number">4.</span> <span class="nav-text">二叉树遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前序遍历"><span class="nav-number">4.1.</span> <span class="nav-text">前序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中序遍历"><span class="nav-number">4.2.</span> <span class="nav-text">中序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序遍历"><span class="nav-number">4.3.</span> <span class="nav-text">后序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#层序遍历"><span class="nav-number">4.4.</span> <span class="nav-text">层序遍历</span></a></li></ol></li></ol></div>
             
 
           </div>

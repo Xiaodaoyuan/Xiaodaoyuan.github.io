@@ -88,7 +88,7 @@
 <meta property="og:description" content="Redis是一个开源的，基于内存的，也可进行持久化的，基于C语言编写的存储数据库。Redis能达到11w的QPS。Redis这么快的原因主要有以下几点:    完全基于内存，数据全部存储在内存中，读取时没有磁盘IO，所以速度非常快。    Redis采用单线程的模型，没有上下文切换的开销，也没有竞态条件，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/redis-encoding.png">
-<meta property="og:updated_time" content="2020-01-15T03:09:14.372Z">
+<meta property="og:updated_time" content="2020-01-16T09:06:29.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一文详解Redis">
 <meta name="twitter:description" content="Redis是一个开源的，基于内存的，也可进行持久化的，基于C语言编写的存储数据库。Redis能达到11w的QPS。Redis这么快的原因主要有以下几点:    完全基于内存，数据全部存储在内存中，读取时没有磁盘IO，所以速度非常快。    Redis采用单线程的模型，没有上下文切换的开销，也没有竞态条件，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗。">
@@ -397,6 +397,7 @@
 <li><p>采用多路复用IO模型，可以同时监测多个流的IO事件能力，在空闲时，会把当前线程阻塞掉，当有一个或多个流有I/O事件时，就从阻塞态唤醒，轮询那些真正发出了事件的流，并只依次顺序的处理就绪的流。可以让单个线程高效的处理多个连接请求（尽量减少网络 I/O 的时间消耗)。</p>
 </li>
 </ol>
+<hr>
 <h3 id="Redis使用场景"><a href="#Redis使用场景" class="headerlink" title="Redis使用场景"></a>Redis使用场景</h3><ol>
 <li>取最新N个数据的操作：可以将数据存在redis的list中。  </li>
 <li>排行榜应用，取TOP N操作：这个可以将数据存入sorted set中，把排序值设为score，根据score进行排序。  </li>
@@ -407,6 +408,7 @@
 <li>构建队列系统</li>
 <li>缓存</li>
 </ol>
+<hr>
 <h3 id="Redis和Memcached的区别"><a href="#Redis和Memcached的区别" class="headerlink" title="Redis和Memcached的区别"></a>Redis和Memcached的区别</h3><ol>
 <li><p><strong>数据类型支持不同</strong><br>Memcached仅支持简单的key-value结构的数据记录不同，Redis支持的数据类型要丰富得多。最为常用的数据类型主要由五种：String、Hash、List、Set和Sorted Set。<br>Memcached单个key-value大小有限，一个value最大只支持1MB，而Redis最大支持512MB</p>
 </li>
@@ -417,6 +419,7 @@
 <li><p><strong>集群管理的不同</strong><br>Memcached本身并不支持分布式，因此只能在客户端通过像一致性哈希这样的分布式算法来实现Memcached的分布式存储。当客户端向Memcached集群发送数据之前，首先会通过内置的分布式算法计算出该条数据的目标节点，然后数据会直接发送到该节点上存储。但客户端查询数据时，同样要计算出查询数据所在的节点，然后直接向该节点发送查询请求以获取数据。<br>Redis Cluster是一个实现了分布式且允许单点故障的Redis高级版本，它没有中心节点，具有线性可伸缩的功能。为了保证单点故障下的数据可用性，Redis Cluster引入了Master节点和Slave节点。在Redis Cluster中，每个Master节点都会有对应的两个用于冗余的Slave节点。这样在整个集群中，任意两个节点的宕机都不会导致数据的不可用。当Master节点退出后，集群会自动选择一个Slave节点成为新的Master节点。</p>
 </li>
 </ol>
+<hr>
 <h3 id="Redis数据结构"><a href="#Redis数据结构" class="headerlink" title="Redis数据结构"></a>Redis数据结构</h3><p>Redis共有5种数据结构：string，list，set，zset，hash。  Redis内部使用一个redisObject对象来表示所有的key和value。redisObject的源码如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> typedef struct redisObject &#123;</span><br><span class="line"> </span><br><span class="line">    // 类型</span><br><span class="line">    unsigned type:4;</span><br><span class="line">    </span><br><span class="line">    // 编码</span><br><span class="line">    unsigned encoding:4;</span><br><span class="line">    </span><br><span class="line">    // 指向底层实现数据结构的指针</span><br><span class="line">    void *ptr;</span><br><span class="line"></span><br><span class="line">    // ...</span><br><span class="line"></span><br><span class="line">&#125; robj;</span><br></pre></td></tr></table></figure>
 <p>type字段对应redis的5种数据结构。</p>
@@ -430,10 +433,12 @@
 <li><p><strong>hash</strong><br>这个是类似 Map 的一种结构，这个一般就是可以将结构化的数据，比如一个对象（前提是这个对象没嵌套其他的对象）给缓存在 Redis 里，然后每次读写缓存的时候，可以就操作 Hash 里的某个字段。一般可以使用hash存储用户的信息。</p>
 </li>
 </ol>
+<hr>
 <h3 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h3><p>Redis 提供了 RDB 和 AOF 两种持久化方式，RDB 是把内存中的数据集以快照形式写入磁盘，实际操作是通过 fork 子进程执行，采用二进制压缩存储；AOF 是以文本日志的形式记录 Redis 处理的每一个写入或删除操作。RDB持久化的特点是：文件小，恢复快，不影响性能，实时性低。AOF持久化的特点是：文件大，恢复慢，性能影响大，实时性高。</p>
 <p>对于两种方式的选择，如果可以接受丢失十几分钟及更长时间的数据，可以选择RDB持久化，对性能影响小，如果只能接受秒级的数据丢失，只能选择AOF持久化。</p>
 <p>AOF如果配置是everysec那么会每秒执行fsync操作，调用write写入磁盘一次，但是如果硬盘负载过高，fsync操作可能会超过1s，Redis主线程持续高速向aof_buf写入命令，硬盘的负载可能会越来越大，IO资源消耗更快，所以Redis的处理逻辑是会对比上次fsync成功的时间，如果超过2s，则主线程阻塞直到fsync同步完成，所以最多可能丢失2s的数据，而不是1s。</p>
 <p>为了防止AOF文件越来越大，可以通过执行BGREWRITEAOF命令，会fork子进程出来，读取当前数据库的键值对信息，生成所需的写命令，写入新的AOF文件。在生成期间，父进程继续正常处理请求，执行修改命令后，不仅会将命令写入aof_buf缓冲区，还会写入重写aof_buf缓冲区。当新的AOF文件生成完毕后，子进程父进程发送信号，父进程将重写aof_buf缓冲区的修改命令写入新的AOF文件，写入完毕后，对新的AOF文件进行改名，原子的地替换旧的AOF文件。</p>
+<hr>
 <h3 id="Redis过期策略"><a href="#Redis过期策略" class="headerlink" title="Redis过期策略"></a>Redis过期策略</h3><ol>
 <li><strong>惰性清除：</strong>在访问key时，如果发现key已经过期，那么会将key删除。</li>
 <li><strong>过期清理：</strong>Redis有定时任务会对过期的key进行清理(这个不会扫描所有过期的key)。</li>
@@ -449,6 +454,7 @@
 </ul>
 </li>
 </ol>
+<hr>
 <h3 id="Redis部署方式"><a href="#Redis部署方式" class="headerlink" title="Redis部署方式"></a>Redis部署方式</h3><p>Redis主要有四种部署方式：单点（Standalone），主从（Master-Slave），哨兵（Sentinel），集群（Cluster）。</p>
 <ol>
 <li><p><strong>单点</strong><br>最简单的部署方式，采用单个redis节点进行部署。不能保证高可用，也不能实现读写分离，一般生产环境不会采用这种方式。</p>
@@ -587,7 +593,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -609,7 +615,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

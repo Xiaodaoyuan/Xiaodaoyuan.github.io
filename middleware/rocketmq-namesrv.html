@@ -88,7 +88,7 @@
 <meta property="og:description" content="Namesrv简介Namesrv可以理解为一个注册中心，类似于kafka的zookeeper，但是比zk更加轻量，主要包含两块功能：  管理一些KV配置信息。 管理broker和topic的注册信息。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/rocketmq-namesrv.png">
-<meta property="og:updated_time" content="2019-12-20T09:42:43.188Z">
+<meta property="og:updated_time" content="2020-01-16T09:07:06.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rocketmq源码解析-2.Namesrv">
 <meta name="twitter:description" content="Namesrv简介Namesrv可以理解为一个注册中心，类似于kafka的zookeeper，但是比zk更加轻量，主要包含两块功能：  管理一些KV配置信息。 管理broker和topic的注册信息。">
@@ -393,6 +393,7 @@
 </ul>
 <a id="more"></a>
 <p><img src="/images/rocketmq-namesrv.png" alt="image"></p>
+<hr>
 <h3 id="Namesrv启动过程"><a href="#Namesrv启动过程" class="headerlink" title="Namesrv启动过程"></a>Namesrv启动过程</h3><blockquote>
 <p>启动过程主要涉及NamesrvStartup和NamesrvController两个类。</p>
 </blockquote>
@@ -402,6 +403,7 @@
 <blockquote>
 <p>不仅Namesrv的启动过程是这样，其他的组件启动过程也是startup/config/controller这样一个流程。</p>
 </blockquote>
+<hr>
 <h3 id="Namesrv主要组件"><a href="#Namesrv主要组件" class="headerlink" title="Namesrv主要组件"></a>Namesrv主要组件</h3><ul>
 <li><strong>KVConfigManager</strong></li>
 </ul>
@@ -431,6 +433,7 @@
 <p>当namesrv有请求过来时，会使用DefaultRequestProcessor去处理请求，处理过程会在线程池this.remotingExecutor中执行，通过processRequest方法处理请求，根据request中不同code进行不同处理。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">switch (request.getCode()) &#123;</span><br><span class="line">            case RequestCode.PUT_KV_CONFIG:</span><br><span class="line">                return this.putKVConfig(ctx, request);</span><br><span class="line">            case RequestCode.GET_KV_CONFIG:</span><br><span class="line">                return this.getKVConfig(ctx, request);</span><br><span class="line">            case RequestCode.DELETE_KV_CONFIG:</span><br><span class="line">                return this.deleteKVConfig(ctx, request);</span><br><span class="line">            case RequestCode.REGISTER_BROKER:</span><br><span class="line">                Version brokerVersion = MQVersion.value2Version(request.getVersion());</span><br><span class="line">                if (brokerVersion.ordinal() &gt;= MQVersion.Version.V3_0_11.ordinal()) &#123;</span><br><span class="line">                    return this.registerBrokerWithFilterServer(ctx, request);</span><br><span class="line">                &#125;</span><br><span class="line">                else &#123;</span><br><span class="line">                    return this.registerBroker(ctx, request);</span><br><span class="line">                &#125;</span><br><span class="line">            case RequestCode.UNREGISTER_BROKER:</span><br><span class="line">                return this.unregisterBroker(ctx, request);</span><br><span class="line">            case RequestCode.GET_ROUTEINTO_BY_TOPIC:</span><br><span class="line">                return this.getRouteInfoByTopic(ctx, request);</span><br><span class="line">            case RequestCode.GET_BROKER_CLUSTER_INFO:</span><br><span class="line">                return this.getBrokerClusterInfo(ctx, request);</span><br><span class="line">            case RequestCode.WIPE_WRITE_PERM_OF_BROKER:</span><br><span class="line">                return this.wipeWritePermOfBroker(ctx, request);</span><br><span class="line">            case RequestCode.GET_ALL_TOPIC_LIST_FROM_NAMESERVER:</span><br><span class="line">                return getAllTopicListFromNameserver(ctx, request);</span><br><span class="line">            case RequestCode.DELETE_TOPIC_IN_NAMESRV:</span><br><span class="line">                return deleteTopicInNamesrv(ctx, request);</span><br><span class="line">            case RequestCode.GET_KVLIST_BY_NAMESPACE:</span><br><span class="line">                return this.getKVListByNamespace(ctx, request);</span><br><span class="line">            case RequestCode.GET_TOPICS_BY_CLUSTER:</span><br><span class="line">                return this.getTopicsByCluster(ctx, request);</span><br><span class="line">            case RequestCode.GET_SYSTEM_TOPIC_LIST_FROM_NS:</span><br><span class="line">                return this.getSystemTopicListFromNs(ctx, request);</span><br><span class="line">            case RequestCode.GET_UNIT_TOPIC_LIST:</span><br><span class="line">                return this.getUnitTopicList(ctx, request);</span><br><span class="line">            case RequestCode.GET_HAS_UNIT_SUB_TOPIC_LIST:</span><br><span class="line">                return this.getHasUnitSubTopicList(ctx, request);</span><br><span class="line">            case RequestCode.GET_HAS_UNIT_SUB_UNUNIT_TOPIC_LIST:</span><br><span class="line">                return this.getHasUnitSubUnUnitTopicList(ctx, request);</span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<hr>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>   namesrv是无状态的，可以任意水平扩展，每一个broker都与所有namesrv保持长链接(有个scheduled task会按一定频率给所有namesrv做register broker的操作)，所以namesrv之间没有主从关系，他们之间也不需要复制数据。client(producer/consumer)会随机选择一个namesrv进行连接。  </p>
 <p>  client和broker中的namesrv地址有以下四种获取方式： </p>
 <ol>
@@ -560,7 +563,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -582,7 +585,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
