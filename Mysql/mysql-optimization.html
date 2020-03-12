@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="springboot,">
+  <meta name="keywords" content="mysql,">
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。">
-<meta name="keywords" content="springboot">
+<meta name="description" content="为什么查询会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定时间。如果要优化查询，实际上是优化其子任务，要么消除其中一些子任务，要么减少子任务的执行次数，要么让子任务执行更快。 查询的生命周期大致可以分为：从客户端，到服务器，然后在服务器上进行解析，生成执行计划，执行，并返回结果给客户端。在完成这些任务的时候，查询需要在不同 的地方花费时间，包括网络，CPU计算，生成统">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springboot使用mybatis加载typealias的package问题">
-<meta property="og:url" content="http://yoursite.com/web/springboot2.html">
+<meta property="og:title" content="Mysql查询性能优化">
+<meta property="og:url" content="http://yoursite.com/Mysql/mysql-optimization.html">
 <meta property="og:site_name" content="Xiao&#39;s Blog">
-<meta property="og:description" content="springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。">
+<meta property="og:description" content="为什么查询会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定时间。如果要优化查询，实际上是优化其子任务，要么消除其中一些子任务，要么减少子任务的执行次数，要么让子任务执行更快。 查询的生命周期大致可以分为：从客户端，到服务器，然后在服务器上进行解析，生成执行计划，执行，并返回结果给客户端。在完成这些任务的时候，查询需要在不同 的地方花费时间，包括网络，CPU计算，生成统">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-24T08:17:32.929Z">
+<meta property="og:image" content="http://yoursite.com/images/mysql-query-excute.png">
+<meta property="og:updated_time" content="2020-02-23T04:58:31.871Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springboot使用mybatis加载typealias的package问题">
-<meta name="twitter:description" content="springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。">
+<meta name="twitter:title" content="Mysql查询性能优化">
+<meta name="twitter:description" content="为什么查询会慢如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定时间。如果要优化查询，实际上是优化其子任务，要么消除其中一些子任务，要么减少子任务的执行次数，要么让子任务执行更快。 查询的生命周期大致可以分为：从客户端，到服务器，然后在服务器上进行解析，生成执行计划，执行，并返回结果给客户端。在完成这些任务的时候，查询需要在不同 的地方花费时间，包括网络，CPU计算，生成统">
+<meta name="twitter:image" content="http://yoursite.com/images/mysql-query-excute.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/web/springboot2.html">
+  <link rel="canonical" href="http://yoursite.com/Mysql/mysql-optimization.html">
 
 
 
 
 
-  <title>springboot使用mybatis加载typealias的package问题 | Xiao's Blog</title>
+  <title>Mysql查询性能优化 | Xiao's Blog</title>
   
 
 
@@ -295,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/web/springboot2.html">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Mysql/mysql-optimization.html">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="任重道远">
@@ -312,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">springboot使用mybatis加载typealias的package问题</h1>
+          <h1 class="post-title" itemprop="name headline">Mysql查询性能优化</h1>
         
 
         <div class="post-meta">
@@ -324,8 +326,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-30T18:02:32+08:00">
-                2018-09-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-20T09:47:02+08:00">
+                2020-02-20
               </time>
             
 
@@ -347,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
                   </a>
                 </span>
 
@@ -384,12 +386,82 @@
       
 
       
-        <p> <strong>springboot打成jar包后运行会造成mybatis设置的别名包找不到实体类的问题，这是由于mybatis默认使用DefaultVFS扫描包，在springboot中可以改成SpringBootVFS进行包扫描。具体见下面代码。</strong></p>
-<hr>
+        <h3 id="为什么查询会慢"><a href="#为什么查询会慢" class="headerlink" title="为什么查询会慢"></a>为什么查询会慢</h3><p>如果把查询看作是一个任务，那么它由一系列子任务组成，每个子任务都会消耗一定时间。如果要优化查询，实际上是优化其子任务，要么消除其中一些子任务，要么减少子任务的执行次数，要么让子任务执行更快。</p>
+<p>查询的生命周期大致可以分为：从客户端，到服务器，然后在服务器上进行解析，生成执行计划，执行，并返回结果给客户端。在完成这些任务的时候，查询需要在不同 的地方花费时间，包括网络，CPU计算，生成统计信息和执行计划，锁等待，互斥等待等操作，尤其是像底层存储引擎检索数据的调用操作，这些调用需要在内存操作，CPU操作和内存不足时导致的I/O操作上消耗时间。根据存储引擎不同，可能还会产生大量的上下文切换以及系统调用。</p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">    public SqlSessionFactory db1SqlSessionFactory(DataSource dataSource) throws Exception &#123;</span><br><span class="line">        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();</span><br><span class="line">        sqlSessionFactoryBean.setDataSource(dataSource);</span><br><span class="line">        //mybatis使用默认DefaultVFS扫描包会有问题，使用SpringBootVFS</span><br><span class="line">        sqlSessionFactoryBean.setVfs(SpringBootVFS.class); </span><br><span class="line">        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();</span><br><span class="line">        sqlSessionFactoryBean.setMapperLocations(resolver.getResources(&quot;classpath*:/mybatis/mapper/**.xml&quot;));</span><br><span class="line">        sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(&quot;mybatis/mybatis-config.xml&quot;));</span><br><span class="line">        return sqlSessionFactoryBean.getObject();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在每一个消耗大量时间的查询案列中，我们都能看到一些不必要的额外操作，某些操作被额外的重复了很多次，某一个操作执行的太慢等。优化查询的目的就是减少和消除这些操作所花费的时间。</p>
 <hr>
-<p>如果使用 mybatis autoconfigure生成的 SessionFactory可能就没有这个问题了。</p>
+<h3 id="优化数据访问"><a href="#优化数据访问" class="headerlink" title="优化数据访问"></a>优化数据访问</h3><h4 id="避免请求不需要的数据"><a href="#避免请求不需要的数据" class="headerlink" title="避免请求不需要的数据"></a>避免请求不需要的数据</h4><p>有些查询会请求超过实际需要的数据，然后这些多余的数据会被应用程序丢弃，这会给Mysql服务器带来额外的负担，并增加网络开销，另外也会消耗应用服务器的CPU和内存资源。</p>
+<ul>
+<li><p><strong>避免查询不需要的记录：</strong><br>处理分页时，应该使用LIMIT限制MySql只返回一页的数据，而不是向应用程序返回全部数据后，再由应用程序过滤不需要的行。</p>
+</li>
+<li><p><strong>避免查询全部列：</strong><br>使用SELECT *这种方式会返回全部列，但有时我们不需要这么多列，我们应该使用SELECT后面加具体的列名还查询需要的列。<br>当然有时候返回更多列也不是坏事，因为这可以提高代码片段的复用性，可以简化开发，所以我们在实际开发中根据自己的需要可以适当返回更多的列。</p>
+</li>
+<li><p><strong>避免多表关联时返回全部列：</strong><br>这个和第二点其实差不多，我们在多表关联查询时应指定需要返回的列，避免返回所有表的全部列。</p>
+</li>
+<li><p><strong>避免重复查询相同的数据：</strong><br>我们有时会重复执行相同的查询，然后每次都返回相同的数据，这时我们可以在初次查询时将数据缓存起来，这样性能会更好。</p>
+</li>
+</ul>
+<h4 id="避免扫描额外的记录"><a href="#避免扫描额外的记录" class="headerlink" title="避免扫描额外的记录"></a>避免扫描额外的记录</h4><p>分析查询时，查看改查询扫描的行数是非常有帮助的。理想情况下扫描的行数和返回的行数应该是相同的，但实际情况很难达到这种完美情况，通常扫描的行数和返回的行数比值在1:1和10:1之间。</p>
+<p>在Explain语句中type列反应了访问类型，rows列反应了扫描的行数。访问的类型有很多种，从全表扫描到索引扫描，返回扫描，唯一索引扫描，常数引用等，这些的速度是从慢到快，扫描的行数也是从多到少。如果查询没有办法找到合适的访问类型，那么解决的最好办法通常就是增加一个合适的索引。</p>
+<p>如果发现查询需要扫描大量的数据但只返回少数的行，可以通过尝试下面的技巧去优化它：</p>
+<ul>
+<li>使用索引覆盖扫描，把所有需要用的列都放到索引中，这样存储引擎无须回表就可以返回结果。</li>
+<li>改变库表结构。例如使用单独的汇总表。</li>
+<li>重写这个复杂的查询，让Mysql优化器能够以更优化的方式执行这个查询。</li>
+</ul>
+<hr>
+<h3 id="重构查询的方式"><a href="#重构查询的方式" class="headerlink" title="重构查询的方式"></a>重构查询的方式</h3><p>在优化有问题的查询时，目标应该是找到一个更有的方法获得实际需要的结果。此时我们可以将查询转换一种写法让其返回一样的结果，但是性能更好，也可以通过修改应用代码，用另一种方式完成查询，最终达到一样的目的。</p>
+<h4 id="切分查询"><a href="#切分查询" class="headerlink" title="切分查询"></a>切分查询</h4><p>有时候对于一个大查询我们需要分而治之，将大查询切分成小查询，每个查询功能完全一样，只完成一小部分，每次只返回一小部分查询结果。</p>
+<p>删除旧的数据就是一个很好的例子。定期的清除大量数据时，如果用一个大的语句一次性完成的话，则可能需要一次锁住很多数据，占满整个事务日志，耗尽系统资源，阻塞很多小的但重要的查询。将一个大的delete语句切分成多个较小的查询可以尽可能小的影响Mysql性能，同时还可以减少Mysql复制的延迟。</p>
+<h4 id="分解关联查询"><a href="#分解关联查询" class="headerlink" title="分解关联查询"></a>分解关联查询</h4><p>很多高性能的应用都会对关联查询进行分解。简单地，可以对每一个表进行一次单表查询，然后将结果在应用程序中进行关联。例如，下面这个查询：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM tag</span><br><span class="line">    JOIN tag_post ON tag_post.tag_id=tag.id</span><br><span class="line">    JOIN post ON tag_post.post_id=post.id</span><br><span class="line">WHERE tag.tag = &apos;mysql&apos;;</span><br></pre></td></tr></table></figure>
+<p>可以分解成下面这些查询来代替：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM tag WHERE tag = &apos;mysql&apos;;</span><br><span class="line">SELECT * FROM tag_post WHERE tag_id = 1234;</span><br><span class="line">SELECT * FROM post WHERE post.id in (123,456,567,9098,8904);</span><br></pre></td></tr></table></figure>
+<p>用分解关联查询的方式重构查询有如下优势：</p>
+<ul>
+<li>让缓存效率更高。如果缓存的是关联表结果，如果关联中的某个表发生了变化，那么缓存就失效了，而拆分后，如果某个表变化，并不会影响所有的缓存。</li>
+<li>将查询分解后，执行单个查询可以减少锁的竞争。</li>
+<li>在应用层做关联，可以更容易对数据库进行拆分，更容易做到高性能和可扩展。</li>
+<li>查询本身的效率也可能会有所提升。例如上面用IN()代替关联查询比随机的关联更加高效。</li>
+<li>可以减少冗余记录的查询。在应用层做关联查询，意味着对某条记录应用只需要查询一次，而在数据库中做关联查询，则可能需要重复的访问一部分数据。</li>
+</ul>
+<hr>
+<h3 id="查询执行过程"><a href="#查询执行过程" class="headerlink" title="查询执行过程"></a>查询执行过程</h3><p>当希望Mysql能够以更高的性能运行查询时，最好的办法就是弄清楚Mysql是如何优化和执行查询的。<br><img src="/images/mysql-query-excute.png" alt="images"><br>Mysql的查询过程根据上图可知：</p>
+<ol>
+<li>客户端发送一条查询给服务器。</li>
+<li>服务器先检查查询缓存，如果命中了缓存，则立刻返回存储在缓存中的结果。否则进入下一阶段。</li>
+<li>服务器进行SQL解析，预处理，再由优化器生成对应的执行计划。</li>
+<li>Mysql根据生成的执行计划，调用存储引擎的API来执行查询。</li>
+<li>将结果返回给客户端。</li>
+</ol>
+<h4 id="Mysql客户端服务器通信协议"><a href="#Mysql客户端服务器通信协议" class="headerlink" title="Mysql客户端服务器通信协议"></a>Mysql客户端服务器通信协议</h4><p>Mysql酷护短和服务器之间的通信协议是半双工的，这意味着，在任何一个时刻，要么是服务器向客户端发送数据，要么是客户端向服务器发送数据，这两个动作不能同时发生。这种协议让Mysql通信简单快速，但是也从很多地方限制了Mysql。一个明显的限制就是没发进行流量控制，一旦一端开始发送消息，另一端要接受完整个消息才能响应它。</p>
+<h4 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h4><p>在解析一个查询语句前，如果查询缓存是打开的，Mysql会先检查这个查询是否命中缓存中的数据，这个检查是通过一个对大小写敏感的哈希查找实现的。命中了则直接返回结果，否则进行下一阶段处理。</p>
+<h4 id="查询优化处理"><a href="#查询优化处理" class="headerlink" title="查询优化处理"></a>查询优化处理</h4><p>查询的生命周期下一步是讲一个SQL转换成一个执行计划，Mysql再依照这个执行计划和存储引擎进行交互。这个阶段包含多个子阶段：解析SQL、预处理、优化SQL执行计划。</p>
+<ul>
+<li><p><strong>语法解析器和预处理</strong><br>首先Mysql通过关键字将SQL语句进行解析，并生成一颗对应的解析树。Mysql解析器将使用语法规则验证和解析查询，包括验证是否使用错误关键字、使用关键字顺序是否正确。预处理器则根据一些Mysql规则进一步检查解析树是否合法，包括检查数据表和数据列是否存在，还会解析名字和别名，看看它们是否有歧义。</p>
+</li>
+<li><p><strong>查询优化器</strong><br>解析树需要由查询优化器将其转化成执行计划，一个查询可以有很多种执行方式。优化器的作用就是找到这其中最好的执行计划。Mysql的查询优化器是一个非常复杂的部件，它使用了很多优化策略来生成一个最优的执行计划。优化策略可以简单的分为两种，一种是静态优化，一种是动态优化。</p>
+</li>
+<li><p><strong>关联查询优化器</strong><br>多表关联时，可以有多种不同的关联顺序来获得相同的执行结果，关联查询优化器通过评估不同顺序时的成本来选择一个代价最小的关联顺序。</p>
+</li>
+<li><p><strong>排序优化</strong><br>Mysql可以通过索引进行排序，当不能使用索引生成排序结果的时候，Mysql需要自己进行排序。如果数据量小，则使用快速排序在内存中操作，如果内存不够，那么Mysql会先将数据分块，对每个独立的块使用快速排序进行排序，并将结果存放在磁盘上，最后将结果合并。<br>Mysql主要有两种排序算法：一是两次传输排序（旧版本使用），读取行指针和需要排序的字段，对其进行排序，然后再根据排序结果读取需要的数据行；二是单词传输排序（新版本使用），先读取查询所需要的所有列，然后再根据给定列进行排序，最后直接返回排序结果。第一种方式缺点是需要两次数据传输，第二种缺点时需要返回的列非常多时会额外占用大量的空间。</p>
+</li>
+</ul>
+<h4 id="查询执行引擎"><a href="#查询执行引擎" class="headerlink" title="查询执行引擎"></a>查询执行引擎</h4><p>Mysql的查询执行引擎根据执行计划来完成整个查询。相比于查询优化阶段，查询执行阶段不是那么复杂，Mysql只是简单的根据执行计划给出的指令逐步执行。在根据执行计划逐步执行的过程中，有大量的操作需要通过调用存储引擎实现的接口来完成，这些接口也就是我们称为“handler api”的接口。</p>
+<h4 id="返回结果给客户端"><a href="#返回结果给客户端" class="headerlink" title="返回结果给客户端"></a>返回结果给客户端</h4><p>查询执行过程的最后一个阶段是将结果返回给客户端。解释查询不需要返回结果集给客户端，Mysq仍然会返回这个查询的一些信息，如该查询影响到的行数。Mysql将结果集返回客户端是一个增量、逐步返回的过程，开始生成第一条结果时，Mysql就可以开始向客户端逐步返回结果集了。这样有两个好处：一是服务器无须存储太多的结果；二是客户端可以第一时间获得返回的结果。</p>
+<hr>
+<h3 id="优化特定类型的查询"><a href="#优化特定类型的查询" class="headerlink" title="优化特定类型的查询"></a>优化特定类型的查询</h3><h4 id="优化COUNT-查询"><a href="#优化COUNT-查询" class="headerlink" title="优化COUNT()查询"></a>优化COUNT()查询</h4><p>count()是一个特殊的函数，有两种非常不同的作用：一是可以统计某个列值的数量，此时要求列值是非空的；一是统计结果集行数。通常来说，count()需要扫描大量的行才能获得精确的结果，在mysql层面能做的优化只有通过索引覆盖扫描。</p>
+<h4 id="优化关联查询"><a href="#优化关联查询" class="headerlink" title="优化关联查询"></a>优化关联查询</h4><ul>
+<li>确保on子句中的列上有索引。在创建索引的时候就要考虑到关联的顺序。当表A和表B用列c关联的时候，如果优化器的关联顺序是B，A，那么就不需要在B表对应的列上建上索引。没有用到的索引只会带来额外的负担。一般来说，除非有其他理由，否则只需要在关联顺序中的第二个表的相应列上创建索引。</li>
+<li>确保任何的group by 和order by 中的表达式只涉及一个表中的列，这样Mysql才有可能使用索引来优化这个过程。</li>
+</ul>
+<h4 id="优化子查询"><a href="#优化子查询" class="headerlink" title="优化子查询"></a>优化子查询</h4><p>关于子查询优化最重要的优化建议就是尽可能使用关联查询代替。</p>
+<h4 id="优化LIMIT分页"><a href="#优化LIMIT分页" class="headerlink" title="优化LIMIT分页"></a>优化LIMIT分页</h4><p>在系统中需要进行分页操作的时候，我们通常会使用limit加上偏移量的办法实现，同时加上合适的order by子句。如果有对应的索引，通常效率会不错，否则，Mysql需要做大量的文件排序操作。</p>
+<p>在偏移量非常大的时候，例如可能是limit 10000，20这样的查询，这时Mysql需要查询10020条记录然后只返回最后20条记录，前面10000条记录被抛弃，这样的代价非常高。优化此类分页查询的一个最简单的办法就是尽可能的使用索引覆盖扫描，而不是查询所有的列，然后再根据需要做一次关联操作再返回所需要的列。例如下面的列子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select film_id,description from sakila.film order by title limit 5000, 5;</span><br></pre></td></tr></table></figure></p>
+<p>如果这个表非常的大，可以改成下面的样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT film.film_id, film.description FROM sakila.film</span><br><span class="line">INNER JOIN </span><br><span class="line">(SELECT film_id FROM sakila.film ORDER BY title LIMIT 5000,5) AS lim</span><br><span class="line">USING(film_id);</span><br></pre></td></tr></table></figure></p>
+<p>注意优化中关联的子查询，因为只查询film_id一个列，数据量小，使得一个内存页可以容纳更多的数据，这让MySQL扫描尽可能少的页面。在获取到所需要的所有行之后再与原表进行关联以获得需要的全部列。</p>
+<h4 id="优化UNION查询"><a href="#优化UNION查询" class="headerlink" title="优化UNION查询"></a>优化UNION查询</h4><p>Mysql总是通过创建并填充临时表的方式来执行union查询，因此很多优化策略在union查询中都没法很好的使用。除非确实需要服务器消除重复的行，否则一定要使用union all，这一点很重要，如果没有all关键字，Mysql会给临时表加上distinct选项，这会导致对整个临时表的数据做唯一性检查，这样做的代价非常高。</p>
 
       
     </div>
@@ -407,7 +479,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/springboot/" rel="tag"><i class="fa fa-tag"></i> springboot</a>
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
           
         </div>
       
@@ -420,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Java/jvm-classloader.html" rel="next" title="JVM（5）：类加载机制">
-                <i class="fa fa-chevron-left"></i> JVM（5）：类加载机制
+              <a href="/data-struct/binary-tree.html" rel="next" title="一文详解二叉树">
+                <i class="fa fa-chevron-left"></i> 一文详解二叉树
               </a>
             
           </div>
@@ -429,10 +501,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/other/nginx.html" rel="prev" title="nginx详解">
-                nginx详解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -484,8 +552,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -557,6 +634,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么查询会慢"><span class="nav-number">1.</span> <span class="nav-text">为什么查询会慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化数据访问"><span class="nav-number">2.</span> <span class="nav-text">优化数据访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#避免请求不需要的数据"><span class="nav-number">2.1.</span> <span class="nav-text">避免请求不需要的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#避免扫描额外的记录"><span class="nav-number">2.2.</span> <span class="nav-text">避免扫描额外的记录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重构查询的方式"><span class="nav-number">3.</span> <span class="nav-text">重构查询的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#切分查询"><span class="nav-number">3.1.</span> <span class="nav-text">切分查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分解关联查询"><span class="nav-number">3.2.</span> <span class="nav-text">分解关联查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询执行过程"><span class="nav-number">4.</span> <span class="nav-text">查询执行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql客户端服务器通信协议"><span class="nav-number">4.1.</span> <span class="nav-text">Mysql客户端服务器通信协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询缓存"><span class="nav-number">4.2.</span> <span class="nav-text">查询缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询优化处理"><span class="nav-number">4.3.</span> <span class="nav-text">查询优化处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询执行引擎"><span class="nav-number">4.4.</span> <span class="nav-text">查询执行引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回结果给客户端"><span class="nav-number">4.5.</span> <span class="nav-text">返回结果给客户端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化特定类型的查询"><span class="nav-number">5.</span> <span class="nav-text">优化特定类型的查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优化COUNT-查询"><span class="nav-number">5.1.</span> <span class="nav-text">优化COUNT()查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化关联查询"><span class="nav-number">5.2.</span> <span class="nav-text">优化关联查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化子查询"><span class="nav-number">5.3.</span> <span class="nav-text">优化子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化LIMIT分页"><span class="nav-number">5.4.</span> <span class="nav-text">优化LIMIT分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化UNION查询"><span class="nav-number">5.5.</span> <span class="nav-text">优化UNION查询</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

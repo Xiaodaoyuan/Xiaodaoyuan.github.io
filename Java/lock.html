@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/mark-word.jpg">
 <meta property="og:image" content="http://yoursite.com/images/lock1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/lock2.jpg">
-<meta property="og:updated_time" content="2020-01-16T09:05:52.830Z">
+<meta property="og:updated_time" content="2020-02-27T10:23:29.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java锁介绍">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;锁是用来控制多个线程访问共享资源的方式，一般来说，一个锁能够防止多个线程同时访问共享资源（但是有些锁可以允许多个线程并发的访问共享资源，比如读写锁）。在Lock接口出现之前，Java程序是靠synchronized关键字实现锁功能的，而Java SE 5之后，并发包中新增了Lock接口（以及相关实现类）用来实现锁功能，它提供了与synch">
@@ -419,7 +419,7 @@
 <p>这里每次调用stringBuffer.append方法都需要加锁和解锁，如果虚拟机检测到有一系列连串的对同一个对象加锁和解锁操作，就会将其合并成一次范围更大的加锁和解锁操作，即在第一次append方法时进行加锁，最后一次append方法结束后进行解锁。</p>
 <h3 id="自旋锁与自适应自旋锁"><a href="#自旋锁与自适应自旋锁" class="headerlink" title="自旋锁与自适应自旋锁"></a>自旋锁与自适应自旋锁</h3><ul>
 <li><strong>引入自旋锁的原因：</strong>互斥同步对性能最大的影响是阻塞的实现，因为挂起线程和恢复线程的操作都需要转入内核态中完成，这些操作给系统的并发性能带来很大的压力。同时虚拟机的开发团队也注意到在许多应用上面，共享数据的锁定状态只会持续很短一段时间，为了这一段很短的时间频繁地阻塞和唤醒线程是非常不值得的。  </li>
-<li><strong>自旋锁：</strong>让该线程执行一段无意义的忙循环（自旋）等待一段时间，不会被立即挂起（自旋不放弃处理器额执行时间），看持有锁的线程是否会很快释放锁。自旋锁在JDK 1.4.2中引入，默认关闭，但是可以使用-XX:+UseSpinning开开启；在JDK1.6中默认开启。  </li>
+<li><strong>自旋锁：</strong>让该线程执行一段无意义的忙循环（自旋）等待一段时间，不会被立即挂起（自旋不放弃处理器的执行时间），看持有锁的线程是否会很快释放锁。自旋锁在JDK 1.4.2中引入，默认关闭，但是可以使用-XX:+UseSpinning开开启；在JDK1.6中默认开启。  </li>
 <li><strong>自旋锁的缺点：</strong>自旋等待不能替代阻塞，虽然它可以避免线程切换带来的开销，但是它占用了处理器的时间。如果持有锁的线程很快就释放了锁，那么自旋的效率就非常好；反之，自旋的线程就会白白消耗掉处理器的资源，它不会做任何有意义的工作，这样反而会带来性能上的浪费。所以说，自旋等待的时间（自旋的次数）必须要有一个限度，例如让其循环10次，如果自旋超过了定义的时间仍然没有获取到锁，则应该被挂起（进入阻塞状态）。通过参数-XX:PreBlockSpin可以调整自旋次数，默认的自旋次数为10。  </li>
 <li><strong>自适应的自旋锁：</strong>JDK1.6引入自适应的自旋锁，自适应就意味着自旋的次数不再是固定的，它是由前一次在同一个锁上的自旋时间及锁的拥有者的状态来决定：如果在同一个锁的对象上，自旋等待刚刚成功获得过锁，并且持有锁的线程正在运行中，那么虚拟机就会认为这次自旋也很有可能再次成功，进而它将允许自旋等待持续相对更长的时间。如果对于某个锁，自旋很少成功获得过，那在以后要获取这个锁时将可能省略掉自旋过程，以避免浪费处理器资源。简单来说，就是线程如果自旋成功了，则下次自旋的次数会更多，如果自旋失败了，则自旋的次数就会减少。</li>
 <li><strong>自旋锁使用场景：</strong>从轻量级锁获取的流程中我们知道，当线程在获取轻量级锁的过程中执行CAS操作失败时，是要通过自旋来获取重量级锁的。</li>
@@ -476,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Java/hashmap.html" rel="next" title="Java8中HashMap和ConcurrentHashMap解析">
-                <i class="fa fa-chevron-left"></i> Java8中HashMap和ConcurrentHashMap解析
+              <a href="/Java/java-gc.html" rel="next" title="Java GC总结">
+                <i class="fa fa-chevron-left"></i> Java GC总结
               </a>
             
           </div>
@@ -567,7 +567,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
