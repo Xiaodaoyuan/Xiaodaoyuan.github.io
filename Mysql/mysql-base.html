@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="Xiao&#39;s Blog">
 <meta property="og:description" content="mysql逻辑架构">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/Mysql/images/mysql-struct.png">
-<meta property="og:image" content="http://yoursite.com/Mysql/images/mysql-update.png">
-<meta property="og:updated_time" content="2020-05-02T01:26:55.218Z">
+<meta property="og:image" content="http://yoursite.com/images/mysql-struct.png">
+<meta property="og:image" content="http://yoursite.com/images/mysql-update.png">
+<meta property="og:updated_time" content="2020-05-03T09:28:28.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql基础">
 <meta name="twitter:description" content="mysql逻辑架构">
-<meta name="twitter:image" content="http://yoursite.com/Mysql/images/mysql-struct.png">
+<meta name="twitter:image" content="http://yoursite.com/images/mysql-struct.png">
 
 
 
@@ -387,7 +387,7 @@
       
 
       
-        <h3 id="mysql逻辑架构"><a href="#mysql逻辑架构" class="headerlink" title="mysql逻辑架构"></a>mysql逻辑架构</h3><p><img src="images/mysql-struct.png" alt="images"><br><a id="more"></a></p>
+        <h3 id="mysql逻辑架构"><a href="#mysql逻辑架构" class="headerlink" title="mysql逻辑架构"></a>mysql逻辑架构</h3><p><img src="/images/mysql-struct.png" alt="images"><br><a id="more"></a></p>
 <h4 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h4><p>连接器负责和客户端建立连接，获取权限，维持和管理连接。连接命令：mysql -h$ip -P$port -u$user -p</p>
 <h4 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h4><p>mysql会缓存一些查询，下次查询如果命中就可以直接返回。但是我们不建议使用查询缓存，因为对一个表的任何更新操作都会使该表的缓存失效。mysql8.0已经删掉这个功能了。</p>
 <h4 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h4><p>分析器对sql语句进行解析。首先是词法分析：将关键字以及表名列名等识别出来；之后是语法分析：判断这个sql语句是否满足mysql语法。</p>
@@ -403,7 +403,7 @@
 <li>redolog是物理日志，记录的是某个数据页做了什么修改。binlog是逻辑日志，记录的是这个语句的原始逻辑。</li>
 <li>redolog是循环写的，写完了又会从头开始写。binlog是追加写，写完一个文件之后会重新开一个文件写入。</li>
 </ol>
-<p><img src="images/mysql-update.png" alt="images"></p>
+<p><img src="/images/mysql-update.png" alt="images"></p>
 <p>根据上图我们介绍下mysql innodb引擎更新过程：</p>
 <ol>
 <li>首先根据条件取出要更新的行，如果在内存中，则直接返回，不再内存中则从磁盘中读取再返回。</li>
@@ -488,6 +488,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/Mysql/mysql-master-slave.html" rel="prev" title="Mysql主备以及读写分离">
+                Mysql主备以及读写分离 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -565,7 +569,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -657,7 +661,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
